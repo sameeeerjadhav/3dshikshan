@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="3D Shikshan" />
+  <meta name="theme-color" content="#0b8a5e" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="assets/icons/app-icon.svg" />
+  <link rel="stylesheet" href="assets/css/install-app.css" />
+  <title>3D Shikshan — 3D Printing, Lasers & More</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #f5f6f8;
+      --surface: #ffffff;
+      --surface-2: #eef0f4;
+      --border: #e0e3ea;
+      --text: #1a1d26;
+      --text-muted: #6b7185;
+      --accent: #0b8a5e;
+      --accent-light: #0b8a5e12;
+      --red: #d9435f;
+      --blue: #2e7bbf;
+      --yellow: #c08b1d;
+      --radius: 14px;
+      --transition: .22s cubic-bezier(.4,0,.2,1);
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    html { -webkit-tap-highlight-color: transparent; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: calc(60px + var(--safe-bottom));
+    }
+
+    /* ── PAGE VIEWS ────────────────────────────────── */
+    .page {
+      display: none;
+      min-height: calc(100vh - 60px);
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 0 16px;
+      animation: pageFadeIn .25s ease;
+    }
+    .page.active { display: block; }
+
+    @keyframes pageFadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── TOP BAR ───────────────────────────────────── */
+    .top-bar {
+      position: sticky; top: 0; z-index: 100;
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      background: rgba(245,246,248,.88);
+      padding: 14px 0 10px;
+      padding-top: calc(14px + var(--safe-top));
+      display: flex; align-items: center; gap: 8px;
+    }
+    .top-bar h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.2rem; font-weight: 700;
+    }
+    .top-bar i.top-icon { font-size: 1rem; }
+    .logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700; color: var(--accent);
+      text-decoration: none; letter-spacing: -0.5px;
+      font-size: 1.2rem;
+    }
+    .logo span { color: var(--text); }
+
+    /* ── BOTTOM TAB BAR ────────────────────────────── */
+    .tab-bar {
+      position: fixed; bottom: 0; left: 0; width: 100%; z-index: 1000;
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      background: rgba(255,255,255,.94);
+      border-top: 1px solid var(--border);
+      padding-bottom: var(--safe-bottom);
+    }
+    .tab-bar-inner {
+      max-width: 600px; margin: 0 auto;
+      display: flex; height: 56px;
+    }
+    .tab-btn {
+      flex: 1; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 3px;
+      background: none; border: none; cursor: pointer;
+      color: var(--text-muted);
+      font-family: 'DM Sans', sans-serif;
+      font-size: .64rem; font-weight: 600;
+      transition: var(--transition);
+      -webkit-tap-highlight-color: transparent;
+      position: relative;
+    }
+    .tab-btn i { font-size: 1.15rem; transition: var(--transition); }
+    .tab-btn.active { color: var(--accent); }
+    .tab-btn.active::before {
+      content: '';
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 28px; height: 3px; border-radius: 0 0 3px 3px;
+      background: var(--accent);
+    }
+    .tab-btn:active { transform: scale(.92); }
+
+    /* ── SHARED ────────────────────────────────────── */
+    .section-label {
+      display: inline-block;
+      font-size: .66rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1.8px;
+      color: var(--accent); background: var(--accent-light);
+      padding: 5px 12px; border-radius: 20px;
+      margin-bottom: 8px;
+    }
+    .section-subtitle {
+      color: var(--text-muted); font-size: .88rem;
+      margin-bottom: 20px;
+    }
+
+    /* ── HERO ───────────────────────────────────────── */
+    .hero {
+      padding: 16px 0 22px; text-align: center;
+    }
+    .hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem; font-weight: 700;
+      line-height: 1.2; margin-bottom: 8px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--accent), var(--blue));
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      color: var(--text-muted); font-size: .86rem;
+      max-width: 360px; margin: 0 auto;
+    }
+
+    /* ── HOME TOGGLE TABS ──────────────────────────── */
+    .home-tabs {
+      display: flex; gap: 0;
+      background: var(--surface-2);
+      border-radius: 12px; padding: 3px;
+      margin-bottom: 16px;
+    }
+    .home-tab-btn {
+      flex: 1; padding: 9px 0;
+      background: none; border: none; border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .82rem; font-weight: 600;
+      color: var(--text-muted); cursor: pointer;
+      transition: var(--transition);
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .home-tab-btn.active {
+      background: var(--surface);
+      color: var(--text);
+      box-shadow: 0 1px 4px rgba(0,0,0,.08);
+    }
+    .home-tab-btn i { font-size: .8rem; }
+
+    .home-panels { position: relative; }
+    .home-panel { display: none; animation: pageFadeIn .2s ease; }
+    .home-panel.active { display: block; }
+
+    /* ── SUB SECTIONS ──────────────────────────────── */
+    .sub-section { margin-bottom: 28px; }
+    .sub-heading {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 12px;
+    }
+    .sub-heading i {
+      font-size: .95rem; color: var(--accent);
+      width: 30px; height: 30px; border-radius: 8px;
+      background: var(--accent-light);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .sub-heading h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.05rem; font-weight: 700;
+    }
+
+    /* ── CARDS ──────────────────────────────────────── */
+    .card-grid { display: flex; flex-direction: column; gap: 10px; }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden; transition: var(--transition);
+      text-decoration: none; color: inherit;
+      display: flex; flex-direction: row;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .card:active { transform: scale(.985); background: var(--surface-2); }
+    .card-img { width: 92px; min-height: 92px; object-fit: cover; flex-shrink: 0; }
+    .card-body {
+      padding: 11px 12px; flex: 1;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .card-tag {
+      font-size: .58rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.2px; margin-bottom: 2px;
+    }
+    .tag-news { color: var(--red); }
+    .tag-blog { color: var(--blue); }
+    .card-body h4 { font-size: .84rem; margin-bottom: 2px; line-height: 1.3; }
+    .card-body p {
+      color: var(--text-muted); font-size: .74rem; line-height: 1.4;
+      display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2;
+      -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .card-arrow {
+      display: flex; align-items: center; justify-content: center;
+      padding: 0 12px; color: var(--text-muted); font-size: .72rem;
+      flex-shrink: 0;
+    }
+
+    /* ── GUIDE ─────────────────────────────────────── */
+    .guide-grid { display: flex; flex-direction: column; gap: 10px; }
+    .guide-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px; transition: var(--transition);
+      display: flex; gap: 14px; align-items: flex-start;
+    }
+    .guide-card:active { background: var(--surface-2); }
+    .guide-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.05rem; flex-shrink: 0;
+    }
+    .guide-card-text h4 { font-size: .9rem; margin-bottom: 3px; }
+    .guide-card-text p { color: var(--text-muted); font-size: .78rem; line-height: 1.45; }
+    .gi-1 { background: #0b8a5e12; color: var(--accent); }
+    .gi-2 { background: #2e7bbf14; color: var(--blue); }
+    .gi-3 { background: #d9435f12; color: var(--red); }
+    .gi-4 { background: #c08b1d14; color: var(--yellow); }
+
+    .steps {
+      margin-top: 24px;
+      display: flex; flex-direction: column;
+      gap: 10px; counter-reset: step;
+    }
+    .step {
+      position: relative;
+      padding: 14px 14px 14px 52px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      counter-increment: step;
+    }
+    .step::before {
+      content: counter(step);
+      position: absolute; top: 50%; left: 14px; transform: translateY(-50%);
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--accent); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .75rem; font-weight: 700;
+    }
+    .step h5 { font-size: .86rem; margin-bottom: 2px; }
+    .step p { color: var(--text-muted); font-size: .76rem; }
+
+    /* ── MAP ────────────────────────────────────────── */
+    #mapContainer {
+      width: 100%; height: 340px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      overflow: hidden; margin-bottom: 20px;
+    }
+    .map-info { display: flex; flex-direction: column; gap: 10px; }
+    .map-info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px; display: flex; align-items: flex-start; gap: 12px;
+    }
+    .map-info-card i { color: var(--accent); font-size: 1rem; margin-top: 2px; }
+    .map-info-card h5 { font-size: .86rem; margin-bottom: 2px; }
+    .map-info-card p { color: var(--text-muted); font-size: .76rem; }
+
+    /* ── LOGIN ──────────────────────────────────────── */
+    .login-header {
+      text-align: center; padding: 20px 0 24px;
+    }
+    .login-header i {
+      font-size: 2.2rem; color: var(--accent);
+      width: 64px; height: 64px; border-radius: 50%;
+      background: var(--accent-light);
+      display: inline-flex; align-items: center; justify-content: center;
+      margin-bottom: 14px;
+    }
+    .login-header h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.3rem; font-weight: 700; margin-bottom: 4px;
+    }
+    .login-header p { color: var(--text-muted); font-size: .86rem; }
+    .login-form {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 20px;
+    }
+    .form-group { margin-bottom: 16px; }
+    .form-group label {
+      display: block; font-size: .78rem; font-weight: 600;
+      margin-bottom: 5px; color: var(--text-muted);
+    }
+    .form-group input {
+      width: 100%; padding: 11px 14px;
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 10px; color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: .9rem; outline: none;
+      transition: var(--transition);
+    }
+    .form-group input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px #0b8a5e12; }
+    .form-options {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 20px; font-size: .8rem;
+    }
+    .form-options label {
+      display: flex; align-items: center; gap: 6px;
+      color: var(--text-muted); cursor: pointer;
+    }
+    .form-options a { color: var(--accent); text-decoration: none; font-weight: 600; }
+    .btn-login {
+      width: 100%; padding: 12px;
+      background: var(--accent); color: #fff;
+      border: none; border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .92rem; font-weight: 700;
+      cursor: pointer; transition: var(--transition);
+      box-shadow: 0 4px 14px rgba(11,138,94,.2);
+    }
+    .btn-login:active { transform: scale(.97); }
+    .divider {
+      display: flex; align-items: center; gap: 12px;
+      margin: 18px 0; color: var(--text-muted); font-size: .78rem;
+    }
+    .divider::before, .divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+    .social-btns { display: flex; gap: 10px; }
+    .social-btns button {
+      flex: 1; padding: 10px;
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 10px; color: var(--text);
+      font-size: 1.05rem; cursor: pointer;
+      transition: var(--transition);
+      -webkit-tap-highlight-color: transparent;
+    }
+    .social-btns button:active { background: var(--surface-2); }
+    .signup-link {
+      text-align: center; margin-top: 18px;
+      font-size: .82rem; color: var(--text-muted);
+    }
+    .signup-link a { color: var(--accent); text-decoration: none; font-weight: 600; }
+
+    /* ── PAGE FOOTER ───────────────────────────────── */
+    .page-footer {
+      text-align: center; padding: 24px 0 12px;
+      color: var(--text-muted); font-size: .7rem;
+      border-top: 1px solid var(--border);
+      margin-top: 20px;
+    }
+
+    /* ── SCROLLBAR ─────────────────────────────────── */
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!--                  PAGE: HOME                       -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="page active" id="page-home">
+  <div class="top-bar">
+    <a href="#" class="logo">3D<span>Shikshan</span></a>
+  </div>
+
+  <div class="hero">
+    <h1>Your Gateway to<br><em>3D Printing &amp; Lasers</em></h1>
+    <p>News, blogs, guides, and resources for makers, engineers, and hobbyists.</p>
+  </div>
+
+  <!-- NEWS / BLOGS TOGGLE -->
+  <div class="home-tabs">
+    <button class="home-tab-btn active" data-panel="news"><i class="fa-solid fa-bolt"></i> News</button>
+    <button class="home-tab-btn" data-panel="blogs"><i class="fa-solid fa-pen-nib"></i> Blogs</button>
+  </div>
+
+  <div class="home-panels">
+
+    <!-- NEWS PANEL -->
+    <div class="home-panel active" id="panel-news">
+      <div class="card-grid">
+        <a href="https://all3dp.com/" target="_blank" class="card">
+          <img src="https://images.unsplash.com/photo-1581092335397-9583eb92d232?w=300&q=80" alt="All3DP" class="card-img" />
+          <div class="card-body">
+            <div class="card-tag tag-news">All3DP</div>
+            <h4>All3DP — World's #1 3D Printing Magazine</h4>
+            <p>Latest 3D printing news, reviews, price comparisons, and buyer's guides.</p>
+          </div>
+          <div class="card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+        </a>
+        <a href="https://3dprint.com/" target="_blank" class="card">
+          <img src="https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?w=300&q=80" alt="3DPrint" class="card-img" />
+          <div class="card-body">
+            <div class="card-tag tag-news">3DPrint.com</div>
+            <h4>3DPrint.com — The Voice of 3D Printing</h4>
+            <p>Breaking news and analysis on 3D printing technology and innovations.</p>
+          </div>
+          <div class="card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+        </a>
+        <a href="https://www.3ders.org/" target="_blank" class="card">
+          <img src="https://images.unsplash.com/photo-1563520239648-a24e51d4b570?w=300&q=80" alt="3Ders" class="card-img" />
+          <div class="card-body">
+            <div class="card-tag tag-news">3Ders.org</div>
+            <h4>3Ders.org — 3D Printer &amp; Printing News</h4>
+            <p>Printers, materials, software, and breakthrough research worldwide.</p>
+          </div>
+          <div class="card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+        </a>
+        <a href="https://hackaday.com/category/laser-hacks/" target="_blank" class="card">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=300&q=80" alt="Hackaday" class="card-img" />
+          <div class="card-body">
+            <div class="card-tag tag-news">Hackaday</div>
+            <h4>Hackaday — Laser Hacks &amp; Projects</h4>
+            <p>Laser cutting projects, DIY engravers, and innovative community hacks.</p>
+          </div>
+          <div class="card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+        </a>
+        <a href="https://www.fabbaloo.com/" target="_blank" class="card">
+          <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=300&q=80" alt="Fabbaloo" class="card-img" />
+          <div class="card-body">
+            <div class="card-tag tag-news">Fabbaloo</div>
+            <h4>Fabbaloo — 3D Printing News &amp; Analysis</h4>
+            <p>In-depth coverage of emerging 3D printing technologies and startups.</p>
+          </div>
+          <div class="card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+        </a>
+      </div>
+    </div>
+
+    <!-- BLOGS PANEL -->
+    <div class="home-panel" id="panel-blogs">
+      <div class="card-grid">
+        <a href="https://all3dp.com/1/best-3d-printer-reviews-top-3d-printers-home-3-d-printer-3d-printer-best-3d-printer-best-3d-printers/" target="_blank" class="card">
+          <img src="https://images.unsplash.com/photo-1631515242808-497c3fbd3972?w=300&q=80" alt="FDM" class="card-img" />
+          <div class="card-body">
+            <div class="card-tag tag-blog">3D Printers</div>
+            <h4>Ultimate Guide to FDM 3D Printers in 2026</h4>
+            <p>Budget to pro-grade FDM printers — volumes, materials, quality compared.</p>
+          </div>
+          <div class="card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+        </a>
+        <a href="https://all3dp.com/1/best-resin-3d-printer-sla-dlp/" target="_blank" class="card">
+          <img src="https://images.unsplash.com/photo-1636955816868-fcb881e57954?w=300&q=80" alt="Resin" class="card-img" />
+          <div class="card-body">
+            <div class="card-tag tag-blog">Resin Printing</div>
+            <h4>SLA &amp; Resin Printing: Precision at Its Finest</h4>
+            <p>SLA, DLP, and MSLA technologies — post-processing and miniature-level detail.</p>
+          </div>
+          <div class="card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+        </a>
+        <a href="https://all3dp.com/2/best-laser-engraver-laser-cutter/" target="_blank" class="card">
+          <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=300&q=80" alt="Laser" class="card-img" />
+          <div class="card-body">
+            <div class="card-tag tag-blog">Laser Cutters</div>
+            <h4>Laser Engravers &amp; Cutters Handbook</h4>
+            <p>Diode to CO₂ — power, safety, materials, and project ideas.</p>
+          </div>
+          <div class="card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+        </a>
+        <a href="https://all3dp.com/2/best-3d-printing-filament/" target="_blank" class="card">
+          <img src="https://images.unsplash.com/photo-1614624532983-4ce03382d63d?w=300&q=80" alt="Filaments" class="card-img" />
+          <div class="card-body">
+            <div class="card-tag tag-blog">Materials</div>
+            <h4>3D Printing Filaments &amp; Materials Explained</h4>
+            <p>PLA, ABS, PETG, TPU, Nylon — strength, flexibility, and use cases.</p>
+          </div>
+          <div class="card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+        </a>
+        <a href="https://www.instructables.com/How-to-Use-a-CNC-Router/" target="_blank" class="card">
+          <img src="https://images.unsplash.com/photo-1565034957450-e7f4af5fdfb0?w=300&q=80" alt="CNC" class="card-img" />
+          <div class="card-body">
+            <div class="card-tag tag-blog">CNC Machines</div>
+            <h4>CNC Routers: Digital Fabrication Basics</h4>
+            <p>G-code, toolpaths, and going from CAD design to a finished part.</p>
+          </div>
+          <div class="card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+        </a>
+        <a href="https://hackaday.com/category/3d-printers-hacks/" target="_blank" class="card">
+          <img src="https://images.unsplash.com/photo-1578328819058-b69f3a3a0e75?w=300&q=80" alt="DIY" class="card-img" />
+          <div class="card-body">
+            <div class="card-tag tag-blog">DIY Projects</div>
+            <h4>Top DIY 3D Printer Mods &amp; Hacks</h4>
+            <p>Direct drive conversions, enclosures, Klipper firmware, auto bed levelling.</p>
+          </div>
+          <div class="card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="page-footer">&copy; 2026 3D Shikshan</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!--                  PAGE: GUIDE                      -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="page" id="page-guide">
+  <div class="top-bar">
+    <i class="fa-solid fa-book top-icon" style="color:var(--accent)"></i>
+    <h2>Guide & Inventory</h2>
+  </div>
+
+  <p class="section-subtitle" style="margin-top:8px;">From beginner to seasoned maker — get the most out of your tools.</p>
+
+  <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; margin-bottom: 12px; font-weight: 700; text-align: center;">Guide</h3>
+  <div class="guide-grid">
+    <div class="guide-card">
+      <div class="guide-icon gi-1"><i class="fa-solid fa-cube"></i></div>
+      <div class="guide-card-text">
+        <h4>3D Printing Basics</h4>
+        <p>FDM vs SLA, choosing a printer, your first print, and slicing software fundamentals.</p>
+      </div>
+    </div>
+    <div class="guide-card">
+      <div class="guide-icon gi-2"><i class="fa-solid fa-crosshairs"></i></div>
+      <div class="guide-card-text">
+        <h4>Laser Cutting 101</h4>
+        <p>Laser types, power settings, material compatibility, ventilation, and vector files.</p>
+      </div>
+    </div>
+    <div class="guide-card">
+      <div class="guide-icon gi-3"><i class="fa-solid fa-microchip"></i></div>
+      <div class="guide-card-text">
+        <h4>CNC &amp; Electronics</h4>
+        <p>CNC routers, Arduino/ESP32, soldering, PCB design, and project integration.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; margin-top: 24px; font-weight: 700; text-align: center;">Inventory</h3>
+  <div class="steps" style="margin-top: 12px;">
+    <div class="step">
+      <h5>Choose Your Tool</h5>
+      <p>Pick between 3D printing, laser cutting, or CNC based on your project needs.</p>
+    </div>
+    <div class="step">
+      <h5>Learn the Software</h5>
+      <p>Master CAD and slicer software to prepare your digital designs for fabrication.</p>
+    </div>
+    <div class="step">
+      <h5>Prepare Materials</h5>
+      <p>Select the right filament, resin, wood, acrylic, or metal for the job.</p>
+    </div>
+  </div>
+
+  <div class="page-footer">&copy; 2026 3D Shikshan</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!--                  PAGE: MAP                        -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="page" id="page-map">
+  <div class="top-bar">
+    <i class="fa-solid fa-map-location-dot top-icon" style="color:var(--blue)"></i>
+    <h2>Map</h2>
+  </div>
+
+  <p class="section-subtitle" style="margin-top:8px;">Find makerspaces, fab labs, and workshops near you.</p>
+
+  <div id="mapContainer"></div>
+
+  <div class="map-info">
+    <div class="map-info-card">
+      <i class="fa-solid fa-location-dot"></i>
+      <div>
+        <h5>Browse by Location</h5>
+        <p>Pan and zoom to discover makerspaces and fab labs in your area.</p>
+      </div>
+    </div>
+    <div class="map-info-card">
+      <i class="fa-solid fa-clock"></i>
+      <div>
+        <h5>Hours &amp; Availability</h5>
+        <p>Check opening hours, equipment, and membership options before visiting.</p>
+      </div>
+    </div>
+    <div class="map-info-card">
+      <i class="fa-solid fa-users"></i>
+      <div>
+        <h5>Community Events</h5>
+        <p>Many spaces host workshops, meetups, and hackathons to learn and connect.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">&copy; 2026 3D Shikshan</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!--                  PAGE: LOGIN                      -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="page" id="page-login">
+  <div class="top-bar">
+    <i class="fa-solid fa-user top-icon" style="color:var(--accent)"></i>
+    <h2>Account</h2>
+  </div>
+
+  <div class="login-header">
+    <i class="fa-solid fa-layer-group"></i>
+    <h2>Welcome Back</h2>
+    <p>Sign in to access guides, save favourites, and connect with makers.</p>
+  </div>
+
+  <div class="login-form">
+    <form action="login_process.php" method="post" autocomplete="off" novalidate>
+      <div class="form-group">
+        <label for="login_id">Email or Username</label>
+        <input type="text" id="login_id" name="login_id" placeholder="Enter email or username" required autocomplete="username" />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="••••••••" required autocomplete="current-password" />
+      </div>
+      <div class="form-options">
+        <label><input type="checkbox" /> Remember me</label>
+        <a href="#">Forgot password?</a>
+      </div>
+      <button type="submit" class="btn-login">Sign In</button>
+    </form>
+    <div class="divider">or continue with</div>
+    <div class="social-btns">
+      <button title="Google"><i class="fa-brands fa-google"></i></button>
+      <button title="GitHub"><i class="fa-brands fa-github"></i></button>
+      <button title="Apple"><i class="fa-brands fa-apple"></i></button>
+    </div>
+    <p class="signup-link">Don't have an account? <a href="signup.php">Sign up</a></p>
+  </div>
+
+  <div class="page-footer">&copy; 2026 3D Shikshan</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!--               BOTTOM TAB BAR                      -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <button class="tab-btn active" data-page="home"><i class="fa-solid fa-house"></i>Home</button>
+    <button class="tab-btn" data-page="guide"><i class="fa-solid fa-book"></i>Guide</button>
+    <button class="tab-btn" data-page="map"><i class="fa-solid fa-map-location-dot"></i>Map</button>
+    <button class="tab-btn" data-page="login"><i class="fa-solid fa-user"></i>Login</button>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="assets/js/install-app.js"></script>
+<script>
+  const pages = document.querySelectorAll('.page');
+  let installAppOffered = false;
+
+  function offerInstallAppOnLogin() {
+    if (installAppOffered) return;
+    const loginPage = document.getElementById('page-login');
+    if (!loginPage || !loginPage.classList.contains('active')) return;
+    installAppOffered = true;
+    window.initInstallAppPopup({ delay: 600 });
+  }
+  const tabs = document.querySelectorAll('.tab-btn');
+  let mapInitialized = false;
+
+  function switchTab(pageName) {
+    pages.forEach(p => p.classList.remove('active'));
+    tabs.forEach(t => t.classList.remove('active'));
+
+    const target = document.getElementById('page-' + pageName);
+    if (target) target.classList.add('active');
+    window.scrollTo(0, 0);
+
+    tabs.forEach(t => {
+      if (t.dataset.page === pageName) t.classList.add('active');
+    });
+
+    if (pageName === 'map' && !mapInitialized) initMap();
+  }
+
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      switchTab(btn.dataset.page);
+      if (btn.dataset.page === 'login') {
+        offerInstallAppOnLogin();
+      }
+    });
+  });
+
+  const homeTabs = document.querySelectorAll('.home-tab-btn');
+  const homePanels = document.querySelectorAll('.home-panel');
+
+  homeTabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      homeTabs.forEach(t => t.classList.remove('active'));
+      homePanels.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('panel-' + btn.dataset.panel).classList.add('active');
+    });
+  });
+
+  function initMap() {
+    mapInitialized = true;
+    const map = L.map('mapContainer').setView([20, 0], 2);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors',
+      maxZoom: 18
+    }).addTo(map);
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(pos => {
+        const { latitude, longitude } = pos.coords;
+        map.setView([latitude, longitude], 13);
+        L.marker([latitude, longitude])
+          .addTo(map)
+          .bindPopup('You are here')
+          .openPopup();
+      });
+    }
+
+    setTimeout(() => map.invalidateSize(), 300);
+  }
+
+</script>
+
+</body>
+</html>

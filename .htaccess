@@ -1,0 +1,19 @@
+# Prefer PHP entry when both index.php and index.html exist
+DirectoryIndex index.php index.html
+
+# Block direct access to sensitive files
+<FilesMatch "^(\.env|\.env\.example|\.gitignore)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Block web access to SQL dumps and env loader internals if requested directly
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^sql/ - [F,L]
+</IfModule>

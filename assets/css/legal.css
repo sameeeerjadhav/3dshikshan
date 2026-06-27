@@ -1,0 +1,145 @@
+:root {
+  --bg: #f5f6f8;
+  --surface: #ffffff;
+  --border: #e0e3ea;
+  --text: #1a1d26;
+  --text-muted: #6b7185;
+  --accent: #0b8a5e;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body.legal-page {
+  margin: 0;
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+}
+
+.legal-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 20px;
+}
+
+.legal-brand {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.legal-main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 24px 16px 40px;
+}
+
+.legal-article h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.6rem;
+  margin: 0 0 8px;
+}
+
+.legal-updated {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin: 0 0 24px;
+}
+
+.legal-article h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.05rem;
+  margin: 28px 0 10px;
+}
+
+.legal-article p,
+.legal-article li {
+  font-size: 0.92rem;
+  color: #2b3040;
+}
+
+.legal-article ul {
+  padding-left: 1.2rem;
+  margin: 0 0 14px;
+}
+
+.legal-article a {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.legal-footer {
+  text-align: center;
+  padding: 20px 16px 28px;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.legal-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+.legal-nav a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.payment-legal-consent {
+  margin-top: 14px;
+  padding: 12px 14px;
+  background: var(--surface-2, #eef0f4);
+  border: 1px solid var(--border, #e0e3ea);
+  border-radius: 10px;
+}
+
+.payment-legal-label {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--text, #1a1d26);
+  cursor: pointer;
+}
+
+.payment-legal-label input {
+  margin-top: 3px;
+  accent-color: var(--accent, #0b8a5e);
+  flex-shrink: 0;
+}
+
+.payment-legal-label a {
+  color: var(--accent, #0b8a5e);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.payment-legal-note {
+  margin: 10px 0 0;
+  font-size: 0.74rem;
+  color: var(--text-muted, #6b7185);
+  line-height: 1.45;
+}
+
+.payment-legal-footer {
+  margin-top: 12px;
+  font-size: 0.72rem;
+  color: var(--text-muted, #6b7185);
+  text-align: center;
+}
+
+.payment-legal-footer a {
+  color: var(--accent, #0b8a5e);
+  font-weight: 600;
+  text-decoration: none;
+  margin: 0 4px;
+}

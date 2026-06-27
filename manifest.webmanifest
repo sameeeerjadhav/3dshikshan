@@ -1,0 +1,25 @@
+{
+  "name": "3D Shikshan",
+  "short_name": "3D Shikshan",
+  "description": "3D Shikshan portal — courses, attendance, and fees",
+  "start_url": "./index.php?login=1",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f5f6f8",
+  "theme_color": "#0b8a5e",
+  "icons": [
+    {
+      "src": "assets/icons/app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/app-icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}
