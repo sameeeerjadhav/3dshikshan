@@ -1,4 +1,4 @@
-﻿CREATE DATABASE IF NOT EXISTS `3dshikshan` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE IF NOT EXISTS `3dshikshan` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE `3dshikshan`;
 
 CREATE TABLE IF NOT EXISTS users (

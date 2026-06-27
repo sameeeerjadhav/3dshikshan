@@ -1,4 +1,4 @@
-﻿-- Shared hosting (Hostinger / cPanel):
+-- Shared hosting (Hostinger / cPanel):
 -- 1. Create database and user in the hosting panel (names are often prefixed, e.g. u587292075_3dshikshan).
 -- 2. In phpMyAdmin, click that database in the LEFT sidebar (do not rely on USE below).
 -- 3. Open Import tab and choose this file.
