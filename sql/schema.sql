@@ -45,6 +45,8 @@ CREATE TABLE IF NOT EXISTS student_profiles (
     district     VARCHAR(100) NOT NULL,
     college_id   INT UNSIGNED NOT NULL,
     course_id    INT UNSIGNED NOT NULL,
+    academic_year VARCHAR(10) NOT NULL DEFAULT 'Unknown',
+    semester     VARCHAR(10) NOT NULL DEFAULT 'Unknown',
     created_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_student_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     CONSTRAINT fk_student_college FOREIGN KEY (college_id) REFERENCES colleges(id) ON DELETE RESTRICT,

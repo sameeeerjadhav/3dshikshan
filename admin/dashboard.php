@@ -96,6 +96,8 @@ if ($conn !== null) {
             sp.mobile_no,
             sp.state,
             sp.district,
+            sp.academic_year,
+            sp.semester,
             c.name AS college_name,
             cr.course_name,
             cr.duration,
@@ -1039,7 +1041,7 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
 
         .student-filter-bar {
             display: grid;
-            grid-template-columns: minmax(260px, 1.25fr) minmax(180px, .85fr) auto;
+            grid-template-columns: minmax(220px, 1.25fr) minmax(140px, .85fr) minmax(110px, .6fr) minmax(110px, .6fr) auto;
             gap: 10px;
             align-items: center;
             margin-bottom: 12px;
@@ -1322,7 +1324,7 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
             .student-cards { display: grid; }
             .student-meta { grid-template-columns: 1fr; }
             .student-filter-bar {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr 1fr;
                 gap: 8px;
             }
             .student-filter-count {
@@ -2208,6 +2210,29 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
                 </select>
                 <i class="fa-solid fa-chevron-down student-filter-caret"></i>
             </div>
+            
+            <div class="student-filter-field">
+                <i class="fa-solid fa-calendar-alt student-filter-icon"></i>
+                <select id="studentYearFilter" class="student-filter-select">
+                    <option value="">All Years</option>
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                    <option value="2026">2026</option>
+                    <option value="2027">2027</option>
+                    <option value="2028">2028</option>
+                </select>
+                <i class="fa-solid fa-chevron-down student-filter-caret"></i>
+            </div>
+
+            <div class="student-filter-field">
+                <i class="fa-solid fa-book student-filter-icon"></i>
+                <select id="studentSemesterFilter" class="student-filter-select">
+                    <option value="">All Semesters</option>
+                    <option value="Odd">Odd</option>
+                    <option value="Even">Even</option>
+                </select>
+                <i class="fa-solid fa-chevron-down student-filter-caret"></i>
+            </div>
             <div class="student-filter-count" id="studentFilterCount"><?php echo count($students); ?> students</div>
         </div>
 
@@ -2239,10 +2264,16 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
                                     $studentCollege = (string)$u['college_name'];
                                     $studentSearchBlob = strtolower(trim($studentName . ' ' . $studentLoginId . ' ' . $studentCourse . ' ' . $studentCollege));
                                 ?>
+                                <?php
+                                    $studentYear = (string)($u['academic_year'] ?? 'Unknown');
+                                    $studentSemester = (string)($u['semester'] ?? 'Unknown');
+                                ?>
                                 <tr
                                     data-student-profile-id="<?php echo (int)$u['profile_id']; ?>"
                                     data-college="<?php echo htmlspecialchars(strtolower($studentCollege), ENT_QUOTES, 'UTF-8'); ?>"
                                     data-search="<?php echo htmlspecialchars($studentSearchBlob, ENT_QUOTES, 'UTF-8'); ?>"
+                                    data-year="<?php echo htmlspecialchars(strtolower($studentYear), ENT_QUOTES, 'UTF-8'); ?>"
+                                    data-semester="<?php echo htmlspecialchars(strtolower($studentSemester), ENT_QUOTES, 'UTF-8'); ?>"
                                 >
                                     <td><?php echo htmlspecialchars((string)$u['full_name'], ENT_QUOTES, 'UTF-8'); ?></td>
                                     <td><?php echo htmlspecialchars((string)$u['login_id'], ENT_QUOTES, 'UTF-8'); ?></td>
@@ -2286,17 +2317,25 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
                     $studentCollege = (string)$u['college_name'];
                     $studentSearchBlob = strtolower(trim($studentName . ' ' . $studentLoginId . ' ' . $studentCourse . ' ' . $studentCollege));
                 ?>
+                <?php
+                    $studentYear = (string)($u['academic_year'] ?? 'Unknown');
+                    $studentSemester = (string)($u['semester'] ?? 'Unknown');
+                ?>
                 <div
                     class="student-card"
                     data-student-profile-id="<?php echo (int)$u['profile_id']; ?>"
                     data-college="<?php echo htmlspecialchars(strtolower($studentCollege), ENT_QUOTES, 'UTF-8'); ?>"
                     data-search="<?php echo htmlspecialchars($studentSearchBlob, ENT_QUOTES, 'UTF-8'); ?>"
+                    data-year="<?php echo htmlspecialchars(strtolower($studentYear), ENT_QUOTES, 'UTF-8'); ?>"
+                    data-semester="<?php echo htmlspecialchars(strtolower($studentSemester), ENT_QUOTES, 'UTF-8'); ?>"
                 >
                     <h4><?php echo htmlspecialchars((string)$u['full_name'], ENT_QUOTES, 'UTF-8'); ?></h4>
                     <div class="student-meta">
                         <div><strong>Login</strong><?php echo htmlspecialchars((string)$u['login_id'], ENT_QUOTES, 'UTF-8'); ?></div>
                         <div><strong>Course</strong><?php echo htmlspecialchars((string)$u['course_name'], ENT_QUOTES, 'UTF-8'); ?></div>
                         <div><strong>College</strong><?php echo htmlspecialchars((string)$u['college_name'], ENT_QUOTES, 'UTF-8'); ?></div>
+                        <div><strong>Year</strong><?php echo htmlspecialchars($studentYear, ENT_QUOTES, 'UTF-8'); ?></div>
+                        <div><strong>Semester</strong><?php echo htmlspecialchars($studentSemester, ENT_QUOTES, 'UTF-8'); ?></div>
                         <div><strong>Registered</strong><?php echo htmlspecialchars((string)$u['created_at'], ENT_QUOTES, 'UTF-8'); ?></div>
                     </div>
                     <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;">
@@ -3382,6 +3421,10 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
     function applyStudentFilters() {
         const query = (studentSearchInput && studentSearchInput.value ? studentSearchInput.value : '').trim().toLowerCase();
         const selectedCollege = (studentCollegeFilter && studentCollegeFilter.value ? studentCollegeFilter.value : '').trim().toLowerCase();
+        const yearFilterInput = document.getElementById('studentYearFilter');
+        const semesterFilterInput = document.getElementById('studentSemesterFilter');
+        const selectedYear = (yearFilterInput && yearFilterInput.value ? yearFilterInput.value : '').trim().toLowerCase();
+        const selectedSemester = (semesterFilterInput && semesterFilterInput.value ? semesterFilterInput.value : '').trim().toLowerCase();
 
         const tableRows = usersTableBody
             ? Array.from(usersTableBody.querySelectorAll('tr[data-student-profile-id]'))
@@ -3393,9 +3436,14 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
         const matchesFilter = (node) => {
             const nodeCollege = String(node.getAttribute('data-college') || '').toLowerCase();
             const nodeSearch = String(node.getAttribute('data-search') || '').toLowerCase();
+            const nodeYear = String(node.getAttribute('data-year') || '').toLowerCase();
+            const nodeSemester = String(node.getAttribute('data-semester') || '').toLowerCase();
+            
             const matchesCollege = selectedCollege === '' || nodeCollege === selectedCollege;
+            const matchesYear = selectedYear === '' || nodeYear === selectedYear;
+            const matchesSemester = selectedSemester === '' || nodeSemester === selectedSemester;
             const matchesQuery = query === '' || nodeSearch.includes(query);
-            return matchesCollege && matchesQuery;
+            return matchesCollege && matchesYear && matchesSemester && matchesQuery;
         };
 
         let visibleCount = 0;
@@ -3834,6 +3882,23 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
         });
     }
 
+    if (studentSearchInput) {
+        studentSearchInput.addEventListener('input', applyStudentFilters);
+    }
+    if (studentCollegeFilter) {
+        studentCollegeFilter.addEventListener('change', applyStudentFilters);
+    }
+    const studentYearFilter = document.getElementById('studentYearFilter');
+    if (studentYearFilter) {
+        studentYearFilter.addEventListener('change', applyStudentFilters);
+    }
+    const studentSemesterFilter = document.getElementById('studentSemesterFilter');
+    if (studentSemesterFilter) {
+        studentSemesterFilter.addEventListener('change', applyStudentFilters);
+    }
+    
+    // Add reset filter logic if it exists (some other parts might use clear)
+    
     // ── FEES FILTERING ──────────────────────────────
     const adminFeeSearchInput = document.getElementById('adminFeeSearchInput');
     const adminFeeStatusFilter = document.getElementById('adminFeeStatusFilter');

@@ -183,6 +183,8 @@ if ($conn !== null) {
                 sp.state,
                 sp.district,
                 sp.created_at,
+                sp.academic_year,
+                sp.semester,
                 c.name AS college_name,
                 cr.course_name,
                 cr.duration,
@@ -493,7 +495,7 @@ function esc(string $value): string
         .student-filter-title{display:flex;align-items:center;gap:8px;font-size:.86rem;font-weight:700;color:var(--text);flex-shrink:0}
         .student-filter-title i{color:var(--accent)}
         .student-filter-count{font-size:.77rem;font-weight:700;color:#475569;background:#f8fafc;border:1px solid #e2e8f0;padding:6px 11px;border-radius:999px;flex-shrink:0}
-        .student-filter-bar{display:grid;grid-template-columns:minmax(380px,1.45fr) minmax(190px,.8fr);gap:10px;align-items:center;min-width:0;background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:8px}
+        .student-filter-bar{display:grid;grid-template-columns:minmax(250px,1.2fr) minmax(180px,1fr) minmax(120px,.6fr) minmax(120px,.6fr);gap:10px;align-items:center;min-width:0;background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:8px}
         .student-field{display:flex;flex-direction:column;gap:0;min-width:0}
         .student-field-label{display:none}
         .student-input-wrap,.student-select-wrap{position:relative}
@@ -596,8 +598,8 @@ function esc(string $value): string
         .sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:99}
         .sidebar-overlay.visible{display:block}
         @media (max-width:700px){.sidebar{transform:translateX(calc(-1 * var(--sidebar-w)))}.sidebar.open{transform:translateX(0)}.main-content{margin-left:0}.profile-name{display:none}.topbar-brand span{display:none}.notification-btn{width:34px;height:34px;border-radius:10px}.notification-dropdown{left:8px;right:8px;width:auto;max-width:none}}
-        @media (max-width:920px){.student-table-wrap{display:none}.student-cards{display:grid}.student-meta{grid-template-columns:1fr}.student-filter-bar{grid-template-columns:minmax(0,1.55fr) minmax(150px,.85fr)}}
-        @media (max-width:640px){.college-summary{padding:16px;flex-direction:column;align-items:flex-start}.college-summary-count{width:100%;justify-content:center}.college-grid{grid-template-columns:1fr}.college-card{padding:12px}.college-view-btn{height:36px;padding:0 10px}.student-detail-grid{grid-template-columns:1fr}.student-filter-panel{padding:12px}.student-filter-top{flex-wrap:wrap;white-space:normal}.student-filter-bar{grid-template-columns:minmax(0,1.7fr) minmax(124px,.9fr);gap:8px;padding:7px}.student-filter-input,.student-filter-select{height:38px;font-size:.78rem}.student-filter-input{padding:0 10px 0 32px}.student-filter-select{padding:0 26px 0 32px}.student-input-icon,.student-select-icon{left:10px;font-size:.74rem}.student-select-caret{right:10px;font-size:.66rem}.student-filter-actions{justify-content:stretch}.student-filter-clear{width:100%;height:36px}.ticket-filter-bar{grid-template-columns:1fr}.ticket-filter-count{justify-self:start}.ticket-row{padding:8px 9px}.ticket-row-top{flex-direction:column;gap:5px;margin-bottom:5px}.ticket-status{align-self:flex-start}.schedule-form{grid-template-columns:1fr}.att-setup-card{grid-template-columns:1fr}}
+        @media (max-width:920px){.student-table-wrap{display:none}.student-cards{display:grid}.student-meta{grid-template-columns:1fr}.student-filter-bar{grid-template-columns:1fr 1fr}}
+        @media (max-width:640px){.college-summary{padding:16px;flex-direction:column;align-items:flex-start}.college-summary-count{width:100%;justify-content:center}.college-grid{grid-template-columns:1fr}.college-card{padding:12px}.college-view-btn{height:36px;padding:0 10px}.student-detail-grid{grid-template-columns:1fr}.student-filter-panel{padding:12px}.student-filter-top{flex-wrap:wrap;white-space:normal}.student-filter-bar{grid-template-columns:1fr;gap:8px;padding:7px}.student-filter-input,.student-filter-select{height:38px;font-size:.78rem}.student-filter-input{padding:0 10px 0 32px}.student-filter-select{padding:0 26px 0 32px}.student-input-icon,.student-select-icon{left:10px;font-size:.74rem}.student-select-caret{right:10px;font-size:.66rem}.student-filter-actions{justify-content:stretch}.student-filter-clear{width:100%;height:36px}.ticket-filter-bar{grid-template-columns:1fr}.ticket-filter-count{justify-self:start}.ticket-row{padding:8px 9px}.ticket-row-top{flex-direction:column;gap:5px;margin-bottom:5px}.ticket-status{align-self:flex-start}.schedule-form{grid-template-columns:1fr}.att-setup-card{grid-template-columns:1fr}}
     </style>
 </head>
 <body>
@@ -938,6 +940,35 @@ function esc(string $value): string
                             <i class="fa-solid fa-chevron-down student-select-caret"></i>
                         </div>
                     </div>
+                    
+                    <div class="student-field">
+                        <label for="studentYearFilter" class="student-field-label">Filter by Year</label>
+                        <div class="student-select-wrap">
+                            <i class="fa-solid fa-calendar-alt student-select-icon"></i>
+                            <select id="studentYearFilter" class="student-filter-select">
+                                <option value="">All Years</option>
+                                <option value="2024">2024</option>
+                                <option value="2025">2025</option>
+                                <option value="2026">2026</option>
+                                <option value="2027">2027</option>
+                                <option value="2028">2028</option>
+                            </select>
+                            <i class="fa-solid fa-chevron-down student-select-caret"></i>
+                        </div>
+                    </div>
+
+                    <div class="student-field">
+                        <label for="studentSemesterFilter" class="student-field-label">Filter by Semester</label>
+                        <div class="student-select-wrap">
+                            <i class="fa-solid fa-book student-select-icon"></i>
+                            <select id="studentSemesterFilter" class="student-filter-select">
+                                <option value="">All Semesters</option>
+                                <option value="Odd">Odd</option>
+                                <option value="Even">Even</option>
+                            </select>
+                            <i class="fa-solid fa-chevron-down student-select-caret"></i>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="student-filter-actions">
@@ -977,7 +1008,11 @@ function esc(string $value): string
                                         $collegeName
                                     ));
                                 ?>
-                                <tr class="student-row" data-college="<?php echo esc(strtolower($collegeName)); ?>" data-search="<?php echo esc($searchBlob); ?>">
+                                <?php
+                                    $studentYear = (string)($student['academic_year'] ?? 'Unknown');
+                                    $studentSemester = (string)($student['semester'] ?? 'Unknown');
+                                ?>
+                                <tr class="student-row" data-college="<?php echo esc(strtolower($collegeName)); ?>" data-search="<?php echo esc($searchBlob); ?>" data-year="<?php echo esc(strtolower($studentYear)); ?>" data-semester="<?php echo esc(strtolower($studentSemester)); ?>">
                                     <td><?php echo esc($studentName); ?></td>
                                     <td><?php echo esc((string)($student['college_name'] ?? '')); ?></td>
                                     <td><?php echo esc((string)($student['course_name'] ?? '')); ?></td>
@@ -1022,11 +1057,17 @@ function esc(string $value): string
                             $collegeName
                         ));
                     ?>
-                    <div class="student-card student-card-item" data-college="<?php echo esc(strtolower($collegeName)); ?>" data-search="<?php echo esc($searchBlob); ?>">
+                    <?php
+                        $studentYear = (string)($student['academic_year'] ?? 'Unknown');
+                        $studentSemester = (string)($student['semester'] ?? 'Unknown');
+                    ?>
+                    <div class="student-card student-card-item" data-college="<?php echo esc(strtolower($collegeName)); ?>" data-search="<?php echo esc($searchBlob); ?>" data-year="<?php echo esc(strtolower($studentYear)); ?>" data-semester="<?php echo esc(strtolower($studentSemester)); ?>">
                         <h4><?php echo esc($studentName); ?></h4>
                         <div class="student-meta">
                             <div><strong>College</strong><?php echo esc((string)($student['college_name'] ?? '')); ?></div>
                             <div><strong>Course</strong><?php echo esc((string)($student['course_name'] ?? '')); ?></div>
+                            <div><strong>Year</strong><?php echo esc($studentYear); ?></div>
+                            <div><strong>Semester</strong><?php echo esc($studentSemester); ?></div>
                             <div style="grid-column:1 / -1;display:flex;gap:6px;flex-wrap:wrap;margin-top:2px;">
                                 <span class="fee-chip total">Total ₹<?php echo number_format($totalFee, 2); ?></span>
                                 <span class="fee-chip paid">Paid ₹<?php echo number_format($paidFee, 2); ?></span>
@@ -1432,15 +1473,23 @@ function applyStudentFilters() {
 
     const query = (studentSearchInput.value || '').toLowerCase().trim();
     const selectedCollege = (studentCollegeFilter.value || '').toLowerCase().trim();
+    const selectedYear = (document.getElementById('studentYearFilter')?.value || '').toLowerCase().trim();
+    const selectedSemester = (document.getElementById('studentSemesterFilter')?.value || '').toLowerCase().trim();
 
     let visibleCount = 0;
 
     studentRows.forEach(row => {
         const rowCollege = (row.dataset.college || '').toLowerCase();
         const rowSearch = (row.dataset.search || '').toLowerCase();
+        const rowYear = (row.dataset.year || '').toLowerCase();
+        const rowSemester = (row.dataset.semester || '').toLowerCase();
+        
         const matchesCollege = selectedCollege === '' || rowCollege === selectedCollege;
+        const matchesYear = selectedYear === '' || rowYear === selectedYear;
+        const matchesSemester = selectedSemester === '' || rowSemester === selectedSemester;
         const matchesQuery = query === '' || rowSearch.includes(query);
-        const visible = matchesCollege && matchesQuery;
+        
+        const visible = matchesCollege && matchesYear && matchesSemester && matchesQuery;
         row.style.display = visible ? '' : 'none';
         if (visible) {
             visibleCount += 1;
@@ -1450,9 +1499,15 @@ function applyStudentFilters() {
     studentCards.forEach(card => {
         const cardCollege = (card.dataset.college || '').toLowerCase();
         const cardSearch = (card.dataset.search || '').toLowerCase();
+        const cardYear = (card.dataset.year || '').toLowerCase();
+        const cardSemester = (card.dataset.semester || '').toLowerCase();
+
         const matchesCollege = selectedCollege === '' || cardCollege === selectedCollege;
+        const matchesYear = selectedYear === '' || cardYear === selectedYear;
+        const matchesSemester = selectedSemester === '' || cardSemester === selectedSemester;
         const matchesQuery = query === '' || cardSearch.includes(query);
-        const visible = matchesCollege && matchesQuery;
+        
+        const visible = matchesCollege && matchesYear && matchesSemester && matchesQuery;
         card.style.display = visible ? '' : 'none';
     });
 
@@ -1461,7 +1516,7 @@ function applyStudentFilters() {
     }
 
     if (studentFilterEmpty) {
-        studentFilterEmpty.classList.toggle('show', visibleCount === 0 && (query !== '' || selectedCollege !== ''));
+        studentFilterEmpty.classList.toggle('show', visibleCount === 0 && (query !== '' || selectedCollege !== '' || selectedYear !== '' || selectedSemester !== ''));
     }
 }
 
@@ -1568,18 +1623,20 @@ if (studentCollegeFilter) {
     studentCollegeFilter.addEventListener('change', applyStudentFilters);
 }
 
+const yearFilter = document.getElementById('studentYearFilter');
+if (yearFilter) yearFilter.addEventListener('change', applyStudentFilters);
+
+const semesterFilter = document.getElementById('studentSemesterFilter');
+if (semesterFilter) semesterFilter.addEventListener('change', applyStudentFilters);
+
 if (studentFilterClearBtn) {
     studentFilterClearBtn.addEventListener('click', () => {
-        if (studentSearchInput) {
-            studentSearchInput.value = '';
-        }
-        if (studentCollegeFilter) {
-            studentCollegeFilter.value = '';
-        }
+        if (studentSearchInput) studentSearchInput.value = '';
+        if (studentCollegeFilter) studentCollegeFilter.value = '';
+        if (yearFilter) yearFilter.value = '';
+        if (semesterFilter) semesterFilter.value = '';
         applyStudentFilters();
-        if (studentSearchInput) {
-            studentSearchInput.focus();
-        }
+        if (studentSearchInput) studentSearchInput.focus();
     });
 }
 

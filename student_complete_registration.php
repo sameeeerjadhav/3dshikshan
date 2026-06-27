@@ -33,13 +33,15 @@ $state = trim((string)($data['state'] ?? ''));
 $district = trim((string)($data['district'] ?? ''));
 $collegeId = (int)($data['college_id'] ?? 0);
 $courseId = (int)($data['course_id'] ?? 0);
+$academicYear = trim((string)($data['academic_year'] ?? ''));
+$semester = trim((string)($data['semester'] ?? ''));
 $razorpayOrderId = trim((string)($data['razorpay_order_id'] ?? ''));
 $razorpayPaymentId = trim((string)($data['razorpay_payment_id'] ?? ''));
 $razorpaySignature = trim((string)($data['razorpay_signature'] ?? ''));
 
 if (
     $firstName === '' || $lastName === '' || $mobileNo === '' || $email === '' ||
-    $state === '' || $district === '' ||
+    $state === '' || $district === '' || $academicYear === '' || $semester === '' ||
     $collegeId <= 0 || $courseId <= 0 || $razorpayOrderId === '' ||
     $razorpayPaymentId === '' || $razorpaySignature === ''
 ) {
@@ -216,13 +218,13 @@ try {
     $userStmt->close();
 
     $profileStmt = $conn->prepare(
-        'INSERT INTO student_profiles (user_id, first_name, middle_name, last_name, mobile_no, email, state, district, college_id, course_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+        'INSERT INTO student_profiles (user_id, first_name, middle_name, last_name, mobile_no, email, state, district, college_id, course_id, academic_year, semester) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
     );
     if ($profileStmt === false) {
         throw new RuntimeException('Unable to create student profile.');
     }
     $profileStmt->bind_param(
-        'isssssssii',
+        'isssssssiiss',
         $userId,
         $firstName,
         $middleName,
@@ -232,7 +234,9 @@ try {
         $state,
         $district,
         $collegeId,
-        $courseId
+        $courseId,
+        $academicYear,
+        $semester
     );
     if (!$profileStmt->execute()) {
         $profileStmt->close();

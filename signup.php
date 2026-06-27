@@ -210,10 +210,30 @@ $razorpayEnabled = RAZORPAY_KEY_ID !== '' && RAZORPAY_KEY_SECRET !== '';
                     </select>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group full">
                     <label for="college_id">College</label>
                     <select id="college_id" name="college_id" required>
                         <option value="">Select College</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="academic_year">Academic Year</label>
+                    <select id="academic_year" name="academic_year" required>
+                        <option value="">Select Year</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                        <option value="2027">2027</option>
+                        <option value="2028">2028</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="semester">Semester</label>
+                    <select id="semester" name="semester" required>
+                        <option value="">Select Semester</option>
+                        <option value="Odd">Odd</option>
+                        <option value="Even">Even</option>
                     </select>
                 </div>
 
@@ -371,7 +391,7 @@ function getCourseFeeCap(selectedCourse) {
 
 
 function validateForm() {
-    const requiredIds = ['first_name','last_name','mobile_no','email','state','district','college_id','course_id'];
+    const requiredIds = ['first_name','last_name','mobile_no','email','state','district','college_id','academic_year','semester','course_id'];
     for (const id of requiredIds) {
         const el = document.getElementById(id);
         if (!String(el.value || '').trim()) {
