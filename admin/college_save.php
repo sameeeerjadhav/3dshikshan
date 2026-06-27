@@ -24,16 +24,15 @@ $name     = trim((string)($_POST['clg_name']     ?? ''));
 $country  = trim((string)($_POST['clg_country']  ?? ''));
 $state    = trim((string)($_POST['clg_state']    ?? ''));
 $district = trim((string)($_POST['clg_district'] ?? ''));
-$city     = trim((string)($_POST['clg_city']     ?? ''));
 
-if ($name === '' || $country === '' || $state === '' || $district === '' || $city === '') {
-    echo json_encode(['ok' => false, 'error' => 'All fields are required.']);
+if ($name === '' || $country === '' || $state === '' || $district === '') {
+    echo json_encode(['ok' => false, 'error' => 'Please fill all college fields.']);
     exit;
 }
 
 // Length limits
 if (strlen($name) > 200 || strlen($country) > 100 || strlen($state) > 100
-    || strlen($district) > 100 || strlen($city) > 100) {
+    || strlen($district) > 100) {
     echo json_encode(['ok' => false, 'error' => 'One or more fields exceed the allowed length.']);
     exit;
 }
@@ -44,29 +43,26 @@ if ($conn === null) {
     exit;
 }
 
-$sql  = 'INSERT INTO colleges (name, country, state, district, city) VALUES (?, ?, ?, ?, ?)';
-$stmt = $conn->prepare($sql);
-
+$stmt = $conn->prepare('INSERT INTO colleges (name, country, state, district) VALUES (?, ?, ?, ?)');
 if ($stmt === false) {
     $conn->close();
-    echo json_encode(['ok' => false, 'error' => 'Database error.']);
+    echo json_encode(['ok' => false, 'error' => 'Unable to prepare statement.']);
     exit;
 }
 
-$stmt->bind_param('sssss', $name, $country, $state, $district, $city);
+$stmt->bind_param('ssss', $name, $country, $state, $district);
 
 if ($stmt->execute()) {
-    $stmt->close();
-    $conn->close();
+    $newId = $conn->insert_id;
     echo json_encode([
         'ok' => true,
         'college' => [
+            'id' => (int)$newId,
             'name' => $name,
             'country' => $country,
             'state' => $state,
-            'district' => $district,
-            'city' => $city,
-        ],
+            'district' => $district
+        ]
     ]);
 } else {
     $err = $stmt->error;

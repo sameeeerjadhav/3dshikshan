@@ -34,7 +34,7 @@ $totalNotificationGroups = 0;
 $unreadAlerts = 0;
 $conn = getDbConnection();
 if ($conn !== null) {
-    $result = $conn->query('SELECT id, name, country, state, district, city FROM colleges ORDER BY id DESC');
+    $result = $conn->query('SELECT id, name, country, state, district FROM colleges ORDER BY id DESC');
     if ($result instanceof mysqli_result) {
         while ($row = $result->fetch_assoc()) {
             $colleges[] = $row;
@@ -2126,7 +2126,6 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
                                     <td><?php echo htmlspecialchars((string)$college['country'], ENT_QUOTES, 'UTF-8'); ?></td>
                                     <td><?php echo htmlspecialchars((string)$college['state'], ENT_QUOTES, 'UTF-8'); ?></td>
                                     <td><?php echo htmlspecialchars((string)$college['district'], ENT_QUOTES, 'UTF-8'); ?></td>
-                                    <td><?php echo htmlspecialchars((string)$college['city'], ENT_QUOTES, 'UTF-8'); ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php endif; ?>
@@ -3104,7 +3103,6 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
             <td>${escapeHtml(college.country)}</td>
             <td>${escapeHtml(college.state)}</td>
             <td>${escapeHtml(college.district)}</td>
-            <td>${escapeHtml(college.city)}</td>
         `;
 
         collegeTableBody.prepend(row);
@@ -3158,7 +3156,6 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
             <td>${escapeHtml(coordinator.mobile_no)}</td>
             <td>${escapeHtml(coordinator.state)}</td>
             <td>${escapeHtml(coordinator.district)}</td>
-            <td>${escapeHtml(coordinator.city)}</td>
             <td>${escapeHtml(coordinator.pin)}</td>
             <td>
                 ${(function() {
@@ -3202,7 +3199,6 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
             ['Duration', student.duration || '-'],
             ['State', student.state || '-'],
             ['District', student.district || '-'],
-            ['City', student.city || '-'],
             ['Registered On', student.created_at || '-']
         ];
 
@@ -3610,7 +3606,7 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
     document.getElementById('clgForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         const btn = document.getElementById('clgSubmitBtn');
-        const fields = ['clg_name','clg_country','clg_state','clg_district','clg_city'];
+        const fields = ['clg_name','clg_country','clg_state','clg_district'];
         let valid = true;
         fields.forEach(id => {
             const el = document.getElementById(id);
