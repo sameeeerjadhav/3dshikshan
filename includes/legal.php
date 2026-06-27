@@ -38,7 +38,12 @@ function legal_render_head(string $title): void
 	echo '<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">';
 	echo '<link rel="stylesheet" href="assets/css/legal.css">';
 	echo '</head><body class="legal-page">';
-	echo '<header class="legal-header"><a href="index.php?login=1" class="legal-brand">' . legal_esc(legal_company_name()) . '</a></header>';
+	echo '<header class="legal-header" style="display: flex; align-items: center; justify-content: space-between; max-width: 100%; box-sizing: border-box;">';
+	echo '<div style="display: flex; align-items: center; gap: 8px;">';
+	echo '<a href="index.html" class="legal-brand" style="display: flex; align-items: center; gap: 8px;"><img src="assets/logo.png" alt="Logo" style="height: 32px; width: auto; object-fit: contain;"></a>';
+	echo '</div>';
+	echo '<a href="index.html" style="text-decoration: none; color: var(--text); background: var(--bg); border: 1px solid var(--border); padding: 6px 14px; border-radius: 8px; font-weight: 500; font-size: 0.9rem; transition: background 0.2s;">&larr; Back to Home</a>';
+	echo '</header>';
 	echo '<main class="legal-main"><article class="legal-article">';
 	echo '<h1>' . legal_esc($title) . '</h1>';
 	echo '<p class="legal-updated">Last updated: May 2026</p>';
