@@ -20,6 +20,9 @@ CREATE TABLE IF NOT EXISTS colleges (
     country    VARCHAR(100) NOT NULL,
     state      VARCHAR(100) NOT NULL,
     district   VARCHAR(100) NOT NULL,
+    address    VARCHAR(255) NOT NULL DEFAULT '',
+    latitude   VARCHAR(50) NOT NULL DEFAULT '',
+    longitude  VARCHAR(50) NOT NULL DEFAULT '',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

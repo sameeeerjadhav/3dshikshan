@@ -19,6 +19,9 @@ $sql = '
         c.district, 
         c.state, 
         c.country,
+        c.address,
+        c.latitude,
+        c.longitude,
         coord.first_name, 
         coord.last_name, 
         coord.mobile_no,
@@ -44,6 +47,9 @@ if ($result instanceof mysqli_result) {
                 'district' => $row['district'],
                 'state' => $row['state'],
                 'country' => $row['country'],
+                'address' => $row['address'] ?? '',
+                'latitude' => $row['latitude'] ?? '',
+                'longitude' => $row['longitude'] ?? '',
                 'coordinators' => []
             ];
         }

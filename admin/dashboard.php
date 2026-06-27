@@ -34,7 +34,7 @@ $totalNotificationGroups = 0;
 $unreadAlerts = 0;
 $conn = getDbConnection();
 if ($conn !== null) {
-    $result = $conn->query('SELECT id, name, country, state, district FROM colleges ORDER BY id DESC');
+    $result = $conn->query('SELECT id, name, country, state, district, address, latitude, longitude FROM colleges ORDER BY id DESC');
     if ($result instanceof mysqli_result) {
         while ($row = $result->fetch_assoc()) {
             $colleges[] = $row;
@@ -2110,7 +2110,7 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
                             <th>Country</th>
                             <th>State</th>
                             <th>District</th>
-                            <th>City</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody id="collegeTableBody">
@@ -2125,6 +2125,23 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
                                     <td><?php echo htmlspecialchars((string)$college['country'], ENT_QUOTES, 'UTF-8'); ?></td>
                                     <td><?php echo htmlspecialchars((string)$college['state'], ENT_QUOTES, 'UTF-8'); ?></td>
                                     <td><?php echo htmlspecialchars((string)$college['district'], ENT_QUOTES, 'UTF-8'); ?></td>
+                                    <td>
+                                        <button type="button" class="action-btn edit-college" data-college='<?php echo htmlspecialchars(json_encode([
+                                            "id" => $college["id"],
+                                            "name" => $college["name"],
+                                            "country" => $college["country"],
+                                            "state" => $college["state"],
+                                            "district" => $college["district"],
+                                            "address" => $college["address"] ?? "",
+                                            "latitude" => $college["latitude"] ?? "",
+                                            "longitude" => $college["longitude"] ?? ""
+                                        ]), ENT_QUOTES, "UTF-8"); ?>'>
+                                            <i class="fa-solid fa-pen"></i> Edit
+                                        </button>
+                                        <button type="button" class="action-btn delete delete-college" data-college-id="<?php echo (int)$college['id']; ?>" data-college-name="<?php echo htmlspecialchars((string)$college['name'], ENT_QUOTES, 'UTF-8'); ?>">
+                                            <i class="fa-solid fa-trash"></i> Delete
+                                        </button>
+                                    </td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php endif; ?>
@@ -2136,11 +2153,17 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
         <div class="form-card hidden" id="collegeFormWrap">
             <h3><i class="fa-solid fa-building-columns"></i> College Details</h3>
             <form id="clgForm" autocomplete="off" novalidate>
+                <input type="hidden" id="clg_id" name="clg_id" value="">
                 <div class="form-grid">
                     <div class="f-group full">
                         <label for="clg_name">College Name</label>
                         <input type="text" id="clg_name" name="clg_name"
                                placeholder="e.g. Shri Shivaji College of Engineering" required>
+                    </div>
+                    <div class="f-group full">
+                        <label for="clg_address">Full Address</label>
+                        <textarea id="clg_address" name="clg_address"
+                               placeholder="e.g. 123 Main St, Near Park" required></textarea>
                     </div>
                     <div class="f-group">
                         <label for="clg_country">Country</label>
@@ -2158,9 +2181,14 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
                                placeholder="e.g. Amravati" required>
                     </div>
                     <div class="f-group">
-                        <label for="clg_city">City</label>
-                        <input type="text" id="clg_city" name="clg_city"
-                               placeholder="e.g. Amravati" required>
+                        <label for="clg_latitude">Latitude</label>
+                        <input type="text" id="clg_latitude" name="clg_latitude"
+                               placeholder="e.g. 19.0760">
+                    </div>
+                    <div class="f-group">
+                        <label for="clg_longitude">Longitude</label>
+                        <input type="text" id="clg_longitude" name="clg_longitude"
+                               placeholder="e.g. 72.8777">
                     </div>
                 </div>
                 <button type="submit" class="btn-submit" id="clgSubmitBtn">
@@ -3304,6 +3332,45 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
         }
     }
 
+    async function deleteCollege(collegeId, collegeName) {
+        if (!collegeId) {
+            return;
+        }
+
+        const confirmed = window.confirm('Delete college "' + (collegeName || '') + '"?');
+        if (!confirmed) {
+            return;
+        }
+
+        try {
+            const body = new URLSearchParams();
+            body.append('id', String(collegeId));
+            const response = await fetch('college_delete.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+                body: body.toString()
+            });
+            const data = await response.json();
+
+            if (!data.ok) {
+                showToast(data.error || 'Unable to delete college.', 'error');
+                return;
+            }
+
+            document.querySelectorAll('.delete-college[data-college-id="' + String(collegeId) + '"]').forEach(node => {
+                const row = node.closest('tr') || node;
+                row.remove();
+            });
+
+            if (document.getElementById('collegeTableBody') && document.getElementById('collegeTableBody').querySelectorAll('tr').length === 0) {
+                document.getElementById('collegeTableBody').innerHTML = '<tr><td colspan="5" class="college-empty">No colleges added yet.</td></tr>';
+            }
+
+            showToast('College deleted successfully.', 'success');
+        } catch {
+            showToast('Network error while deleting college.', 'error');
+        }
+    }
     function incrementCounter(element, amount = 1) {
         if (!element) {
             return;
@@ -3469,6 +3536,34 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
             const coordinatorId = coordinatorDeleteBtn.getAttribute('data-coordinator-id') || '';
             const coordinatorName = coordinatorDeleteBtn.getAttribute('data-coordinator-name') || '';
             deleteCoordinator(coordinatorId, coordinatorName);
+            return;
+        }
+
+        const collegeEditBtn = event.target.closest('.action-btn.edit-college');
+        if (collegeEditBtn) {
+            const data = JSON.parse(collegeEditBtn.getAttribute('data-college'));
+            document.getElementById('clg_id').value = data.id;
+            document.getElementById('clg_name').value = data.name || '';
+            document.getElementById('clg_address').value = data.address || '';
+            document.getElementById('clg_country').value = data.country || '';
+            document.getElementById('clg_state').value = data.state || '';
+            document.getElementById('clg_district').value = data.district || '';
+            document.getElementById('clg_latitude').value = data.latitude || '';
+            document.getElementById('clg_longitude').value = data.longitude || '';
+            
+            document.getElementById('clgSubmitBtn').innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Update College';
+            collegeFormWrap.classList.remove('hidden');
+            updateCollegeToggleLabel();
+            collegeFormWrap.scrollIntoView({ behavior: 'smooth' });
+            return;
+        }
+
+        const collegeDeleteBtn = event.target.closest('.action-btn.delete.delete-college[data-college-id]');
+        if (collegeDeleteBtn) {
+            const collegeId = collegeDeleteBtn.getAttribute('data-college-id') || '';
+            const collegeName = collegeDeleteBtn.getAttribute('data-college-name') || '';
+            deleteCollege(collegeId, collegeName);
+            return;
         }
     });
 
@@ -3498,6 +3593,11 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
     });
 
     toggleCollegeFormBtn.addEventListener('click', () => {
+        if (!collegeFormWrap.classList.contains('hidden')) {
+            document.getElementById('clgForm').reset();
+            document.getElementById('clg_id').value = '';
+            document.getElementById('clgSubmitBtn').innerHTML = '<i class="fa-solid fa-plus"></i> Save College';
+        }
         collegeFormWrap.classList.toggle('hidden');
         updateCollegeToggleLabel();
     });
@@ -3542,7 +3642,7 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
     document.getElementById('clgForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         const btn = document.getElementById('clgSubmitBtn');
-        const fields = ['clg_name','clg_country','clg_state','clg_district'];
+        const fields = ['clg_name','clg_country','clg_state','clg_district','clg_address'];
         let valid = true;
         fields.forEach(id => {
             const el = document.getElementById(id);
@@ -3559,13 +3659,19 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
             const res  = await fetch('college_save.php', { method: 'POST', body });
             const data = await res.json();
             if (data.ok) {
-                showToast('College added successfully!', 'success');
-                if (data.college) {
-                    prependCollegeRow(data.college);
+                if (document.getElementById('clg_id').value !== '') {
+                    showToast('College updated successfully. Refreshing...', 'success');
+                    setTimeout(() => window.location.reload(), 1000);
+                } else {
+                    showToast('College added successfully!', 'success');
+                    if (data.college) {
+                        prependCollegeRow(data.college);
+                    }
+                    this.reset();
+                    document.getElementById('clg_id').value = '';
+                    collegeFormWrap.classList.add('hidden');
+                    updateCollegeToggleLabel();
                 }
-                this.reset();
-                collegeFormWrap.classList.add('hidden');
-                updateCollegeToggleLabel();
             } else {
                 showToast(data.error || 'Failed to save.', 'error');
             }
