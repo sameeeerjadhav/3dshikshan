@@ -47,7 +47,7 @@ if (!$showLoginPage && $error === null) {
         </div>
 
         <div class="login-header">
-            <i class="fa-solid fa-layer-group"></i>
+            <img src="assets/logo.png" alt="3D Shikshan" style="height: 100px; object-fit: contain; margin-bottom: 15px;">
             <h2>Welcome Back</h2>
             <p>Sign in to access your 3D Shikshan portal dashboard.</p>
         </div>
