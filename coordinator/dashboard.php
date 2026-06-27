@@ -1539,7 +1539,10 @@ function applyStudentFilters() {
     }
 }
 
-function showSection(name) {
+function showSection(name, updateHash = true) {
+    if (updateHash) {
+        window.location.hash = name;
+    }
     sections.forEach(section => section.style.display = 'none');
     const target = document.getElementById('section-' + name);
     if (target) target.style.display = 'block';
@@ -2236,6 +2239,20 @@ document.querySelectorAll('.ticket-resolve-btn').forEach(button => {
 document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && ticketResolveModalOverlay && ticketResolveModalOverlay.classList.contains('show')) {
         closeTicketResolveModal();
+    }
+});
+
+window.addEventListener('hashchange', () => {
+    const hash = window.location.hash.replace('#', '');
+    if (hash && document.getElementById('section-' + hash)) {
+        showSection(hash, false);
+    }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const hash = window.location.hash.replace('#', '');
+    if (hash && document.getElementById('section-' + hash)) {
+        showSection(hash, false);
     }
 });
 </script>

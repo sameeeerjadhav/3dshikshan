@@ -3973,7 +3973,10 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
     const sections = document.querySelectorAll('[id^="section-"]');
     const navItems = document.querySelectorAll('.nav-item');
 
-    function showSection(name) {
+    function showSection(name, updateHash = true) {
+        if (updateHash) {
+            window.location.hash = name;
+        }
         sections.forEach(s => s.style.display = 'none');
         const target = document.getElementById('section-' + name);
         if (target) target.style.display = 'block';
@@ -4245,6 +4248,20 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
     applyAdminFeeFilters();
 
     applyAdminTicketFilters();
+
+    window.addEventListener('hashchange', () => {
+        const hash = window.location.hash.replace('#', '');
+        if (hash && document.getElementById('section-' + hash)) {
+            showSection(hash, false);
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const hash = window.location.hash.replace('#', '');
+        if (hash && document.getElementById('section-' + hash)) {
+            showSection(hash, false);
+        }
+    });
 </script>
 </body>
 </html>

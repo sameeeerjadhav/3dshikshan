@@ -794,7 +794,10 @@
   const tabs = document.querySelectorAll('.tab-btn');
   let mapInitialized = false;
 
-  function switchTab(pageName) {
+  function switchTab(pageName, updateHash = true) {
+    if (updateHash) {
+      window.location.hash = pageName;
+    }
     pages.forEach(p => p.classList.remove('active'));
     tabs.forEach(t => t.classList.remove('active'));
 
@@ -816,6 +819,25 @@
         offerInstallAppOnLogin();
       }
     });
+  });
+
+  window.addEventListener('hashchange', () => {
+    const hash = window.location.hash.replace('#', '');
+    if (hash) {
+      switchTab(hash, false);
+    }
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const hash = window.location.hash.replace('#', '');
+    if (hash) {
+      switchTab(hash, false);
+    } else {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('login') === '1') {
+        switchTab('login', false);
+      }
+    }
   });
 
   const homeTabs = document.querySelectorAll('.home-tab-btn');

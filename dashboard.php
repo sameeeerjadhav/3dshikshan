@@ -1707,7 +1707,10 @@ function esc(string $value): string
         const sections = document.querySelectorAll('[id^="section-"]');
         const navItems = document.querySelectorAll('.nav-item');
 
-        function showSection(name) {
+        function showSection(name, updateHash = true) {
+            if (updateHash) {
+                window.location.hash = name;
+            }
             sections.forEach(section => section.style.display = 'none');
             const target = document.getElementById('section-' + name);
             if (target) {
