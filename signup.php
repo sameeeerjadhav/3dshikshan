@@ -158,7 +158,7 @@ $razorpayEnabled = RAZORPAY_KEY_ID !== '' && RAZORPAY_KEY_SECRET !== '';
 
     <div class="signup-card">
         <div class="login-header" style="padding-top:0;">
-            <img src="assets/logo.png" alt="3D Shikshan" style="height: 48px; object-fit: contain; margin-bottom: 15px;">
+            <img src="assets/logo.png" alt="3D Shikshan" style="height: 100px; object-fit: contain; margin-bottom: 15px;">
             <h2>Create Student Account</h2>
         </div>
 
