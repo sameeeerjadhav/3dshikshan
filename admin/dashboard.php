@@ -1961,9 +1961,6 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
         <a class="nav-item" href="#" onclick="showSection('fees')">
             <i class="fa-solid fa-indian-rupee-sign"></i> Fees
         </a>
-        <a class="nav-item" href="#" onclick="showSection('courses')">
-            <i class="fa-solid fa-cube"></i> Courses
-        </a>
 
         <div class="sidebar-label" style="margin-top:8px;">Management</div>
         <a class="nav-item" href="#" onclick="showSection('add-college')">
@@ -2362,82 +2359,6 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
         </div>
     </div>
 
-    <div id="section-courses" style="display:none;">
-        <div class="page-heading">Courses</div>
-        <p class="page-sub">Show available courses and add new courses.</p>
-
-        <div class="section-toolbar">
-            <div></div>
-            <button type="button" class="btn-add-college" id="toggleCourseFormBtn">
-                <i class="fa-solid fa-plus"></i>
-                Add Course
-            </button>
-        </div>
-
-        <div class="college-list-card">
-            <div class="college-list-wrap">
-                <table class="college-table" id="courseTable">
-                    <thead>
-                        <tr>
-                            <th>Course Name</th>
-                            <th>Description</th>
-                            <th>Duration</th>
-                            <th>Fees</th>
-                            <th>Required Details</th>
-                        </tr>
-                    </thead>
-                    <tbody id="courseTableBody">
-                        <?php if (empty($courses)): ?>
-                            <tr>
-                                <td colspan="5" class="college-empty">No courses added yet.</td>
-                            </tr>
-                        <?php else: ?>
-                            <?php foreach ($courses as $course): ?>
-                                <tr>
-                                    <td><?php echo htmlspecialchars((string)$course['course_name'], ENT_QUOTES, 'UTF-8'); ?></td>
-                                    <td><?php echo htmlspecialchars((string)$course['description'], ENT_QUOTES, 'UTF-8'); ?></td>
-                                    <td><?php echo htmlspecialchars((string)$course['duration'], ENT_QUOTES, 'UTF-8'); ?></td>
-                                    <td><?php echo htmlspecialchars((string)$course['fees'], ENT_QUOTES, 'UTF-8'); ?></td>
-                                    <td><?php echo htmlspecialchars((string)$course['required_details'], ENT_QUOTES, 'UTF-8'); ?></td>
-                                </tr>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="form-card hidden" id="courseFormWrap">
-            <h3><i class="fa-solid fa-book"></i> Course Details</h3>
-            <form id="courseForm" autocomplete="off" novalidate>
-                <div class="form-grid">
-                    <div class="f-group full">
-                        <label for="course_name">Course Name</label>
-                        <input type="text" id="course_name" name="course_name" placeholder="e.g. Advanced 3D Printing" required>
-                    </div>
-                    <div class="f-group full">
-                        <label for="course_description">Description</label>
-                        <textarea id="course_description" name="description" placeholder="Write course description" required></textarea>
-                    </div>
-                    <div class="f-group">
-                        <label for="course_duration">Duration</label>
-                        <input type="text" id="course_duration" name="duration" placeholder="e.g. 3 Months" required>
-                    </div>
-                    <div class="f-group">
-                        <label for="course_fees">Fees</label>
-                        <input type="text" id="course_fees" name="fees" placeholder="e.g. 15000" required>
-                    </div>
-                    <div class="f-group full">
-                        <label for="course_required_details">Required Details</label>
-                        <textarea id="course_required_details" name="required_details" placeholder="Eligibility, documents, prerequisites" required></textarea>
-                    </div>
-                </div>
-                <button type="submit" class="btn-submit" id="courseSubmitBtn">
-                    <i class="fa-solid fa-plus"></i> Save Course
-                </button>
-            </form>
-        </div>
-    </div>
 
     <div id="section-fees" style="display:none;">
         <div class="page-heading">Fees Collection</div>
@@ -3090,9 +3011,7 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
     const toggleCollegeFormBtn = document.getElementById('toggleCollegeFormBtn');
     const collegeFormWrap = document.getElementById('collegeFormWrap');
     const collegeTableBody = document.getElementById('collegeTableBody');
-    const toggleCourseFormBtn = document.getElementById('toggleCourseFormBtn');
-    const courseFormWrap = document.getElementById('courseFormWrap');
-    const courseTableBody = document.getElementById('courseTableBody');
+
     const toggleCoordinatorFormBtn = document.getElementById('toggleCoordinatorFormBtn');
     const coordinatorFormWrap = document.getElementById('coordinatorFormWrap');
     const coordinatorTableBody = document.getElementById('coordinatorTableBody');
@@ -3145,31 +3064,6 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
         `;
 
         collegeTableBody.prepend(row);
-    }
-
-    function updateCourseToggleLabel() {
-        const isHidden = courseFormWrap.classList.contains('hidden');
-        toggleCourseFormBtn.innerHTML = isHidden
-            ? '<i class="fa-solid fa-plus"></i> Add Course'
-            : '<i class="fa-solid fa-xmark"></i> Close Form';
-    }
-
-    function prependCourseRow(course) {
-        const hasEmptyRow = courseTableBody.querySelector('.college-empty');
-        if (hasEmptyRow) {
-            courseTableBody.innerHTML = '';
-        }
-
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${escapeHtml(course.course_name)}</td>
-            <td>${escapeHtml(course.description)}</td>
-            <td>${escapeHtml(course.duration)}</td>
-            <td>${escapeHtml(course.fees)}</td>
-            <td>${escapeHtml(course.required_details)}</td>
-        `;
-
-        courseTableBody.prepend(row);
     }
 
     function updateCoordinatorToggleLabel() {
@@ -3608,11 +3502,6 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
         updateCollegeToggleLabel();
     });
 
-    toggleCourseFormBtn.addEventListener('click', () => {
-        courseFormWrap.classList.toggle('hidden');
-        updateCourseToggleLabel();
-    });
-
     toggleCoordinatorFormBtn.addEventListener('click', () => {
         if (!coordinatorFormWrap.classList.contains('hidden')) {
             document.getElementById('coordinatorForm').reset();
@@ -3636,7 +3525,6 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
     applyStudentFilters();
 
     updateCollegeToggleLabel();
-    updateCourseToggleLabel();
     updateCoordinatorToggleLabel();
 
     /* ── Toast ── */
@@ -3687,46 +3575,6 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
 
         btn.disabled = false;
         btn.innerHTML = '<i class="fa-solid fa-plus"></i> Add College';
-    });
-
-    /* ── Add Course form ── */
-    document.getElementById('courseForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const btn = document.getElementById('courseSubmitBtn');
-        const fields = ['course_name','course_description','course_duration','course_fees','course_required_details'];
-        let valid = true;
-        fields.forEach(id => {
-            const el = document.getElementById(id);
-            if (!el.value.trim()) { el.style.borderColor = 'var(--red)'; valid = false; }
-            else el.style.borderColor = '';
-        });
-        if (!valid) { showToast('Please fill all course fields.', 'error'); return; }
-
-        btn.disabled = true;
-        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving…';
-
-        const body = new FormData(this);
-        try {
-            const res  = await fetch('course_save.php', { method: 'POST', body });
-            const data = await res.json();
-            if (data.ok) {
-                showToast('Course added successfully!', 'success');
-                if (data.course) {
-                    prependCourseRow(data.course);
-                }
-                incrementCounter(statCourses, 1);
-                this.reset();
-                courseFormWrap.classList.add('hidden');
-                updateCourseToggleLabel();
-            } else {
-                showToast(data.error || 'Failed to save course.', 'error');
-            }
-        } catch {
-            showToast('Network error. Please try again.', 'error');
-        }
-
-        btn.disabled = false;
-        btn.innerHTML = '<i class="fa-solid fa-plus"></i> Save Course';
     });
 
     /* ── Add Coordinator form ── */
