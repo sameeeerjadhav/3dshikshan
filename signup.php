@@ -56,6 +56,7 @@ $razorpayEnabled = RAZORPAY_KEY_ID !== '' && RAZORPAY_KEY_SECRET !== '';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Student Sign Up - 3D Shikshan</title>
+    <link rel="icon" type="image/png" href="assets/logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">

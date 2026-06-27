@@ -32,6 +32,7 @@ function legal_render_head(string $title): void
 	echo '<meta charset="UTF-8">';
 	echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
 	echo '<title>' . $pageTitle . '</title>';
+	echo '<link rel="icon" type="image/png" href="assets/logo.png" />';
 	echo '<link rel="preconnect" href="https://fonts.googleapis.com">';
 	echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
 	echo '<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">';

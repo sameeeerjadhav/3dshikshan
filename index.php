@@ -31,6 +31,7 @@ if (!$showLoginPage && $error === null) {
     <link rel="manifest" href="manifest.webmanifest">
     <link rel="apple-touch-icon" href="assets/icons/app-icon.svg">
     <title>3D Shikshan</title>
+    <link rel="icon" type="image/png" href="assets/logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
