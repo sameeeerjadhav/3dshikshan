@@ -25,6 +25,8 @@ if (!is_array($payload)) {
 $collegeId = (int)($payload['college_id'] ?? 0);
 $sessionDate = trim((string)($payload['session_date'] ?? ''));
 $sessionDetails = trim((string)($payload['session_details'] ?? ''));
+$sessionType = trim((string)($payload['session_type'] ?? 'Class'));
+$notes = trim((string)($payload['notes'] ?? ''));
 
 if ($collegeId <= 0) {
     http_response_code(422);
@@ -37,6 +39,18 @@ $isValidDate = $dateObj instanceof DateTime && $dateObj->format('Y-m-d') === $se
 if (!$isValidDate) {
     http_response_code(422);
     echo json_encode(['ok' => false, 'error' => 'Please enter a valid session date.']);
+    exit;
+}
+
+if (!in_array($sessionType, ['Class', 'Industrial Visit'], true)) {
+    http_response_code(422);
+    echo json_encode(['ok' => false, 'error' => 'Please select a valid session type.']);
+    exit;
+}
+
+if (mb_strlen($notes) > 2000) {
+    http_response_code(422);
+    echo json_encode(['ok' => false, 'error' => 'Notes are too long.']);
     exit;
 }
 
@@ -66,6 +80,8 @@ $conn->query(
         college_id INT UNSIGNED NOT NULL,
         session_date DATE NOT NULL,
         session_details VARCHAR(2000) NOT NULL,
+        session_type VARCHAR(50) NOT NULL DEFAULT 'Class',
+        notes VARCHAR(2000) NOT NULL DEFAULT '',
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         INDEX idx_cs_college_date (college_id, session_date),
         INDEX idx_cs_coordinator_date (coordinator_id, session_date)
@@ -161,13 +177,13 @@ $conn->begin_transaction();
 
 try {
     $insertSessionStmt = $conn->prepare(
-        'INSERT INTO coordinator_sessions (coordinator_id, college_id, session_date, session_details) VALUES (?, ?, ?, ?)'
+        'INSERT INTO coordinator_sessions (coordinator_id, college_id, session_date, session_details, session_type, notes) VALUES (?, ?, ?, ?, ?, ?)'
     );
     if ($insertSessionStmt === false) {
         throw new RuntimeException('Unable to save scheduled session.');
     }
 
-    $insertSessionStmt->bind_param('iiss', $coordinatorId, $collegeId, $sessionDate, $sessionDetails);
+    $insertSessionStmt->bind_param('iissss', $coordinatorId, $collegeId, $sessionDate, $sessionDetails, $sessionType, $notes);
     if (!$insertSessionStmt->execute()) {
         $insertSessionStmt->close();
         throw new RuntimeException('Unable to save scheduled session.');

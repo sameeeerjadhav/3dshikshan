@@ -96,6 +96,8 @@ CREATE TABLE IF NOT EXISTS coordinator_sessions (
     college_id      INT UNSIGNED NOT NULL,
     session_date    DATE NOT NULL,
     session_details VARCHAR(2000) NOT NULL,
+    session_type    VARCHAR(50) NOT NULL DEFAULT 'Class',
+    notes           VARCHAR(2000) NOT NULL DEFAULT '',
     created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_cs_coordinator FOREIGN KEY (coordinator_id) REFERENCES coordinators(id) ON DELETE CASCADE,
     CONSTRAINT fk_cs_college FOREIGN KEY (college_id) REFERENCES colleges(id) ON DELETE CASCADE,

@@ -147,6 +147,8 @@ if ($conn !== null) {
                 cs.college_id,
                 cs.session_date,
                 cs.session_details,
+                cs.session_type,
+                cs.notes,
                 cs.created_at,
                 c.name AS college_name
             FROM coordinator_sessions cs
@@ -789,9 +791,22 @@ function esc(string $value): string
                     <input type="date" id="schedule_session_date" required>
                 </div>
 
+                <div class="schedule-group">
+                    <label for="schedule_session_type">Session Type</label>
+                    <select id="schedule_session_type" required>
+                        <option value="Class" selected>Class</option>
+                        <option value="Industrial Visit">Industrial Visit</option>
+                    </select>
+                </div>
+
                 <div class="schedule-group full">
                     <label for="schedule_session_details">Session Details</label>
                     <textarea id="schedule_session_details" placeholder="Enter full session details for students" required></textarea>
+                </div>
+                
+                <div class="schedule-group full">
+                    <label for="schedule_notes">Notes / Instructions</label>
+                    <textarea id="schedule_notes" placeholder="Enter additional notes or instructions for students (optional)"></textarea>
                 </div>
 
                 <div class="schedule-group full schedule-actions">
@@ -809,6 +824,7 @@ function esc(string $value): string
                             <tr>
                                 <th>Session Date</th>
                                 <th>College</th>
+                                <th>Type</th>
                                 <th>Details</th>
                                 <th>Created At</th>
                             </tr>
@@ -818,6 +834,7 @@ function esc(string $value): string
                                 <tr>
                                     <td><?php echo esc((string)$session['session_date']); ?></td>
                                     <td><?php echo esc((string)($session['college_name'] ?? '')); ?></td>
+                                    <td><?php echo esc((string)($session['session_type'] ?? 'Class')); ?></td>
                                     <td><?php echo esc((string)$session['session_details']); ?></td>
                                     <td><?php echo esc((string)$session['created_at']); ?></td>
                                 </tr>
@@ -835,6 +852,7 @@ function esc(string $value): string
                             <tr>
                                 <th>Session Date</th>
                                 <th>College</th>
+                                <th>Type</th>
                                 <th>Details</th>
                                 <th>Created At</th>
                             </tr>
@@ -1667,11 +1685,15 @@ if (scheduleSessionForm && scheduleSubmitBtn) {
 
         const collegeSelect = document.getElementById('schedule_college_id');
         const sessionDateInput = document.getElementById('schedule_session_date');
+        const sessionTypeSelect = document.getElementById('schedule_session_type');
         const detailsInput = document.getElementById('schedule_session_details');
+        const notesInput = document.getElementById('schedule_notes');
 
         const collegeId = Number((collegeSelect && collegeSelect.value) || 0);
         const sessionDate = (sessionDateInput && sessionDateInput.value) ? sessionDateInput.value : '';
+        const sessionType = (sessionTypeSelect && sessionTypeSelect.value) ? sessionTypeSelect.value : 'Class';
         const sessionDetails = (detailsInput && detailsInput.value) ? detailsInput.value.trim() : '';
+        const notes = (notesInput && notesInput.value) ? notesInput.value.trim() : '';
 
         if (!collegeId) {
             showScheduleMessage('Please select an assigned college.', 'error');
@@ -1696,7 +1718,9 @@ if (scheduleSessionForm && scheduleSubmitBtn) {
                 body: JSON.stringify({
                     college_id: collegeId,
                     session_date: sessionDate,
-                    session_details: sessionDetails
+                    session_type: sessionType,
+                    session_details: sessionDetails,
+                    notes: notes
                 })
             });
 
@@ -1713,16 +1737,19 @@ if (scheduleSessionForm && scheduleSubmitBtn) {
                 const row = document.createElement('tr');
                 const tdDate = document.createElement('td');
                 const tdCollege = document.createElement('td');
+                const tdType = document.createElement('td');
                 const tdDetails = document.createElement('td');
                 const tdCreated = document.createElement('td');
 
                 tdDate.textContent = scheduled.session_date || '-';
                 tdCollege.textContent = scheduled.college_name || '-';
+                tdType.textContent = sessionType || 'Class';
                 tdDetails.textContent = scheduled.session_details || '-';
                 tdCreated.textContent = scheduled.created_at || '-';
 
                 row.appendChild(tdDate);
                 row.appendChild(tdCollege);
+                row.appendChild(tdType);
                 row.appendChild(tdDetails);
                 row.appendChild(tdCreated);
                 scheduledSessionsTbody.prepend(row);
@@ -1737,6 +1764,12 @@ if (scheduleSessionForm && scheduleSubmitBtn) {
 
             if (detailsInput) {
                 detailsInput.value = '';
+            }
+            if (notesInput) {
+                notesInput.value = '';
+            }
+            if (sessionTypeSelect) {
+                sessionTypeSelect.value = 'Class';
             }
             if (sessionDateInput) {
                 sessionDateInput.value = '';

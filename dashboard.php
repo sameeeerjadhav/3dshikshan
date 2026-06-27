@@ -204,7 +204,7 @@ if ($conn !== null) {
         }
 
         $scheduleStmt = $conn->prepare(
-            'SELECT cs.session_date, cs.session_details
+            'SELECT cs.session_date, cs.session_details, cs.session_type, cs.notes
              FROM coordinator_sessions cs
              WHERE cs.college_id = ?
              ORDER BY cs.session_date ASC'
@@ -219,6 +219,8 @@ if ($conn !== null) {
                     $scheduleSessions[] = [
                         'date'    => (string)$row['session_date'],
                         'details' => (string)$row['session_details'],
+                        'type'    => (string)($row['session_type'] ?? 'Class'),
+                        'notes'   => (string)($row['notes'] ?? ''),
                     ];
                 }
             }
@@ -1025,14 +1027,14 @@ function esc(string $value): string
             color: var(--text);
             font-weight: 700;
         }
-        .cal-day.has-session {
+        .cal-day.has-session-class {
             background: #dbeafe;
             color: #1d4ed8;
             font-weight: 700;
             cursor: pointer;
         }
-        .cal-day.has-session:hover { background: #bfdbfe; }
-        .cal-day.has-session::after {
+        .cal-day.has-session-class:hover { background: #bfdbfe; }
+        .cal-day.has-session-class::after {
             content: '';
             width: 5px; height: 5px;
             border-radius: 50%;
@@ -1040,11 +1042,32 @@ function esc(string $value): string
             position: absolute;
             bottom: 6px;
         }
-        .cal-day.today.has-session {
+        .cal-day.today.has-session-class {
             background: #1d4ed8;
             color: #fff;
         }
-        .cal-day.today.has-session::after { background: #bfdbfe; }
+        .cal-day.today.has-session-class::after { background: #bfdbfe; }
+        
+        .cal-day.has-session-iv {
+            background: #ffe4e6;
+            color: #be123c;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .cal-day.has-session-iv:hover { background: #fecdd3; }
+        .cal-day.has-session-iv::after {
+            content: '';
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background: #e11d48;
+            position: absolute;
+            bottom: 6px;
+        }
+        .cal-day.today.has-session-iv {
+            background: #be123c;
+            color: #fff;
+        }
+        .cal-day.today.has-session-iv::after { background: #fecdd3; }
         .cal-session-panel {
             margin-top: 14px;
             background: #eff6ff;
@@ -1084,7 +1107,8 @@ function esc(string $value): string
             width: 12px; height: 12px;
             border-radius: 4px;
         }
-        .cal-legend-dot.session { background: #dbeafe; border: 1px solid #93c5fd; }
+        .cal-legend-dot.session-class { background: #dbeafe; border: 1px solid #93c5fd; }
+        .cal-legend-dot.session-iv { background: #ffe4e6; border: 1px solid #fda4af; }
         .cal-legend-dot.today-dot { background: var(--surface-2); border: 1px solid var(--border); }
         .cal-no-sessions {
             background: var(--surface);
@@ -1402,10 +1426,13 @@ function esc(string $value): string
                     <div class="cal-grid" id="calGrid"></div>
                     <div class="cal-session-panel" id="calSessionPanel">
                         <div class="cal-session-date" id="calSessionDate"></div>
+                        <div class="cal-session-type" id="calSessionType" style="font-weight: 600; margin-bottom: 4px; color: #475569; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px;"></div>
                         <div class="cal-session-details" id="calSessionDetails"></div>
+                        <div class="cal-session-notes" id="calSessionNotes" style="font-style: italic; margin-top: 8px; color: #64748b; font-size: 0.8rem;"></div>
                     </div>
                     <div class="cal-legend">
-                        <div class="cal-legend-item"><div class="cal-legend-dot session"></div> Session scheduled</div>
+                        <div class="cal-legend-item"><div class="cal-legend-dot session-class"></div> Class</div>
+                        <div class="cal-legend-item"><div class="cal-legend-dot session-iv"></div> Industrial Visit</div>
                         <div class="cal-legend-item"><div class="cal-legend-dot today-dot"></div> Today</div>
                     </div>
                 </div>
@@ -1810,7 +1837,9 @@ function esc(string $value): string
 
         // Build a Set of YYYY-MM-DD → details string for fast lookup
         const SESSION_MAP = {};
-        SESSION_DATES.forEach(function(s) { SESSION_MAP[s.date] = s.details; });
+        SESSION_DATES.forEach(function(s) { 
+            SESSION_MAP[s.date] = { details: s.details, type: s.type, notes: s.notes }; 
+        });
 
         const MONTH_NAMES = ['January','February','March','April','May','June',
                              'July','August','September','October','November','December'];
@@ -1820,6 +1849,8 @@ function esc(string $value): string
         const calSessionPanel= document.getElementById('calSessionPanel');
         const calSessionDate = document.getElementById('calSessionDate');
         const calSessionDet  = document.getElementById('calSessionDetails');
+        const calSessionType = document.getElementById('calSessionType');
+        const calSessionNotes= document.getElementById('calSessionNotes');
 
         const today = new Date();
         let calYear  = today.getFullYear();
@@ -1856,13 +1887,23 @@ function esc(string $value): string
 
                 if (dateStr === todayStr) cell.classList.add('today');
                 if (SESSION_MAP[dateStr] !== undefined) {
-                    cell.classList.add('has-session');
-                    const capturedDate    = dateStr;
-                    const capturedDetails = SESSION_MAP[dateStr];
+                    const sessionData = SESSION_MAP[dateStr];
+                    if (sessionData.type === 'Industrial Visit') {
+                        cell.classList.add('has-session-iv');
+                    } else {
+                        cell.classList.add('has-session-class');
+                    }
                     cell.addEventListener('click', function() {
                         const friendly = MONTH_NAMES[calMonth] + ' ' + d + ', ' + calYear;
                         calSessionDate.textContent = 'Session on ' + friendly;
-                        calSessionDet.textContent  = capturedDetails || 'No details provided.';
+                        calSessionType.textContent = sessionData.type || 'Class';
+                        calSessionDet.textContent  = sessionData.details || 'No details provided.';
+                        if (sessionData.notes) {
+                            calSessionNotes.textContent = 'Notes: ' + sessionData.notes;
+                            calSessionNotes.style.display = 'block';
+                        } else {
+                            calSessionNotes.style.display = 'none';
+                        }
                         calSessionPanel.classList.add('show');
                     });
                 }
