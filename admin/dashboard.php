@@ -1866,7 +1866,7 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
     </button>
 
     <a href="#" class="topbar-brand">
-        <i class="fa-solid fa-layer-group"></i>
+        <img src="../assets/logo.png" alt="Logo" style="height: 28px; width: auto; object-fit: contain;">
         3D <span>Shikshan</span>
     </a>
 

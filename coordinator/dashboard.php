@@ -603,7 +603,7 @@ function esc(string $value): string
 <body>
     <header class="topbar">
     <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle navigation"><i class="fa-solid fa-bars"></i></button>
-    <a href="#" class="topbar-brand"><i class="fa-solid fa-layer-group"></i>3D <span>Shikshan</span></a>
+    <a href="#" class="topbar-brand"><img src="../assets/logo.png" alt="Logo" style="height: 28px; width: auto; object-fit: contain; margin-right: 10px;">3D <span>Shikshan</span></a>
     <div class="topbar-spacer"></div>
     <div class="topbar-actions">
         <div class="notification-wrap" id="notificationWrap">
