@@ -931,25 +931,35 @@
       `;
       container.appendChild(card);
 
-      const locString = `${college.district}, ${college.state}, ${college.country}`;
-      if (!distCoords[locString]) {
-        try {
-          const gRes = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(locString)}`);
-          const gJson = await gRes.json();
-          if (gJson && gJson.length > 0) {
-            const lat = parseFloat(gJson[0].lat) + (Math.random() - 0.5) * 0.05;
-            const lon = parseFloat(gJson[0].lon) + (Math.random() - 0.5) * 0.05;
-            distCoords[locString] = { lat, lon };
-          } else {
-             distCoords[locString] = { lat: 19.75, lon: 75.71 };
+      let lat = 19.75;
+      let lon = 75.71;
+
+      if (college.latitude && college.longitude) {
+          lat = parseFloat(college.latitude);
+          lon = parseFloat(college.longitude);
+      } else {
+          const locString = `${college.district}, ${college.state}, ${college.country}`;
+          if (!distCoords[locString]) {
+            try {
+              const gRes = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(locString)}`);
+              const gJson = await gRes.json();
+              if (gJson && gJson.length > 0) {
+                const fetchedLat = parseFloat(gJson[0].lat) + (Math.random() - 0.5) * 0.05;
+                const fetchedLon = parseFloat(gJson[0].lon) + (Math.random() - 0.5) * 0.05;
+                distCoords[locString] = { lat: fetchedLat, lon: fetchedLon };
+              } else {
+                 distCoords[locString] = { lat: 19.75, lon: 75.71 };
+              }
+            } catch (e) {
+              distCoords[locString] = { lat: 19.75, lon: 75.71 };
+            }
+            await new Promise(r => setTimeout(r, 1000));
           }
-        } catch (e) {
-          distCoords[locString] = { lat: 19.75, lon: 75.71 };
-        }
-        await new Promise(r => setTimeout(r, 1000));
+          lat = distCoords[locString].lat;
+          lon = distCoords[locString].lon;
       }
 
-      const coords = distCoords[locString];
+      const coords = { lat, lon };
       if (coords) {
          const m = L.marker([coords.lat, coords.lon], {icon: redIcon}).bindPopup(`<strong>${college.name}</strong><br>${address}`);
          markersLayer.addLayer(m);
