@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS users (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     full_name VARCHAR(120) NOT NULL,
     login_id VARCHAR(120) NOT NULL UNIQUE,
+    mobile_no VARCHAR(20) DEFAULT '',
     password_hash VARCHAR(255) NOT NULL,
     role ENUM('admin', 'coordinator', 'student') NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -157,3 +158,14 @@ CREATE TABLE IF NOT EXISTS coordinator_tickets (
     INDEX idx_ct_student_created (student_profile_id, created_at),
     INDEX idx_ct_status_created (status, created_at)
 );
+
+
+CREATE TABLE IF NOT EXISTS password_resets (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(120) NOT NULL,
+    token VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    expires_at TIMESTAMP NOT NULL,
+    INDEX (email)
+);
+

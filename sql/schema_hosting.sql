@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS users (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     full_name VARCHAR(120) NOT NULL,
     login_id VARCHAR(120) NOT NULL UNIQUE,
+    mobile_no VARCHAR(20) DEFAULT '',
     password_hash VARCHAR(255) NOT NULL,
     role ENUM('admin', 'coordinator', 'student') NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP

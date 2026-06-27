@@ -3071,6 +3071,11 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
                     </div>
 
                     <div class="f-group full">
+                        <label for="settings_mobile_no">Mobile Number (For OTP Verification)</label>
+                        <input type="text" id="settings_mobile_no" name="mobile_no" value="<?php echo htmlspecialchars($user['mobile_no'] ?? '', ENT_QUOTES, 'UTF-8'); ?>" required>
+                    </div>
+
+                    <div class="f-group full">
                         <label for="settings_current_password">Current Password (Required for login ID/password changes)</label>
                         <input type="password" id="settings_current_password" name="current_password" placeholder="Enter current password">
                     </div>
@@ -3088,6 +3093,22 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
                     <i class="fa-solid fa-floppy-disk"></i> Save Settings
                 </button>
             </form>
+        </div>
+    </div>
+
+    <!-- OTP Modal for Admin Settings -->
+    <div class="modal-overlay" id="adminOtpOverlay" style="display:none; align-items:center; justify-content:center;">
+        <div class="form-card" style="width:100%; max-width:400px; text-align:center;">
+            <h3>OTP Verification</h3>
+            <p class="page-sub" style="margin-bottom:15px;" id="adminOtpMessage">An OTP has been generated for security. (Check popup/console)</p>
+            <div class="f-group" style="text-align:left;">
+                <label for="settings_otp">Enter 6-digit OTP</label>
+                <input type="text" id="settings_otp" placeholder="e.g. 123456" maxlength="6" style="text-align:center; letter-spacing:4px; font-size:1.2rem; font-weight:bold;">
+            </div>
+            <div style="display:flex; gap:10px; justify-content:center; margin-top:20px;">
+                <button type="button" class="btn-submit" style="background:var(--red);" onclick="document.getElementById('adminOtpOverlay').style.display='none';">Cancel</button>
+                <button type="button" class="btn-submit" id="adminOtpVerifyBtn">Verify & Save</button>
+            </div>
         </div>
     </div>
 
@@ -4185,8 +4206,11 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
             const newPasswordInput = document.getElementById('settings_new_password');
             const confirmPasswordInput = document.getElementById('settings_confirm_password');
 
+            const mobileNoInput = document.getElementById('settings_mobile_no');
+
             const fullName = fullNameInput ? fullNameInput.value.trim() : '';
             const loginId = loginIdInput ? loginIdInput.value.trim() : '';
+            const mobileNo = mobileNoInput ? mobileNoInput.value.trim() : '';
             const currentPassword = currentPasswordInput ? currentPasswordInput.value : '';
             const newPassword = newPasswordInput ? newPasswordInput.value : '';
             const confirmPassword = confirmPasswordInput ? confirmPasswordInput.value : '';
@@ -4212,19 +4236,51 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
             }
 
             adminSettingsSubmitBtn.disabled = true;
-            adminSettingsSubmitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
+            adminSettingsSubmitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Processing...';
 
+            const payload = {
+                full_name: fullName,
+                login_id: loginId,
+                mobile_no: mobileNo,
+                current_password: currentPassword,
+                new_password: newPassword,
+                confirm_password: confirmPassword,
+            };
+
+            // If changing password, request OTP first
+            if (newPassword !== '') {
+                try {
+                    const response = await fetch('settings_save.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ action: 'request_otp', ...payload })
+                    });
+                    const result = await response.json();
+                    if (!result.ok) {
+                        throw new Error(result.error || 'Failed to request OTP.');
+                    }
+                    
+                    // Show OTP Modal
+                    document.getElementById('adminOtpOverlay').style.display = 'flex';
+                    // Show mock OTP for testing
+                    if (result.mock_otp) {
+                        alert(`MOCK SMS (Sent to ${mobileNo}): Your 3DShikshan Admin OTP is ${result.mock_otp}`);
+                    }
+                } catch (error) {
+                    showToast(error.message || 'Unable to request OTP right now.', 'error');
+                } finally {
+                    adminSettingsSubmitBtn.disabled = false;
+                    adminSettingsSubmitBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Save Settings';
+                }
+                return; // Stop here, wait for OTP modal verification
+            }
+
+            // Normal save without OTP (if password is not changed)
             try {
                 const response = await fetch('settings_save.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        full_name: fullName,
-                        login_id: loginId,
-                        current_password: currentPassword,
-                        new_password: newPassword,
-                        confirm_password: confirmPassword,
-                    })
+                    body: JSON.stringify({ action: 'save', ...payload })
                 });
 
                 const result = await response.json();
@@ -4241,6 +4297,58 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
             } finally {
                 adminSettingsSubmitBtn.disabled = false;
                 adminSettingsSubmitBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Save Settings';
+            }
+        });
+    }
+
+    const adminOtpVerifyBtn = document.getElementById('adminOtpVerifyBtn');
+    if (adminOtpVerifyBtn) {
+        adminOtpVerifyBtn.addEventListener('click', async () => {
+            const otp = document.getElementById('settings_otp').value.trim();
+            if (otp.length !== 6) {
+                showToast('Please enter a valid 6-digit OTP.', 'error');
+                return;
+            }
+
+            const fullName = document.getElementById('settings_full_name').value.trim();
+            const loginId = document.getElementById('settings_login_id').value.trim();
+            const mobileNo = document.getElementById('settings_mobile_no').value.trim();
+            const currentPassword = document.getElementById('settings_current_password').value;
+            const newPassword = document.getElementById('settings_new_password').value;
+
+            adminOtpVerifyBtn.disabled = true;
+            adminOtpVerifyBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Verifying...';
+
+            try {
+                const response = await fetch('settings_save.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        action: 'verify_otp',
+                        otp: otp,
+                        full_name: fullName,
+                        login_id: loginId,
+                        mobile_no: mobileNo,
+                        current_password: currentPassword,
+                        new_password: newPassword
+                    })
+                });
+
+                const result = await response.json();
+                if (!result.ok) {
+                    throw new Error(result.error || 'Invalid OTP or failed to save settings.');
+                }
+
+                document.getElementById('adminOtpOverlay').style.display = 'none';
+                showToast('Settings & Password updated successfully. Refreshing...', 'success');
+                setTimeout(() => {
+                    window.location.reload();
+                }, 900);
+            } catch (error) {
+                showToast(error.message || 'Unable to verify OTP right now.', 'error');
+            } finally {
+                adminOtpVerifyBtn.disabled = false;
+                adminOtpVerifyBtn.innerHTML = 'Verify & Save';
             }
         });
     }
