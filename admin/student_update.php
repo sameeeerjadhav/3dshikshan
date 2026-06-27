@@ -7,7 +7,8 @@ header('Content-Type: application/json');
 require_once __DIR__ . '/../config.php';
 require_once __DIR__ . '/../db.php';
 
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
+$user = $_SESSION['user'] ?? null;
+if (!$user || ($user['role'] ?? '') !== 'admin') {
     echo json_encode(['ok' => false, 'error' => 'Unauthorized access.']);
     exit;
 }
