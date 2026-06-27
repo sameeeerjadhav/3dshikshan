@@ -158,9 +158,8 @@ $razorpayEnabled = RAZORPAY_KEY_ID !== '' && RAZORPAY_KEY_SECRET !== '';
 
     <div class="signup-card">
         <div class="login-header" style="padding-top:0;">
-            <i class="fa-solid fa-graduation-cap"></i>
+            <img src="assets/logo.png" alt="3D Shikshan" style="height: 48px; object-fit: contain; margin-bottom: 15px;">
             <h2>Create Student Account</h2>
-            <p>Pay minimum ₹1000 via Razorpay to complete signup.</p>
         </div>
 
         <div class="success-box" id="signupSuccess"></div>
@@ -218,13 +217,7 @@ $razorpayEnabled = RAZORPAY_KEY_ID !== '' && RAZORPAY_KEY_SECRET !== '';
                     </select>
                 </div>
 
-                <div class="form-group full">
-                    <label for="course_id">Course</label>
-                    <select id="course_id" name="course_id" required>
-                        <option value="">Select Course</option>
-                    </select>
-                    <div class="course-details" id="courseDetails"></div>
-                </div>
+                <input type="hidden" id="course_id" name="course_id" value="">
 
                 <div class="form-group full">
                     <label for="amount_to_pay">Amount to Pay (₹)</label>
@@ -232,7 +225,7 @@ $razorpayEnabled = RAZORPAY_KEY_ID !== '' && RAZORPAY_KEY_SECRET !== '';
                 </div>
             </div>
 
-            <div class="pay-note" id="payNote">Select course to see total fees. Payable min ₹1000 and up to selected course fees.</div>
+
 
             <?php if ($razorpayEnabled): ?>
                 <?php require __DIR__ . '/includes/payment_consent.php'; ?>
@@ -272,9 +265,7 @@ const stateEl = document.getElementById('state');
 const districtEl = document.getElementById('district');
 const collegeEl = document.getElementById('college_id');
 const courseEl = document.getElementById('course_id');
-const courseDetailsEl = document.getElementById('courseDetails');
 const amountToPayEl = document.getElementById('amount_to_pay');
-const payNoteEl = document.getElementById('payNote');
 const loaderEl = document.getElementById('signupLoader');
 const successEl = document.getElementById('signupSuccess');
 const formEl = document.getElementById('signupForm');
@@ -345,13 +336,15 @@ function updateColleges() {
 }
 
 function updateCourses() {
-    courseEl.innerHTML = '<option value="">Select Course</option>';
-    courses.forEach(c => {
-        const opt = document.createElement('option');
-        opt.value = String(c.id);
-        opt.textContent = c.course_name;
-        courseEl.appendChild(opt);
-    });
+    if (courses.length > 0) {
+        courseEl.value = String(courses[0].id);
+        const maxPayable = getCourseFeeCap(courses[0]);
+        amountToPayEl.min = '1000';
+        amountToPayEl.max = String(maxPayable);
+        if (!amountToPayEl.value || Number(amountToPayEl.value) > maxPayable || Number(amountToPayEl.value) < 1000) {
+            amountToPayEl.value = maxPayable.toFixed(2);
+        }
+    }
 }
 
 function parseCourseFees(feesText) {
@@ -375,39 +368,7 @@ function getCourseFeeCap(selectedCourse) {
     return parseCourseFees(selectedCourse.fees);
 }
 
-function renderCourseDetails() {
-    const selectedCourse = getSelectedCourse();
-    if (!selectedCourse) {
-        courseDetailsEl.style.display = 'none';
-        amountToPayEl.value = '';
-        amountToPayEl.min = '1000';
-        amountToPayEl.removeAttribute('max');
-        payNoteEl.textContent = 'Select course to see total fees. Payable min ₹1000 and up to selected course fees.';
-        return;
-    }
 
-    const minPayable = 1000;
-    const maxPayable = getCourseFeeCap(selectedCourse);
-    courseDetailsEl.style.display = 'block';
-    courseDetailsEl.innerHTML = `
-        <p><strong>Description:</strong> ${selectedCourse.description}</p>
-        <p><strong>Duration:</strong> ${selectedCourse.duration}</p>
-        <p><strong>Fees:</strong> ₹${selectedCourse.fees}</p>
-        <p><strong>Required Details:</strong> ${selectedCourse.required_details}</p>
-    `;
-
-    amountToPayEl.min = String(minPayable);
-    amountToPayEl.max = String(maxPayable);
-    if (!amountToPayEl.value || Number(amountToPayEl.value) > maxPayable || Number(amountToPayEl.value) < minPayable) {
-        amountToPayEl.value = maxPayable.toFixed(2);
-    }
-
-    if (maxPayable < minPayable) {
-        payNoteEl.textContent = `Course fees ₹${maxPayable.toFixed(2)} is below minimum allowed payment ₹1000. Please contact admin.`;
-    } else {
-        payNoteEl.textContent = `Total course fees: ₹${maxPayable.toFixed(2)}. You can pay from ₹1000.00 to ₹${maxPayable.toFixed(2)}.`;
-    }
-}
 
 function validateForm() {
     const requiredIds = ['first_name','last_name','mobile_no','email','state','district','college_id','course_id'];
@@ -425,10 +386,9 @@ function validateForm() {
         return 'Enter valid mobile number (10-15 digits).';
     }
 
-    const selectedCourse = getSelectedCourse();
+    const selectedCourse = courses.length > 0 ? courses[0] : null;
     if (!selectedCourse) {
-        courseEl.focus();
-        return 'Please select course.';
+        return 'No courses available for registration.';
     }
 
     const maxPayable = getCourseFeeCap(selectedCourse);
@@ -450,7 +410,7 @@ function validateForm() {
 
 stateEl.addEventListener('change', updateDistricts);
 districtEl.addEventListener('change', updateColleges);
-courseEl.addEventListener('change', renderCourseDetails);
+courseEl.addEventListener('change', function() {});
 
 updateStates();
 updateCourses();
