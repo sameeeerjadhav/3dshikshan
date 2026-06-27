@@ -1,8 +1,8 @@
--- Shared hosting (Hostinger / cPanel):
+﻿-- Shared hosting (Hostinger / cPanel):
 -- 1. Create database and user in the hosting panel (names are often prefixed, e.g. u587292075_3dshikshan).
 -- 2. In phpMyAdmin, click that database in the LEFT sidebar (do not rely on USE below).
 -- 3. Open Import tab and choose this file.
--- Do NOT add a USE statement here — the panel username prefix must match the selected database.
+-- Do NOT add a USE statement here â€” the panel username prefix must match the selected database.
 
 CREATE TABLE IF NOT EXISTS users (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
