@@ -284,21 +284,53 @@
 
     /* ── MAP ────────────────────────────────────────── */
     #mapContainer {
-      width: 100%; height: 340px;
+      width: 100%; height: 50vh; min-height: 300px;
       border-radius: var(--radius);
       border: 1px solid var(--border);
       overflow: hidden; margin-bottom: 20px;
     }
-    .map-info { display: flex; flex-direction: column; gap: 10px; }
-    .map-info-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 16px; display: flex; align-items: flex-start; gap: 12px;
+    .district-filters {
+      display: flex; gap: 8px; overflow-x: auto; margin-bottom: 15px;
+      padding-bottom: 5px; scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
     }
-    .map-info-card i { color: var(--accent); font-size: 1rem; margin-top: 2px; }
-    .map-info-card h5 { font-size: .86rem; margin-bottom: 2px; }
-    .map-info-card p { color: var(--text-muted); font-size: .76rem; }
+    .district-filters::-webkit-scrollbar { display: none; }
+    .filter-pill {
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text); padding: 6px 14px; border-radius: 999px;
+      font-size: .8rem; font-weight: 500; white-space: nowrap;
+      cursor: pointer; transition: var(--transition);
+      -webkit-tap-highlight-color: transparent;
+    }
+    .filter-pill.active { background: var(--text); color: #fff; border-color: var(--text); }
+    
+    .college-cards {
+      display: flex; gap: 12px; overflow-x: auto; padding-bottom: 15px;
+      scroll-snap-type: x mandatory; scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .college-cards::-webkit-scrollbar { display: none; }
+    .college-map-card {
+      min-width: 280px; max-width: 320px; scroll-snap-align: center;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 16px;
+      box-shadow: var(--shadow-soft);
+      display: flex; flex-direction: column; gap: 10px;
+      flex-shrink: 0;
+    }
+    .college-map-card h4 { font-size: .95rem; margin: 0; color: var(--accent); }
+    .college-map-card p { font-size: .8rem; margin: 0; color: var(--text-muted); line-height: 1.4; }
+    .college-card-actions { display: flex; gap: 8px; margin-top: 5px; }
+    .college-card-actions a {
+      flex: 1; padding: 8px; text-align: center; border-radius: 8px;
+      font-size: .8rem; font-weight: 600; text-decoration: none;
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      transition: var(--transition);
+    }
+    .btn-directions { background: #3b82f6; color: #fff; }
+    .btn-call { background: var(--surface-2); color: var(--text); border: 1px solid var(--border); }
+    .btn-directions:active { background: #2563eb; }
+    .btn-call:active { background: var(--surface-3); }
 
     /* ── LOGIN ──────────────────────────────────────── */
     .login-header {
@@ -592,35 +624,17 @@
 <div class="page" id="page-map">
   <div class="top-bar">
     <i class="fa-solid fa-map-location-dot top-icon" style="color:var(--blue)"></i>
-    <h2>Map</h2>
+    <h2>Our Centers</h2>
   </div>
 
-  <p class="section-subtitle" style="margin-top:8px;">Find makerspaces, fab labs, and workshops near you.</p>
+  <div id="districtFilters" class="district-filters">
+    <button class="filter-pill active" data-district="All">All</button>
+  </div>
 
   <div id="mapContainer"></div>
 
-  <div class="map-info">
-    <div class="map-info-card">
-      <i class="fa-solid fa-location-dot"></i>
-      <div>
-        <h5>Browse by Location</h5>
-        <p>Pan and zoom to discover makerspaces and fab labs in your area.</p>
-      </div>
-    </div>
-    <div class="map-info-card">
-      <i class="fa-solid fa-clock"></i>
-      <div>
-        <h5>Hours &amp; Availability</h5>
-        <p>Check opening hours, equipment, and membership options before visiting.</p>
-      </div>
-    </div>
-    <div class="map-info-card">
-      <i class="fa-solid fa-users"></i>
-      <div>
-        <h5>Community Events</h5>
-        <p>Many spaces host workshops, meetups, and hackathons to learn and connect.</p>
-      </div>
-    </div>
+  <div id="collegeCards" class="college-cards">
+    <!-- College cards will be populated here -->
   </div>
 
   <div class="page-footer">&copy; 2026 3D Shikshan</div>
@@ -676,7 +690,7 @@
   <div class="tab-bar-inner">
     <button class="tab-btn active" data-page="home"><i class="fa-solid fa-house"></i>Home</button>
     <button class="tab-btn" data-page="guide"><i class="fa-solid fa-book"></i>Guide</button>
-    <button class="tab-btn" data-page="map"><i class="fa-solid fa-map-location-dot"></i>Map</button>
+    <button class="tab-btn" data-page="map"><i class="fa-solid fa-map-location-dot"></i>Our Centers</button>
     <button class="tab-btn" data-page="login"><i class="fa-solid fa-user"></i>Login</button>
   </div>
 </div>
@@ -733,26 +747,141 @@
     });
   });
 
-  function initMap() {
+  let mapData = [];
+  let theMap = null;
+  let markersLayer = null;
+  let distCoords = {};
+
+  async function initMap() {
     mapInitialized = true;
-    const map = L.map('mapContainer').setView([20, 0], 2);
+    theMap = L.map('mapContainer').setView([19.7515, 75.7139], 6);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors',
       maxZoom: 18
-    }).addTo(map);
+    }).addTo(theMap);
+    
+    markersLayer = L.layerGroup().addTo(theMap);
 
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(pos => {
-        const { latitude, longitude } = pos.coords;
-        map.setView([latitude, longitude], 13);
-        L.marker([latitude, longitude])
-          .addTo(map)
-          .bindPopup('You are here')
-          .openPopup();
-      });
+    try {
+      const res = await fetch('api/get_centers.php');
+      const json = await res.json();
+      if (json.ok && json.centers) {
+        mapData = json.centers;
+        buildDistrictFilters();
+        renderColleges('All');
+      }
+    } catch (e) {
+      console.error('Failed to load centers', e);
     }
 
-    setTimeout(() => map.invalidateSize(), 300);
+    setTimeout(() => theMap.invalidateSize(), 300);
+  }
+
+  function buildDistrictFilters() {
+    const filtersContainer = document.getElementById('districtFilters');
+    filtersContainer.innerHTML = '<button class="filter-pill active" data-district="All">All</button>';
+    const districts = [...new Set(mapData.map(c => c.district))].sort();
+    
+    districts.forEach(d => {
+      if(!d) return;
+      const btn = document.createElement('button');
+      btn.className = 'filter-pill';
+      btn.dataset.district = d;
+      btn.textContent = d;
+      filtersContainer.appendChild(btn);
+    });
+
+    filtersContainer.addEventListener('click', (e) => {
+      if (e.target.classList.contains('filter-pill')) {
+        document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+        renderColleges(e.target.dataset.district);
+      }
+    });
+  }
+
+  async function renderColleges(district) {
+    const container = document.getElementById('collegeCards');
+    container.innerHTML = '';
+    markersLayer.clearLayers();
+
+    const filtered = district === 'All' ? mapData : mapData.filter(c => c.district === district);
+    
+    if (filtered.length === 0) {
+      container.innerHTML = '<p style="padding:15px;color:var(--text-muted)">No centers found.</p>';
+      return;
+    }
+
+    const redIcon = new L.Icon({
+      iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
+    });
+
+    const bounds = [];
+
+    for (const college of filtered) {
+      const coordData = college.coordinators && college.coordinators.length > 0 ? college.coordinators[0] : null;
+      const coordName = coordData ? coordData.name : 'Not assigned';
+      const coordPhone = coordData ? coordData.mobile_no : '';
+      const address = coordData && coordData.address ? coordData.address : `${college.district}, ${college.state}`;
+
+      const card = document.createElement('div');
+      card.className = 'college-map-card';
+      card.innerHTML = `
+        <div>
+          <h4>${college.name}</h4>
+          <p>${address}</p>
+          <p style="margin-top:5px;font-size:0.75rem"><strong>Coordinator:</strong> ${coordName}</p>
+        </div>
+        <div class="college-card-actions">
+          <a href="tel:${coordPhone}" class="btn-call" ${!coordPhone ? 'style="pointer-events:none;opacity:0.5"' : ''}>
+            <i class="fa-solid fa-phone"></i> Call
+          </a>
+          <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(college.name + ' ' + address)}" target="_blank" class="btn-directions">
+            <i class="fa-solid fa-location-arrow"></i> Directions
+          </a>
+        </div>
+      `;
+      container.appendChild(card);
+
+      const locString = `${college.district}, ${college.state}, ${college.country}`;
+      if (!distCoords[locString]) {
+        try {
+          const gRes = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(locString)}`);
+          const gJson = await gRes.json();
+          if (gJson && gJson.length > 0) {
+            const lat = parseFloat(gJson[0].lat) + (Math.random() - 0.5) * 0.05;
+            const lon = parseFloat(gJson[0].lon) + (Math.random() - 0.5) * 0.05;
+            distCoords[locString] = { lat, lon };
+          } else {
+             distCoords[locString] = { lat: 19.75, lon: 75.71 };
+          }
+        } catch (e) {
+          distCoords[locString] = { lat: 19.75, lon: 75.71 };
+        }
+        await new Promise(r => setTimeout(r, 1000));
+      }
+
+      const coords = distCoords[locString];
+      if (coords) {
+         const m = L.marker([coords.lat, coords.lon], {icon: redIcon}).bindPopup(`<strong>${college.name}</strong><br>${address}`);
+         markersLayer.addLayer(m);
+         bounds.push([coords.lat, coords.lon]);
+         
+         card.addEventListener('click', () => {
+            theMap.setView([coords.lat, coords.lon], 13);
+            m.openPopup();
+         });
+      }
+    }
+    
+    if (bounds.length > 0) {
+       theMap.fitBounds(bounds, { padding: [30, 30], maxZoom: 12 });
+    }
   }
 
 </script>
