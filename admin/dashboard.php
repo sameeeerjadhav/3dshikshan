@@ -90,12 +90,17 @@ if ($conn !== null) {
         "SELECT
             sp.id AS profile_id,
             sp.user_id,
+            sp.first_name,
+            sp.middle_name,
+            sp.last_name,
             u.full_name,
             u.login_id,
             sp.email,
             sp.mobile_no,
             sp.state,
             sp.district,
+            sp.college_id,
+            sp.course_id,
             sp.academic_year,
             sp.semester,
             c.name AS college_name,
@@ -2318,7 +2323,25 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
                                             <button type="button" class="action-btn view" data-student-profile-id="<?php echo (int)$u['profile_id']; ?>">
                                                 <i class="fa-solid fa-eye"></i> View
                                             </button>
-                                            <button type="button" class="action-btn delete" data-student-profile-id="<?php echo (int)$u['profile_id']; ?>" data-student-name="<?php echo htmlspecialchars((string)$u['full_name'], ENT_QUOTES, 'UTF-8'); ?>">
+                                            <button type="button" class="action-btn edit-student" data-student='<?php echo htmlspecialchars(json_encode([
+                                                "profile_id" => $u["profile_id"],
+                                                "user_id" => $u["user_id"],
+                                                "first_name" => $u["first_name"],
+                                                "middle_name" => $u["middle_name"],
+                                                "last_name" => $u["last_name"],
+                                                "login_id" => $u["login_id"],
+                                                "email" => $u["email"],
+                                                "mobile_no" => $u["mobile_no"],
+                                                "state" => $u["state"],
+                                                "district" => $u["district"],
+                                                "college_id" => $u["college_id"],
+                                                "course_id" => $u["course_id"],
+                                                "academic_year" => $u["academic_year"],
+                                                "semester" => $u["semester"]
+                                            ]), ENT_QUOTES, "UTF-8"); ?>'>
+                                                <i class="fa-solid fa-pen"></i> Edit
+                                            </button>
+                                            <button type="button" class="action-btn delete delete-student" data-student-profile-id="<?php echo (int)$u['profile_id']; ?>" data-student-name="<?php echo htmlspecialchars((string)$u['full_name'], ENT_QUOTES, 'UTF-8'); ?>">
                                                 <i class="fa-solid fa-trash"></i> Delete
                                             </button>
                                         </div>
@@ -2373,7 +2396,25 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
                         <button type="button" class="action-btn view" data-student-profile-id="<?php echo (int)$u['profile_id']; ?>">
                             <i class="fa-solid fa-eye"></i> View
                         </button>
-                        <button type="button" class="action-btn delete" data-student-profile-id="<?php echo (int)$u['profile_id']; ?>" data-student-name="<?php echo htmlspecialchars((string)$u['full_name'], ENT_QUOTES, 'UTF-8'); ?>">
+                        <button type="button" class="action-btn edit-student" data-student='<?php echo htmlspecialchars(json_encode([
+                            "profile_id" => $u["profile_id"],
+                            "user_id" => $u["user_id"],
+                            "first_name" => $u["first_name"],
+                            "middle_name" => $u["middle_name"],
+                            "last_name" => $u["last_name"],
+                            "login_id" => $u["login_id"],
+                            "email" => $u["email"],
+                            "mobile_no" => $u["mobile_no"],
+                            "state" => $u["state"],
+                            "district" => $u["district"],
+                            "college_id" => $u["college_id"],
+                            "course_id" => $u["course_id"],
+                            "academic_year" => $u["academic_year"],
+                            "semester" => $u["semester"]
+                        ]), ENT_QUOTES, "UTF-8"); ?>'>
+                            <i class="fa-solid fa-pen"></i> Edit
+                        </button>
+                        <button type="button" class="action-btn delete delete-student" data-student-profile-id="<?php echo (int)$u['profile_id']; ?>" data-student-name="<?php echo htmlspecialchars((string)$u['full_name'], ENT_QUOTES, 'UTF-8'); ?>">
                             <i class="fa-solid fa-trash"></i> Delete
                         </button>
                     </div>
@@ -2386,9 +2427,98 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
                 <div class="college-empty" style="background:var(--surface);border:1px solid var(--border);border-radius:12px;">No students found.</div>
             <?php endif; ?>
         </div>
+        </div>
+
+        <div class="form-card hidden" id="studentFormWrap">
+            <div class="section-toolbar" style="margin-bottom: 20px;">
+                <h3><i class="fa-solid fa-user-pen"></i> Edit Student Profile</h3>
+                <button type="button" class="btn-cancel" id="cancelStudentEditBtn">
+                    <i class="fa-solid fa-arrow-left"></i> Back to List
+                </button>
+            </div>
+            <form id="studentEditForm" autocomplete="off" novalidate>
+                <input type="hidden" id="edit_student_profile_id" name="profile_id" value="">
+                <input type="hidden" id="edit_student_user_id" name="user_id" value="">
+                <div class="form-grid">
+                    <div class="f-group">
+                        <label for="edit_student_first_name">First Name</label>
+                        <input type="text" id="edit_student_first_name" name="first_name" required>
+                    </div>
+                    <div class="f-group">
+                        <label for="edit_student_middle_name">Middle Name</label>
+                        <input type="text" id="edit_student_middle_name" name="middle_name">
+                    </div>
+                    <div class="f-group">
+                        <label for="edit_student_last_name">Last Name</label>
+                        <input type="text" id="edit_student_last_name" name="last_name" required>
+                    </div>
+                    <div class="f-group">
+                        <label for="edit_student_login_id">Login ID (Username)</label>
+                        <input type="text" id="edit_student_login_id" name="login_id" required>
+                    </div>
+                    <div class="f-group">
+                        <label for="edit_student_email">Email</label>
+                        <input type="email" id="edit_student_email" name="email" required>
+                    </div>
+                    <div class="f-group">
+                        <label for="edit_student_mobile_no">Mobile No</label>
+                        <input type="text" id="edit_student_mobile_no" name="mobile_no" required>
+                    </div>
+                    <div class="f-group">
+                        <label for="edit_student_state">State</label>
+                        <input type="text" id="edit_student_state" name="state" required>
+                    </div>
+                    <div class="f-group">
+                        <label for="edit_student_district">District</label>
+                        <input type="text" id="edit_student_district" name="district" required>
+                    </div>
+                    <div class="f-group">
+                        <label for="edit_student_college_id">College</label>
+                        <select id="edit_student_college_id" name="college_id" required>
+                            <option value="">Select College</option>
+                            <?php foreach ($colleges as $c): ?>
+                                <option value="<?php echo (int)$c['id']; ?>"><?php echo htmlspecialchars((string)$c['name'], ENT_QUOTES, 'UTF-8'); ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="f-group">
+                        <label for="edit_student_course_id">Course</label>
+                        <select id="edit_student_course_id" name="course_id" required>
+                            <option value="">Select Course</option>
+                            <?php foreach ($courses as $c): ?>
+                                <option value="<?php echo (int)$c['id']; ?>"><?php echo htmlspecialchars((string)$c['course_name'], ENT_QUOTES, 'UTF-8'); ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="f-group">
+                        <label for="edit_student_academic_year">Academic Year</label>
+                        <select id="edit_student_academic_year" name="academic_year" required>
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                            <option value="2026">2026</option>
+                            <option value="2027">2027</option>
+                            <option value="2028">2028</option>
+                        </select>
+                    </div>
+                    <div class="f-group">
+                        <label for="edit_student_semester">Semester</label>
+                        <select id="edit_student_semester" name="semester" required>
+                            <option value="Odd">Odd</option>
+                            <option value="Even">Even</option>
+                        </select>
+                    </div>
+                    <div class="f-group full">
+                        <label for="edit_student_password">Reset Password (leave blank to keep current)</label>
+                        <input type="text" id="edit_student_password" name="password" placeholder="New password">
+                    </div>
+                </div>
+                <button type="submit" class="btn-submit" id="studentSubmitBtn">
+                    <i class="fa-solid fa-save"></i> Save Changes
+                </button>
+            </form>
+        </div>
     </div>
-
-
+    
     <div id="section-fees" style="display:none;">
         <div class="page-heading">Fees Collection</div>
         <p class="page-sub">Track fee assignment, collections, pending balances, and student-wise payment details.</p>
@@ -3750,6 +3880,94 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
         btn.disabled = false;
         btn.innerHTML = '<i class="fa-solid fa-plus"></i> Create Coordinator';
     });
+
+    /* ── Edit Student Logic ── */
+    const studentFormWrap = document.getElementById('studentFormWrap');
+    const cancelStudentEditBtn = document.getElementById('cancelStudentEditBtn');
+    const studentEditForm = document.getElementById('studentEditForm');
+
+    if (cancelStudentEditBtn && studentFormWrap) {
+        cancelStudentEditBtn.addEventListener('click', () => {
+            studentFormWrap.classList.add('hidden');
+            document.querySelector('.student-filter-bar').style.display = '';
+            document.querySelector('.students-table-wrap').style.display = '';
+            document.getElementById('studentsCardList').style.display = '';
+        });
+    }
+
+    document.querySelectorAll('.edit-student').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const data = JSON.parse(btn.getAttribute('data-student') || '{}');
+            document.getElementById('edit_student_profile_id').value = data.profile_id || '';
+            document.getElementById('edit_student_user_id').value = data.user_id || '';
+            document.getElementById('edit_student_first_name').value = data.first_name || '';
+            document.getElementById('edit_student_middle_name').value = data.middle_name || '';
+            document.getElementById('edit_student_last_name').value = data.last_name || '';
+            document.getElementById('edit_student_login_id').value = data.login_id || '';
+            document.getElementById('edit_student_email').value = data.email || '';
+            document.getElementById('edit_student_mobile_no').value = data.mobile_no || '';
+            document.getElementById('edit_student_state').value = data.state || '';
+            document.getElementById('edit_student_district').value = data.district || '';
+            document.getElementById('edit_student_college_id').value = data.college_id || '';
+            document.getElementById('edit_student_course_id').value = data.course_id || '';
+            document.getElementById('edit_student_academic_year').value = data.academic_year || '';
+            document.getElementById('edit_student_semester').value = data.semester || '';
+            document.getElementById('edit_student_password').value = ''; // Always clear password
+
+            // Hide list and show form
+            document.querySelector('.student-filter-bar').style.display = 'none';
+            document.querySelector('.students-table-wrap').style.display = 'none';
+            document.getElementById('studentsCardList').style.display = 'none';
+            studentFormWrap.classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    });
+
+    if (studentEditForm) {
+        studentEditForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('studentSubmitBtn');
+            const originalHTML = btn.innerHTML;
+            
+            // Basic validation
+            const requiredFields = [
+                'edit_student_first_name', 'edit_student_last_name', 'edit_student_login_id',
+                'edit_student_email', 'edit_student_mobile_no', 'edit_student_state',
+                'edit_student_district', 'edit_student_college_id', 'edit_student_course_id'
+            ];
+            let valid = true;
+            requiredFields.forEach(id => {
+                const el = document.getElementById(id);
+                if (!el.value.trim()) { el.style.borderColor = 'var(--red)'; valid = false; }
+                else { el.style.borderColor = ''; }
+            });
+
+            if (!valid) {
+                showToast('Please fill out all required fields.', 'error');
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
+
+            const body = new FormData(this);
+            try {
+                const res = await fetch('student_update.php', { method: 'POST', body });
+                const data = await res.json();
+                if (data.ok) {
+                    showToast('Student updated successfully!', 'success');
+                    setTimeout(() => window.location.reload(), 1000);
+                } else {
+                    showToast(data.error || 'Failed to update student.', 'error');
+                }
+            } catch (err) {
+                showToast('Network error. Please try again.', 'error');
+            }
+
+            btn.disabled = false;
+            btn.innerHTML = originalHTML;
+        });
+    }
 
     /* ── Section switching ── */
     const sections = document.querySelectorAll('[id^="section-"]');
