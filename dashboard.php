@@ -1168,6 +1168,12 @@ function esc(string $value): string
                     <a href="#" class="dropdown-item" onclick="showSection('tickets'); closeProfile();">
                         <i class="fa-solid fa-life-ring"></i> Raise Ticket
                     </a>
+                    <a href="#" class="dropdown-item" onclick="showSection('upload'); closeProfile();">
+                        <i class="fa-solid fa-upload"></i> Upload
+                    </a>
+                    <a href="#" class="dropdown-item" onclick="showSection('download'); closeProfile();">
+                        <i class="fa-solid fa-download"></i> Download
+                    </a>
                     <div class="dropdown-divider"></div>
                     <a href="logout.php" class="dropdown-item danger">
                         <i class="fa-solid fa-right-from-bracket"></i> Logout
@@ -1196,6 +1202,12 @@ function esc(string $value): string
             </a>
             <a class="nav-item" href="#" onclick="showSection('tickets')">
                 <i class="fa-solid fa-life-ring"></i> Raise Ticket
+            </a>
+            <a class="nav-item" href="#" onclick="showSection('upload')">
+                <i class="fa-solid fa-upload"></i> Upload
+            </a>
+            <a class="nav-item" href="#" onclick="showSection('download')">
+                <i class="fa-solid fa-download"></i> Download
             </a>
         </div>
         <div class="sidebar-footer">
@@ -1243,6 +1255,18 @@ function esc(string $value): string
             <?php else: ?>
                 <div class="empty-box">Student profile details not found.</div>
             <?php endif; ?>
+        </div>
+
+        <div id="section-upload" style="display:none;">
+            <div class="page-heading">Upload</div>
+            <p class="page-sub">Upload your files and documents here.</p>
+            <div class="empty-box">Upload functionality coming soon.</div>
+        </div>
+
+        <div id="section-download" style="display:none;">
+            <div class="page-heading">Download</div>
+            <p class="page-sub">Download resources and files here.</p>
+            <div class="empty-box">Download functionality coming soon.</div>
         </div>
 
         <div id="section-profile" style="display:none;">
