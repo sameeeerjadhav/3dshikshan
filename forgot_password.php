@@ -139,7 +139,7 @@ if (isset($_SESSION['user']['role'])) {
 <body>
 
 <div class="auth-card">
-    <img src="assets/images/logo.png" alt="3D Shikshan" class="auth-logo">
+    <img src="assets/logo.png" alt="3D Shikshan" class="auth-logo" style="height: 100px; object-fit: contain; margin-bottom: 15px;">
     <h1 class="auth-title">Reset Password</h1>
     <p class="auth-sub">Enter your registered email address and we'll send you a link to reset your password.</p>
 

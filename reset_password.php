@@ -168,7 +168,7 @@ if (empty($token) || empty($email)) {
 <body>
 
 <div class="auth-card">
-    <img src="assets/images/logo.png" alt="3D Shikshan" class="auth-logo">
+    <img src="assets/logo.png" alt="3D Shikshan" class="auth-logo" style="height: 100px; object-fit: contain; margin-bottom: 15px;">
     <h1 class="auth-title">Set New Password</h1>
     
     <?php if (!$valid): ?>
