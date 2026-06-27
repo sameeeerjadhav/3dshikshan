@@ -1405,7 +1405,7 @@ function esc(string $value): string
 
         <div id="section-schedule" style="display:none;">
             <div class="page-heading">My Schedule</div>
-            <p class="page-sub">Sessions scheduled by your coordinator are highlighted in blue.</p>
+            <p class="page-sub">Activities scheduled by your coordinator are highlighted in blue.</p>
 
             <?php if ($studentProfile): ?>
                 <div class="cal-card">
@@ -1895,7 +1895,7 @@ function esc(string $value): string
                     }
                     cell.addEventListener('click', function() {
                         const friendly = MONTH_NAMES[calMonth] + ' ' + d + ', ' + calYear;
-                        calSessionDate.textContent = 'Session on ' + friendly;
+                        calSessionDate.textContent = 'Activity on ' + friendly;
                         calSessionType.textContent = sessionData.type || 'Class';
                         calSessionDet.textContent  = sessionData.details || 'No details provided.';
                         if (sessionData.notes) {

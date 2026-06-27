@@ -766,12 +766,12 @@ function esc(string $value): string
     </div>
 
     <div id="section-schedule" style="display:none;">
-        <div class="page-heading">Schedule Sessions</div>
-        <p class="page-sub">Create session notifications for students from your assigned colleges.</p>
+        <div class="page-heading">Schedule Activities</div>
+        <p class="page-sub">Create activity notifications for students from your assigned colleges.</p>
 
         <div class="schedule-card">
             <div class="schedule-head">
-                <h3>New Session Schedule</h3>
+                <h3>New Activity Schedule</h3>
                 <div class="schedule-note">Only assigned colleges are available</div>
             </div>
 
@@ -787,12 +787,12 @@ function esc(string $value): string
                 </div>
 
                 <div class="schedule-group">
-                    <label for="schedule_session_date">Session Date</label>
+                    <label for="schedule_session_date">Activity Date</label>
                     <input type="date" id="schedule_session_date" required>
                 </div>
 
                 <div class="schedule-group">
-                    <label for="schedule_session_type">Session Type</label>
+                    <label for="schedule_session_type">Activity Type</label>
                     <select id="schedule_session_type" required>
                         <option value="Class" selected>Class</option>
                         <option value="Industrial Visit">Industrial Visit</option>
@@ -800,8 +800,8 @@ function esc(string $value): string
                 </div>
 
                 <div class="schedule-group full">
-                    <label for="schedule_session_details">Session Details</label>
-                    <textarea id="schedule_session_details" placeholder="Enter full session details for students" required></textarea>
+                    <label for="schedule_session_details">Activity Details</label>
+                    <textarea id="schedule_session_details" placeholder="Enter full activity details for students" required></textarea>
                 </div>
                 
                 <div class="schedule-group full">
@@ -810,7 +810,7 @@ function esc(string $value): string
                 </div>
 
                 <div class="schedule-group full schedule-actions">
-                    <button type="submit" id="scheduleSubmitBtn" class="btn-schedule">Schedule Session</button>
+                    <button type="submit" id="scheduleSubmitBtn" class="btn-schedule">Schedule Activity</button>
                 </div>
             </form>
             <div class="schedule-message" id="scheduleMessage"></div>
@@ -822,7 +822,7 @@ function esc(string $value): string
                     <table class="table" id="scheduledSessionsTable">
                         <thead>
                             <tr>
-                                <th>Session Date</th>
+                                <th>Activity Date</th>
                                 <th>College</th>
                                 <th>Type</th>
                                 <th>Details</th>
@@ -844,13 +844,13 @@ function esc(string $value): string
                 </div>
             </div>
         <?php else: ?>
-            <div class="empty-box" id="noScheduledSessionsBox">No sessions scheduled yet.</div>
+            <div class="empty-box" id="noScheduledSessionsBox">No activities scheduled yet.</div>
             <div class="table-card" id="scheduledSessionsTableWrap" style="display:none;">
                 <div class="table-wrap">
                     <table class="table" id="scheduledSessionsTable">
                         <thead>
                             <tr>
-                                <th>Session Date</th>
+                                <th>Activity Date</th>
                                 <th>College</th>
                                 <th>Type</th>
                                 <th>Details</th>
@@ -866,7 +866,7 @@ function esc(string $value): string
 
     <div id="section-attendance" style="display:none;">
         <div class="page-heading">Attendance</div>
-        <p class="page-sub">Mark student attendance for your scheduled sessions.</p>
+        <p class="page-sub">Mark student attendance for your scheduled activities.</p>
 
         <?php if (empty($assignedColleges)): ?>
             <div class="empty-box">No colleges assigned yet. Attendance will be available once colleges are assigned.</div>
@@ -882,9 +882,9 @@ function esc(string $value): string
                 </select>
             </div>
             <div class="att-step">
-                <label for="attSessionSelect">Select Session</label>
+                <label for="attSessionSelect">Select Activity</label>
                 <select id="attSessionSelect" disabled>
-                    <option value="">— Choose Session Date —</option>
+                    <option value="">— Choose Activity Date —</option>
                 </select>
             </div>
         </div>
@@ -1700,16 +1700,16 @@ if (scheduleSessionForm && scheduleSubmitBtn) {
             return;
         }
         if (!sessionDate) {
-            showScheduleMessage('Please select a session date.', 'error');
+            showScheduleMessage('Please select an activity date.', 'error');
             return;
         }
         if (sessionDetails.length < 5) {
-            showScheduleMessage('Please enter detailed session information (minimum 5 characters).', 'error');
+            showScheduleMessage('Please enter detailed activity information (minimum 5 characters).', 'error');
             return;
         }
 
         scheduleSubmitBtn.disabled = true;
-        showScheduleMessage('Scheduling session...', 'success');
+        showScheduleMessage('Scheduling activity...', 'success');
 
         try {
             const response = await fetch('schedule_session.php', {
@@ -1726,12 +1726,12 @@ if (scheduleSessionForm && scheduleSubmitBtn) {
 
             const result = await response.json();
             if (!result.ok) {
-                throw new Error(result.error || 'Unable to schedule this session.');
+                throw new Error(result.error || 'Unable to schedule this activity.');
             }
 
             const scheduled = result.scheduled || {};
             const notifiedStudents = Number(result.notified_students || 0);
-            showScheduleMessage(`Session scheduled successfully. Notification sent to ${notifiedStudents} student(s).`, 'success');
+            showScheduleMessage(`Activity scheduled successfully. Notification sent to ${notifiedStudents} student(s).`, 'success');
 
             if (scheduledSessionsTbody) {
                 const row = document.createElement('tr');
@@ -1775,7 +1775,7 @@ if (scheduleSessionForm && scheduleSubmitBtn) {
                 sessionDateInput.value = '';
             }
         } catch (error) {
-            showScheduleMessage(error.message || 'Unable to schedule session right now.', 'error');
+            showScheduleMessage(error.message || 'Unable to schedule activity right now.', 'error');
         } finally {
             scheduleSubmitBtn.disabled = false;
         }
