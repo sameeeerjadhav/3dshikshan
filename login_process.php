@@ -7,7 +7,7 @@ require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: index.php?login=1');
+    header('Location: index.html#login');
     exit;
 }
 
@@ -15,8 +15,7 @@ $loginId = trim((string)($_POST['login_id'] ?? ''));
 $password = (string)($_POST['password'] ?? '');
 
 if ($loginId === '' || $password === '') {
-    $_SESSION['login_error'] = 'Please enter both login ID and password.';
-    header('Location: index.php?login=1');
+    header('Location: index.html?error=empty#login');
     exit;
 }
 
@@ -38,8 +37,7 @@ if (
 $connection = getDbConnection();
 
 if ($connection === null) {
-    $_SESSION['login_error'] = 'Unable to connect to database right now.';
-    header('Location: index.php?login=1');
+    header('Location: index.html?error=db#login');
     exit;
 }
 
@@ -48,8 +46,7 @@ $stmt = $connection->prepare($sql);
 
 if ($stmt === false) {
     $connection->close();
-    $_SESSION['login_error'] = 'Login is temporarily unavailable.';
-    header('Location: index.php?login=1');
+    header('Location: index.html?error=unavailable#login');
     exit;
 }
 
@@ -62,15 +59,13 @@ $stmt->close();
 $connection->close();
 
 if (!$record || !password_verify($password, (string)$record['password_hash'])) {
-    $_SESSION['login_error'] = 'Invalid credentials.';
-    header('Location: index.php?login=1');
+    header('Location: index.html?error=invalid#login');
     exit;
 }
 
 $role = (string)$record['role'];
 if (!in_array($role, ['admin', 'coordinator', 'student'], true)) {
-    $_SESSION['login_error'] = 'Unauthorized role for this portal.';
-    header('Location: index.php?login=1');
+    header('Location: index.html?error=unauthorized#login');
     exit;
 }
 

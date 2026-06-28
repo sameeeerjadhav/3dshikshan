@@ -757,6 +757,11 @@
     <p>Sign in to access guides, save favourites, and connect with makers.</p>
   </div>
 
+  <div class="error-banner" id="loginErrorBanner" style="display: none;" role="alert">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <span id="loginErrorText"></span>
+  </div>
+
   <div class="login-form">
     <form action="login_process.php" method="post" autocomplete="off" novalidate>
       <div class="form-group">
@@ -1019,6 +1024,28 @@
   });
   document.getElementById('scrollRightBtn').addEventListener('click', () => {
     document.getElementById('collegeCards').scrollBy({ left: 300, behavior: 'smooth' });
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('error')) {
+      const errCode = params.get('error');
+      const banner = document.getElementById('loginErrorBanner');
+      const errText = document.getElementById('loginErrorText');
+      const errMap = {
+        'empty': 'Please enter both login ID and password.',
+        'db': 'Unable to connect to database right now.',
+        'unavailable': 'Login is temporarily unavailable.',
+        'invalid': 'Invalid credentials.',
+        'unauthorized': 'Unauthorized role for this portal.'
+      };
+      if (errMap[errCode] && banner && errText) {
+        errText.textContent = errMap[errCode];
+        banner.style.display = 'flex';
+        const newUrl = window.location.pathname + window.location.hash;
+        window.history.replaceState({}, document.title, newUrl);
+      }
+    }
   });
 
 </script>
