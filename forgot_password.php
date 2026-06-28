@@ -201,5 +201,13 @@ if (isset($_SESSION['user']['role'])) {
     });
 </script>
 
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <a href="index.html#home" class="tab-btn" style="text-decoration:none;"><i class="fa-solid fa-house"></i>Home</a>
+    <a href="index.html#guide" class="tab-btn" style="text-decoration:none;"><i class="fa-solid fa-book"></i>Guide</a>
+    <a href="index.html#map" class="tab-btn" style="text-decoration:none;"><i class="fa-solid fa-map-location-dot"></i>Our Centers</a>
+    <a href="index.html#login" class="tab-btn active" style="text-decoration:none;"><i class="fa-solid fa-user"></i>Account</a>
+  </div>
+</div>
 </body>
 </html>

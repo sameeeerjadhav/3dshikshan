@@ -64,7 +64,7 @@ $razorpayEnabled = RAZORPAY_KEY_ID !== '' && RAZORPAY_KEY_SECRET !== '';
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/legal.css">
     <style>
-        .signup-shell { max-width: 760px; margin: 0 auto; padding: 0 16px 22px; }
+        .signup-shell { max-width: 760px; margin: 0 auto; padding: 0 16px 22px; padding-bottom: 76px; }
         .signup-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 18px; }
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .full { grid-column: 1 / -1; }
@@ -541,5 +541,13 @@ formEl.addEventListener('submit', async function (event) {
     }
 });
 </script>
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <a href="index.html#home" class="tab-btn" style="text-decoration:none;"><i class="fa-solid fa-house"></i>Home</a>
+    <a href="index.html#guide" class="tab-btn" style="text-decoration:none;"><i class="fa-solid fa-book"></i>Guide</a>
+    <a href="index.html#map" class="tab-btn" style="text-decoration:none;"><i class="fa-solid fa-map-location-dot"></i>Our Centers</a>
+    <a href="index.html#login" class="tab-btn active" style="text-decoration:none;"><i class="fa-solid fa-user"></i>Account</a>
+  </div>
+</div>
 </body>
 </html>
