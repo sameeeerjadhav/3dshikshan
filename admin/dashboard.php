@@ -2880,10 +2880,10 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
             </div><!-- /.coord-table-wrap -->
             <!-- Mobile card view for coordinators -->
             <div class="coord-card-list" id="coordCardList">
-                <?php if (empty()): ?>
+                <?php if (empty($coordinators)): ?>
                     <div style="padding:18px;text-align:center;color:var(--text-muted);">No coordinators added yet.</div>
                 <?php else: ?>
-                    <?php foreach ( as ): ?>
+                    <?php foreach ($coordinators as $coordinator): ?>
                         <?php
                             $cName = trim((string)$coordinator['first_name'] . ' ' . (string)$coordinator['second_name'] . ' ' . (string)$coordinator['last_name']);
                             $cCollegesArr = array_filter(array_map('trim', explode(',', (string)($coordinator['assigned_colleges'] ?? ''))));
