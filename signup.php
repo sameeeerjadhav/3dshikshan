@@ -61,7 +61,7 @@ $razorpayEnabled = RAZORPAY_KEY_ID !== '' && RAZORPAY_KEY_SECRET !== '';
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css?v=2">
     <link rel="stylesheet" href="assets/css/legal.css">
     <style>
         .signup-shell { max-width: 760px; margin: 0 auto; padding: 0 16px 22px; padding-bottom: 76px; }
