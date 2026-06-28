@@ -244,6 +244,7 @@
       border-radius: var(--radius);
       padding: 16px; transition: var(--transition);
       display: flex; gap: 14px; align-items: flex-start;
+      cursor: pointer;
     }
     .guide-card:active { background: var(--surface-2); }
     .guide-icon {
@@ -270,6 +271,7 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       counter-increment: step;
+      cursor: pointer;
     }
     .step::before {
       content: counter(step);
@@ -692,21 +694,21 @@
 
   <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; margin-bottom: 12px; font-weight: 700; text-align: center;">Guide</h3>
   <div class="guide-grid">
-    <div class="guide-card">
+    <div class="guide-card" onclick="switchTab('guide-1')">
       <div class="guide-icon gi-1"><i class="fa-solid fa-cube"></i></div>
       <div class="guide-card-text">
         <h4>3D Printing Basics</h4>
         <p>FDM vs SLA, choosing a printer, your first print, and slicing software fundamentals.</p>
       </div>
     </div>
-    <div class="guide-card">
+    <div class="guide-card" onclick="switchTab('guide-2')">
       <div class="guide-icon gi-2"><i class="fa-solid fa-crosshairs"></i></div>
       <div class="guide-card-text">
         <h4>Laser Cutting 101</h4>
         <p>Laser types, power settings, material compatibility, ventilation, and vector files.</p>
       </div>
     </div>
-    <div class="guide-card">
+    <div class="guide-card" onclick="switchTab('guide-3')">
       <div class="guide-icon gi-3"><i class="fa-solid fa-microchip"></i></div>
       <div class="guide-card-text">
         <h4>CNC &amp; Electronics</h4>
@@ -717,15 +719,15 @@
 
   <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; margin-top: 24px; font-weight: 700; text-align: center;">Inventory</h3>
   <div class="steps" style="margin-top: 12px;">
-    <div class="step">
+    <div class="step" onclick="switchTab('inv-1')">
       <h5>Choose Your Tool</h5>
       <p>Pick between 3D printing, laser cutting, or CNC based on your project needs.</p>
     </div>
-    <div class="step">
+    <div class="step" onclick="switchTab('inv-2')">
       <h5>Learn the Software</h5>
       <p>Master CAD and slicer software to prepare your digital designs for fabrication.</p>
     </div>
-    <div class="step">
+    <div class="step" onclick="switchTab('inv-3')">
       <h5>Prepare Materials</h5>
       <p>Select the right filament, resin, wood, acrylic, or metal for the job.</p>
     </div>
@@ -810,7 +812,63 @@
   <div class="page-footer">&copy; 2026 3D Shikshan</div>
 </div>
 
-<!-- ══════════════════════════════════════════════════ -->
+<!-- SUBPAGES for Guide & Inventory -->
+<div class="page" id="page-guide-1">
+  <div class="top-bar">
+    <button onclick="switchTab('guide')" style="background:none;border:none;font-size:1.2rem;margin-right:12px;cursor:pointer;color:var(--text);"><i class="fa-solid fa-arrow-left"></i></button>
+    <h2>3D Printing Basics</h2>
+  </div>
+  <div style="padding:16px;">
+    <p>Paste your 3D Printing Basics content here...</p>
+  </div>
+</div>
+<div class="page" id="page-guide-2">
+  <div class="top-bar">
+    <button onclick="switchTab('guide')" style="background:none;border:none;font-size:1.2rem;margin-right:12px;cursor:pointer;color:var(--text);"><i class="fa-solid fa-arrow-left"></i></button>
+    <h2>Laser Cutting 101</h2>
+  </div>
+  <div style="padding:16px;">
+    <p>Paste your Laser Cutting 101 content here...</p>
+  </div>
+</div>
+<div class="page" id="page-guide-3">
+  <div class="top-bar">
+    <button onclick="switchTab('guide')" style="background:none;border:none;font-size:1.2rem;margin-right:12px;cursor:pointer;color:var(--text);"><i class="fa-solid fa-arrow-left"></i></button>
+    <h2>CNC &amp; Electronics</h2>
+  </div>
+  <div style="padding:16px;">
+    <p>Paste your CNC &amp; Electronics content here...</p>
+  </div>
+</div>
+<div class="page" id="page-inv-1">
+  <div class="top-bar">
+    <button onclick="switchTab('guide')" style="background:none;border:none;font-size:1.2rem;margin-right:12px;cursor:pointer;color:var(--text);"><i class="fa-solid fa-arrow-left"></i></button>
+    <h2>Choose Your Tool</h2>
+  </div>
+  <div style="padding:16px;">
+    <p>Paste your Choose Your Tool content here...</p>
+  </div>
+</div>
+<div class="page" id="page-inv-2">
+  <div class="top-bar">
+    <button onclick="switchTab('guide')" style="background:none;border:none;font-size:1.2rem;margin-right:12px;cursor:pointer;color:var(--text);"><i class="fa-solid fa-arrow-left"></i></button>
+    <h2>Learn the Software</h2>
+  </div>
+  <div style="padding:16px;">
+    <p>Paste your Learn the Software content here...</p>
+  </div>
+</div>
+<div class="page" id="page-inv-3">
+  <div class="top-bar">
+    <button onclick="switchTab('guide')" style="background:none;border:none;font-size:1.2rem;margin-right:12px;cursor:pointer;color:var(--text);"><i class="fa-solid fa-arrow-left"></i></button>
+    <h2>Prepare Materials</h2>
+  </div>
+  <div style="padding:16px;">
+    <p>Paste your Prepare Materials content here...</p>
+  </div>
+</div>
+
+<!-- ─ -->
 <!--               BOTTOM TAB BAR                      -->
 <!-- ══════════════════════════════════════════════════ -->
 <div class="tab-bar">
