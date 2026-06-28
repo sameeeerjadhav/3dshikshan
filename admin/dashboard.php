@@ -1863,6 +1863,104 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
                 justify-content: center;
             }
         }
+        /* Colleges Popover */
+        .colleges-badge {
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 5px 10px;
+            font-size: 0.78rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--accent);
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.18s, border-color 0.18s;
+            user-select: none;
+            position: relative;
+        }
+        .colleges-badge:hover { background: var(--accent-light); border-color: var(--accent); }
+        .colleges-badge-none {
+            background: #fff1f2;
+            border: 1px solid #ffe4e6;
+            border-radius: 8px;
+            padding: 5px 10px;
+            font-size: 0.78rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #be123c;
+        }
+        /* Global popover */
+        #collegesPopover {
+            position: fixed;
+            z-index: 99999;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            box-shadow: 0 8px 32px rgba(0,0,0,.15);
+            min-width: 240px;
+            max-width: 340px;
+            padding: 0;
+            display: none;
+            flex-direction: column;
+        }
+        #collegesPopover.visible { display: flex; }
+        .clg-popover-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px 10px;
+            border-bottom: 1px solid var(--border);
+        }
+        .clg-popover-title {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .clg-popover-title i { color: var(--accent); }
+        .clg-popover-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            padding: 2px 6px;
+            border-radius: 6px;
+            line-height: 1;
+        }
+        .clg-popover-close:hover { background: var(--surface-2); color: var(--text); }
+        .clg-popover-list {
+            padding: 10px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            max-height: 260px;
+            overflow-y: auto;
+        }
+        .clg-popover-item {
+            padding: 7px 10px;
+            border-radius: 8px;
+            background: var(--surface-2);
+            font-size: 0.8rem;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .clg-popover-item i { color: var(--accent); font-size: 0.72rem; flex-shrink: 0; }
+        /* Popover backdrop (for mobile) */
+        #collegesPopoverBackdrop {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 99998;
+        }
+        #collegesPopoverBackdrop.visible { display: block; }
     </style>
 </head>
 <body>
@@ -2709,10 +2807,10 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
                                         $collegesArr = array_filter(array_map('trim', explode(',', (string)($coordinator['assigned_colleges'] ?? ''))));
                                         $count = count($collegesArr);
                                         if ($count > 0) {
-                                            $tooltipText = htmlspecialchars(implode(', ', $collegesArr), ENT_QUOTES, 'UTF-8');
-                                            echo '<div title="' . $tooltipText . '" style="background: var(--surface-2); padding: 5px 10px; border-radius: 6px; font-size: 0.78rem; display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--border); color: var(--text); cursor: help;"><i class="fa-solid fa-building-columns" style="color: var(--accent);"></i> <strong>' . $count . '</strong> ' . ($count === 1 ? 'College' : 'Colleges') . '</div>';
+                                            $dataColleges = htmlspecialchars(json_encode(array_values($collegesArr)), ENT_QUOTES, 'UTF-8');
+                                            echo '<button type="button" class="colleges-badge" data-colleges="' . $dataColleges . '"><i class="fa-solid fa-building-columns"></i> ' . $count . ' ' . ($count === 1 ? 'College' : 'Colleges') . ' <i class="fa-solid fa-chevron-down" style="font-size:0.6rem;"></i></button>';
                                         } else {
-                                            echo '<div style="background: #fff1f2; padding: 5px 10px; border-radius: 6px; font-size: 0.78rem; display: inline-flex; align-items: center; gap: 6px; border: 1px solid #ffe4e6; color: #be123c;"><i class="fa-solid fa-building-columns"></i> None</div>';
+                                            echo '<span class="colleges-badge-none"><i class="fa-solid fa-building-columns"></i> None</span>';
                                         }
                                         ?>
                                     </td>
@@ -3269,9 +3367,10 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
                 ${(function() {
                     const arr = (coordinator.assigned_colleges || '').split(',').map(c => c.trim()).filter(c => c);
                     if (arr.length > 0) {
-                        return `<div title="${escapeHtml(arr.join(', '))}" style="background: var(--surface-2); padding: 5px 10px; border-radius: 6px; font-size: 0.78rem; display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--border); color: var(--text); cursor: help;"><i class="fa-solid fa-building-columns" style="color: var(--accent);"></i> <strong>${arr.length}</strong> ${arr.length === 1 ? 'College' : 'Colleges'}</div>`;
+                        const dataColleges = escapeHtml(JSON.stringify(arr));
+                        return `<button type="button" class="colleges-badge" data-colleges="${dataColleges}"><i class="fa-solid fa-building-columns"></i> ${arr.length} ${arr.length === 1 ? 'College' : 'Colleges'} <i class="fa-solid fa-chevron-down" style="font-size:0.6rem;"></i></button>`;
                     }
-                    return `<div style="background: #fff1f2; padding: 5px 10px; border-radius: 6px; font-size: 0.78rem; display: inline-flex; align-items: center; gap: 6px; border: 1px solid #ffe4e6; color: #be123c;"><i class="fa-solid fa-building-columns"></i> None</div>`;
+                    return `<span class="colleges-badge-none"><i class="fa-solid fa-building-columns"></i> None</span>`;
                 })()}
             </td>
             <td>
@@ -4362,6 +4461,85 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
             showSection(hash, false);
         }
     });
+</script>
+<!-- Colleges Popover -->
+<div id="collegesPopoverBackdrop"></div>
+<div id="collegesPopover" role="dialog" aria-modal="true" aria-label="Assigned Colleges">
+    <div class="clg-popover-header">
+        <div class="clg-popover-title"><i class="fa-solid fa-building-columns"></i> Assigned Colleges</div>
+        <button type="button" class="clg-popover-close" id="clgPopoverClose" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="clg-popover-list" id="clgPopoverList"></div>
+</div>
+<script>
+(function() {
+    const popover = document.getElementById('collegesPopover');
+    const backdrop = document.getElementById('collegesPopoverBackdrop');
+    const list = document.getElementById('clgPopoverList');
+    const closeBtn = document.getElementById('clgPopoverClose');
+
+    function closePopover() {
+        popover.classList.remove('visible');
+        backdrop.classList.remove('visible');
+    }
+
+    function openPopover(badge) {
+        let colleges;
+        try { colleges = JSON.parse(badge.getAttribute('data-colleges') || '[]'); } catch(e) { colleges = []; }
+        list.innerHTML = colleges.map(c => `<div class="clg-popover-item"><i class="fa-solid fa-circle-dot"></i>${c}</div>`).join('');
+
+        // Position
+        const rect = badge.getBoundingClientRect();
+        const pw = Math.min(340, window.innerWidth - 24);
+        popover.style.width = pw + 'px';
+        popover.style.minWidth = '';
+
+        let left = rect.left;
+        let top = rect.bottom + 6;
+
+        // Keep within viewport horizontally
+        if (left + pw > window.innerWidth - 12) left = window.innerWidth - pw - 12;
+        if (left < 12) left = 12;
+
+        // Flip up if not enough space below
+        const popH = 300; // approximate max height
+        if (top + popH > window.innerHeight - 12) {
+            top = rect.top - 6 - Math.min(popH, list.children.length * 46 + 60);
+            if (top < 12) top = 12;
+        }
+
+        popover.style.left = left + 'px';
+        popover.style.top = top + 'px';
+
+        popover.classList.add('visible');
+        backdrop.classList.add('visible');
+    }
+
+    // Delegate click on badges
+    document.addEventListener('click', function(e) {
+        const badge = e.target.closest('.colleges-badge');
+        if (badge) {
+            e.stopPropagation();
+            if (popover.classList.contains('visible')) {
+                closePopover();
+            } else {
+                openPopover(badge);
+            }
+            return;
+        }
+        if (e.target === backdrop || e.target.closest('#clgPopoverClose')) {
+            closePopover();
+        }
+    });
+
+    // Close on backdrop tap (mobile)
+    backdrop.addEventListener('click', closePopover);
+    closeBtn.addEventListener('click', closePopover);
+
+    // Reposition on scroll/resize
+    window.addEventListener('resize', closePopover);
+    window.addEventListener('scroll', closePopover, true);
+})();
 </script>
 </body>
 </html>
