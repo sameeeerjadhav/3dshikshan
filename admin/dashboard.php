@@ -1315,7 +1315,8 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
 
         .student-cards,
         .fee-card-list,
-        .coord-card-list {
+        .coord-card-list,
+        .college-card-list {
             display: none;
             gap: 8px;
         }
@@ -1351,14 +1352,14 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
             margin-bottom: 2px;
         }
 
-        .fee-card, .coord-card {
+        .fee-card, .coord-card, .college-card {
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 10px;
             padding: 12px;
             box-shadow: var(--shadow-soft);
         }
-        .fee-card-name, .coord-card-name {
+        .fee-card-name, .coord-card-name, .college-card-name {
             font-family: 'Space Grotesk', sans-serif;
             font-size: .95rem;
             font-weight: 700;
@@ -1599,10 +1600,12 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
             .hero-chip { flex: 1; justify-content: center; }
             .students-table-wrap,
             .fee-table-wrap,
-            .coord-table-wrap { display: none; }
+            .coord-table-wrap,
+            .college-list-wrap { display: none; }
             .student-cards,
             .fee-card-list,
-            .coord-card-list { display: grid; }
+            .coord-card-list,
+            .college-card-list { display: grid; }
             /* student-meta remains 1fr 1fr on mobile */
             .student-filter-bar {
                 grid-template-columns: 1fr 1fr;
@@ -2526,6 +2529,41 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
                         <?php endif; ?>
                     </tbody>
                 </table>
+            </div>
+
+            <!-- Mobile card list for colleges -->
+            <div class="college-card-list" id="collegeCardList">
+                <?php if (empty($colleges)): ?>
+                    <div class="empty-box">No colleges added yet.</div>
+                <?php else: ?>
+                    <?php foreach ($colleges as $college): ?>
+                        <div class="college-card">
+                            <div class="college-card-name"><?php echo htmlspecialchars((string)$college['name'], ENT_QUOTES, 'UTF-8'); ?></div>
+                            <div class="coord-card-meta">
+                                <div class="coord-card-meta-item"><strong>Country</strong><?php echo htmlspecialchars((string)$college['country'], ENT_QUOTES, 'UTF-8'); ?></div>
+                                <div class="coord-card-meta-item"><strong>State</strong><?php echo htmlspecialchars((string)$college['state'], ENT_QUOTES, 'UTF-8'); ?></div>
+                                <div class="coord-card-meta-item" style="grid-column: 1 / -1;"><strong>District</strong><?php echo htmlspecialchars((string)$college['district'], ENT_QUOTES, 'UTF-8'); ?></div>
+                            </div>
+                            <div class="coord-card-footer">
+                                <button type="button" class="action-btn edit-college" data-college='<?php echo htmlspecialchars(json_encode([
+                                    "id" => $college["id"],
+                                    "name" => $college["name"],
+                                    "country" => $college["country"],
+                                    "state" => $college["state"],
+                                    "district" => $college["district"],
+                                    "address" => $college["address"] ?? "",
+                                    "latitude" => $college["latitude"] ?? "",
+                                    "longitude" => $college["longitude"] ?? ""
+                                ]), ENT_QUOTES, "UTF-8"); ?>'>
+                                    <i class="fa-solid fa-pen"></i> Edit
+                                </button>
+                                <button type="button" class="action-btn delete delete-college" data-college-id="<?php echo (int)$college['id']; ?>" data-college-name="<?php echo htmlspecialchars((string)$college['name'], ENT_QUOTES, 'UTF-8'); ?>">
+                                    <i class="fa-solid fa-trash"></i> Delete
+                                </button>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </div>
         </div>
 
