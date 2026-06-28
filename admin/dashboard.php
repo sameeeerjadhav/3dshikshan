@@ -2707,17 +2707,12 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
                                     <td>
                                         <?php
                                         $collegesArr = array_filter(array_map('trim', explode(',', (string)($coordinator['assigned_colleges'] ?? ''))));
-                                        $visibleCount = 2;
-                                        $visibleColleges = array_slice($collegesArr, 0, $visibleCount);
-                                        $hiddenColleges = array_slice($collegesArr, $visibleCount);
-
-                                        foreach ($visibleColleges as $cName) {
-                                            echo '<div style="background: var(--surface-2); padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; margin-bottom: 4px; display: inline-block; margin-right: 4px; border: 1px solid var(--border); color: var(--text-muted);">' . htmlspecialchars($cName, ENT_QUOTES, 'UTF-8') . '</div>';
-                                        }
-
-                                        if (count($hiddenColleges) > 0) {
-                                            $tooltipText = htmlspecialchars(implode(', ', $hiddenColleges), ENT_QUOTES, 'UTF-8');
-                                            echo '<div title="' . $tooltipText . '" style="background: #eef2ff; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; margin-bottom: 4px; display: inline-block; margin-right: 4px; border: 1px solid #c3dafe; color: #4338ca; cursor: help; font-weight: 500;">+' . count($hiddenColleges) . ' more</div>';
+                                        $count = count($collegesArr);
+                                        if ($count > 0) {
+                                            $tooltipText = htmlspecialchars(implode(', ', $collegesArr), ENT_QUOTES, 'UTF-8');
+                                            echo '<div title="' . $tooltipText . '" style="background: var(--surface-2); padding: 5px 10px; border-radius: 6px; font-size: 0.78rem; display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--border); color: var(--text); cursor: help;"><i class="fa-solid fa-building-columns" style="color: var(--accent);"></i> <strong>' . $count . '</strong> ' . ($count === 1 ? 'College' : 'Colleges') . '</div>';
+                                        } else {
+                                            echo '<div style="background: #fff1f2; padding: 5px 10px; border-radius: 6px; font-size: 0.78rem; display: inline-flex; align-items: center; gap: 6px; border: 1px solid #ffe4e6; color: #be123c;"><i class="fa-solid fa-building-columns"></i> None</div>';
                                         }
                                         ?>
                                     </td>
@@ -3272,14 +3267,11 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
             <td>${escapeHtml(coordinator.pin)}</td>
             <td>
                 ${(function() {
-                    const arr = (coordinator.colleges || '').split(',').map(c => c.trim()).filter(c => c);
-                    const visible = arr.slice(0, 2);
-                    const hidden = arr.slice(2);
-                    let html = visible.map(c => `<div style="background: var(--surface-2); padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; margin-bottom: 4px; display: inline-block; margin-right: 4px; border: 1px solid var(--border); color: var(--text-muted);">${escapeHtml(c)}</div>`).join('');
-                    if (hidden.length > 0) {
-                        html += `<div title="${escapeHtml(hidden.join(', '))}" style="background: #eef2ff; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; margin-bottom: 4px; display: inline-block; margin-right: 4px; border: 1px solid #c3dafe; color: #4338ca; cursor: help; font-weight: 500;">+${hidden.length} more</div>`;
+                    const arr = (coordinator.assigned_colleges || '').split(',').map(c => c.trim()).filter(c => c);
+                    if (arr.length > 0) {
+                        return `<div title="${escapeHtml(arr.join(', '))}" style="background: var(--surface-2); padding: 5px 10px; border-radius: 6px; font-size: 0.78rem; display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--border); color: var(--text); cursor: help;"><i class="fa-solid fa-building-columns" style="color: var(--accent);"></i> <strong>${arr.length}</strong> ${arr.length === 1 ? 'College' : 'Colleges'}</div>`;
                     }
-                    return html;
+                    return `<div style="background: #fff1f2; padding: 5px 10px; border-radius: 6px; font-size: 0.78rem; display: inline-flex; align-items: center; gap: 6px; border: 1px solid #ffe4e6; color: #be123c;"><i class="fa-solid fa-building-columns"></i> None</div>`;
                 })()}
             </td>
             <td>
