@@ -305,10 +305,26 @@
     }
     .filter-pill.active { background: var(--text); color: #fff; border-color: var(--text); }
     
+    .college-cards-wrapper {
+      position: relative; display: flex; align-items: center;
+    }
+    .scroll-btn {
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text); border-radius: 50%; width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; position: absolute; z-index: 10;
+      box-shadow: var(--shadow-soft);
+      transition: var(--transition);
+    }
+    .scroll-btn:hover { background: var(--bg); }
+    .scroll-left { left: -10px; }
+    .scroll-right { right: -10px; }
     .college-cards {
       display: flex; gap: 12px; overflow-x: auto; padding-bottom: 15px;
       scroll-snap-type: x mandatory; scrollbar-width: none;
       -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
+      width: 100%; padding-left: 10px; padding-right: 10px;
     }
     .college-cards::-webkit-scrollbar { display: none; }
     .college-map-card {
@@ -716,8 +732,12 @@
 
   <div id="mapContainer"></div>
 
-  <div id="collegeCards" class="college-cards">
-    <!-- College cards will be populated here -->
+  <div class="college-cards-wrapper">
+    <button class="scroll-btn scroll-left" id="scrollLeftBtn"><i class="fa-solid fa-chevron-left"></i></button>
+    <div id="collegeCards" class="college-cards">
+      <!-- College cards will be populated here -->
+    </div>
+    <button class="scroll-btn scroll-right" id="scrollRightBtn"><i class="fa-solid fa-chevron-right"></i></button>
   </div>
 
   <div class="page-footer">&copy; 2026 3D Shikshan</div>
@@ -932,8 +952,6 @@
 
     for (const college of filtered) {
       const coordData = college.coordinators && college.coordinators.length > 0 ? college.coordinators[0] : null;
-      const coordName = coordData ? coordData.name : 'Not assigned';
-      const coordPhone = coordData ? coordData.mobile_no : '';
       const address = coordData && coordData.address ? coordData.address : `${college.district}, ${college.state}`;
 
       const card = document.createElement('div');
@@ -942,12 +960,8 @@
         <div>
           <h4>${college.name}</h4>
           <p>${address}</p>
-          <p style="margin-top:5px;font-size:0.75rem"><strong>Coordinator:</strong> ${coordName}</p>
         </div>
         <div class="college-card-actions">
-          <a href="tel:${coordPhone}" class="btn-call" ${!coordPhone ? 'style="pointer-events:none;opacity:0.5"' : ''}>
-            <i class="fa-solid fa-phone"></i> Call
-          </a>
           <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(college.name + ' ' + address)}" target="_blank" class="btn-directions">
             <i class="fa-solid fa-location-arrow"></i> Directions
           </a>
@@ -1000,6 +1014,13 @@
        theMap.fitBounds(bounds, { padding: [30, 30], maxZoom: 12 });
     }
   }
+
+  document.getElementById('scrollLeftBtn').addEventListener('click', () => {
+    document.getElementById('collegeCards').scrollBy({ left: -300, behavior: 'smooth' });
+  });
+  document.getElementById('scrollRightBtn').addEventListener('click', () => {
+    document.getElementById('collegeCards').scrollBy({ left: 300, behavior: 'smooth' });
+  });
 
 </script>
 
