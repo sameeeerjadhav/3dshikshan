@@ -1118,7 +1118,9 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
             white-space: nowrap;
         }
 
-        .student-cards {
+        .student-cards,
+        .fee-card-list,
+        .coord-card-list {
             display: none;
             gap: 8px;
         }
@@ -1326,8 +1328,12 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
             .page-heading { font-size: 1.22rem; }
             .hero-actions { width: 100%; }
             .hero-chip { flex: 1; justify-content: center; }
-            .students-table-wrap { display: none; }
-            .student-cards { display: grid; }
+            .students-table-wrap,
+            .fee-table-wrap,
+            .coord-table-wrap { display: none; }
+            .student-cards,
+            .fee-card-list,
+            .coord-card-list { display: grid; }
             .student-meta { grid-template-columns: 1fr; }
             .student-filter-bar {
                 grid-template-columns: 1fr 1fr;
