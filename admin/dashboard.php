@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 declare(strict_types=1);
 
 session_start();
@@ -355,7 +355,7 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <title>Admin Dashboard — 3D Shikshan</title>
+    <title>Admin Dashboard â€” 3D Shikshan</title>
     <link rel="icon" type="image/png" href="../assets/logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -397,7 +397,7 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
             min-height: 100vh;
         }
 
-        /* ── TOPBAR ─────────────────────────────────── */
+        /* â”€â”€ TOPBAR â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
         .topbar {
             position: fixed; top: 0; left: 0; right: 0; z-index: 200;
             height: var(--topbar-h);
@@ -656,7 +656,7 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
         .dropdown-item.danger i { color: var(--red); }
         .dropdown-divider { height: 1px; background: var(--border); margin: 4px 8px; }
 
-        /* ── SIDEBAR ────────────────────────────────── */
+        /* â”€â”€ SIDEBAR â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
         .sidebar {
             position: fixed; top: var(--topbar-h); left: 0; bottom: 0;
             width: var(--sidebar-w);
@@ -718,7 +718,7 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
             border-top: 1px solid var(--border);
         }
 
-        /* ── MAIN CONTENT ───────────────────────────── */
+        /* â”€â”€ MAIN CONTENT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
         .main-content {
             margin-top: var(--topbar-h);
             margin-left: var(--sidebar-w);
@@ -762,7 +762,7 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
             transform: translateY(-1px);
         }
 
-        /* ── CARDS ──────────────────────────────────── */
+        /* â”€â”€ CARDS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
         .page-heading {
             font-family: 'Space Grotesk', sans-serif;
             font-size: 1.42rem;
@@ -827,7 +827,7 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
         .info-key { color: var(--text-muted); min-width: 90px; }
         .info-val { font-weight: 600; }
 
-        /* ── FORM ───────────────────────────────────── */
+        /* â”€â”€ FORM â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
         .form-card {
             background: var(--surface);
             border: 1px solid var(--border);
@@ -1296,14 +1296,14 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
 
         @media (max-width: 500px) { .form-grid { grid-template-columns: 1fr; } }
 
-        /* ── OVERLAY (mobile sidebar) ───────────────── */
+        /* â”€â”€ OVERLAY (mobile sidebar) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
         .sidebar-overlay {
             display: none; position: fixed; inset: 0;
             background: rgba(0,0,0,.3); z-index: 99;
         }
         .sidebar-overlay.visible { display: block; }
 
-        /* ── RESPONSIVE ─────────────────────────────── */
+        /* â”€â”€ RESPONSIVE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
         @media (max-width: 700px) {
             .sidebar { transform: translateX(calc(-1 * var(--sidebar-w))); }
             .sidebar.open { transform: translateX(0); }
@@ -1351,7 +1351,7 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
             .student-detail-grid { grid-template-columns: 1fr; }
         }
 
-        /* ── TICKETS ────────────────────────────────── */
+        /* â”€â”€ TICKETS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
         .tickets-card {
             background: var(--surface);
             border: 1px solid var(--border);
@@ -1589,7 +1589,7 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
             font-size: .86rem;
         }
 
-        /* ── FEES ───────────────────────────────────── */
+        /* â”€â”€ FEES â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
         .fees-summary-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
@@ -1680,7 +1680,7 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
             color: #b45309;
         }
 
-        /* ── REPORTS ───────────────────────────────── */
+        /* â”€â”€ REPORTS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
         .report-kpi-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -1965,7 +1965,7 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
 </head>
 <body>
 
-<!-- ── TOPBAR ─────────────────────────────────────── -->
+<!-- â”€â”€ TOPBAR â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
 <header class="topbar">
     <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle navigation">
         <i class="fa-solid fa-bars"></i>
@@ -2048,10 +2048,10 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
     </div>
 </header>
 
-<!-- ── SIDEBAR OVERLAY ────────────────────────────── -->
+<!-- â”€â”€ SIDEBAR OVERLAY â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-<!-- ── SIDEBAR ────────────────────────────────────── -->
+<!-- â”€â”€ SIDEBAR â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
 <aside class="sidebar" id="sidebar">
     <div class="sidebar-section">
         <div class="sidebar-label">Main</div>
@@ -2091,7 +2091,7 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
     </div>
 </aside>
 
-<!-- ── MAIN CONTENT ───────────────────────────────── -->
+<!-- â”€â”€ MAIN CONTENT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
 <main class="main-content" id="mainContent">
 
     <!-- OVERVIEW SECTION -->
@@ -2410,9 +2410,9 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
                                     <td><?php echo htmlspecialchars((string)$u['college_name'], ENT_QUOTES, 'UTF-8'); ?></td>
                                     <td>
                                         <div style="display:flex;gap:6px;flex-wrap:wrap;">
-                                            <span class="fee-chip total">Total ₹<?php echo number_format((float)($u['total_fee'] ?? 0), 2); ?></span>
-                                            <span class="fee-chip paid">Paid ₹<?php echo number_format((float)($u['paid_fee'] ?? 0), 2); ?></span>
-                                            <span class="fee-chip pending">Remain ₹<?php echo number_format((float)($u['remaining_fee'] ?? 0), 2); ?></span>
+                                            <span class="fee-chip total">Total â‚¹<?php echo number_format((float)($u['total_fee'] ?? 0), 2); ?></span>
+                                            <span class="fee-chip paid">Paid â‚¹<?php echo number_format((float)($u['paid_fee'] ?? 0), 2); ?></span>
+                                            <span class="fee-chip pending">Remain â‚¹<?php echo number_format((float)($u['remaining_fee'] ?? 0), 2); ?></span>
                                         </div>
                                     </td>
                                     <td class="subtle-cell"><?php echo htmlspecialchars((string)$u['created_at'], ENT_QUOTES, 'UTF-8'); ?></td>
@@ -2486,9 +2486,9 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
                         <div><strong>Registered</strong><?php echo htmlspecialchars((string)$u['created_at'], ENT_QUOTES, 'UTF-8'); ?></div>
                     </div>
                     <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;">
-                        <span class="fee-chip total">Total ₹<?php echo number_format((float)($u['total_fee'] ?? 0), 2); ?></span>
-                        <span class="fee-chip paid">Paid ₹<?php echo number_format((float)($u['paid_fee'] ?? 0), 2); ?></span>
-                        <span class="fee-chip pending">Remain ₹<?php echo number_format((float)($u['remaining_fee'] ?? 0), 2); ?></span>
+                        <span class="fee-chip total">Total â‚¹<?php echo number_format((float)($u['total_fee'] ?? 0), 2); ?></span>
+                        <span class="fee-chip paid">Paid â‚¹<?php echo number_format((float)($u['paid_fee'] ?? 0), 2); ?></span>
+                        <span class="fee-chip pending">Remain â‚¹<?php echo number_format((float)($u['remaining_fee'] ?? 0), 2); ?></span>
                     </div>
                     <div class="row-actions" style="margin-top:10px;">
                         <button type="button" class="action-btn view" data-student-profile-id="<?php echo (int)$u['profile_id']; ?>">
@@ -2686,6 +2686,7 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
 
 
         <div class="college-list-card">
+            <div class="fee-table-wrap">
             <div class="college-list-wrap">
                 <table class="college-table" id="feesTable">
                     <thead>
@@ -2749,7 +2750,40 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
                     </tbody>
                 </table>
             </div>
-        </div>
+            </div><!-- /.fee-table-wrap -->
+            <!-- Mobile fee card list -->
+            <div class="fee-card-list" id="feeCardList">
+                <?php if (empty($students)): ?>
+                    <div style="padding:18px;text-align:center;color:var(--text-muted);">No student fee records found.</div>
+                <?php else: ?>
+                    <?php foreach ($students as $studentFee): ?>
+                        <?php
+                            $sfTotal = (float)($studentFee['total_fee'] ?? 0);
+                            $sfPaid = (float)($studentFee['paid_fee'] ?? 0);
+                            $sfPending = (float)($studentFee['remaining_fee'] ?? 0);
+                            if ($sfPending <= 0.009) { $sfClass = 'fully-paid'; $sfLabel = 'Fully Paid'; }
+                            elseif ($sfPaid > 0) { $sfClass = 'partial'; $sfLabel = 'Partial'; }
+                            else { $sfClass = 'unpaid'; $sfLabel = 'Unpaid'; }
+                            $sfBlob = strtolower(trim((string)($studentFee['full_name']??'').' '.(string)($studentFee['email']??'').' '.(string)($studentFee['college_name']??'').' '.(string)($studentFee['course_name']??'').' '.(string)($studentFee['login_id']??'')));
+                        ?>
+                        <div class="fee-card" data-fee-item="1" data-status="<?php echo htmlspecialchars($sfClass,ENT_QUOTES,'UTF-8'); ?>" data-search="<?php echo htmlspecialchars($sfBlob,ENT_QUOTES,'UTF-8'); ?>" data-total="<?php echo $sfTotal; ?>" data-paid="<?php echo $sfPaid; ?>" data-pending="<?php echo $sfPending; ?>">
+                            <div class="fee-card-name"><?php echo htmlspecialchars((string)($studentFee['full_name']??''),ENT_QUOTES,'UTF-8'); ?></div>
+                            <div class="fee-card-email"><?php echo htmlspecialchars((string)($studentFee['email']??''),ENT_QUOTES,'UTF-8'); ?></div>
+                            <div class="fee-card-sub"><?php echo htmlspecialchars((string)($studentFee['college_name']??''),ENT_QUOTES,'UTF-8'); ?> &middot; <?php echo htmlspecialchars((string)($studentFee['course_name']??''),ENT_QUOTES,'UTF-8'); ?></div>
+                            <div class="fee-card-amounts">
+                                <div class="fee-card-amount"><strong>Total</strong>&#8377;<?php echo number_format($sfTotal,2); ?></div>
+                                <div class="fee-card-amount"><strong>Paid</strong>&#8377;<?php echo number_format($sfPaid,2); ?></div>
+                                <div class="fee-card-amount"><strong>Due</strong>&#8377;<?php echo number_format($sfPending,2); ?></div>
+                            </div>
+                            <div class="fee-card-footer">
+                                <span class="fee-status <?php echo htmlspecialchars($sfClass,ENT_QUOTES,'UTF-8'); ?>"><?php echo htmlspecialchars($sfLabel,ENT_QUOTES,'UTF-8'); ?></span>
+                                <span style="font-size:0.72rem;color:var(--text-muted);"><?php echo htmlspecialchars((string)($studentFee['created_at']??''),ENT_QUOTES,'UTF-8'); ?></span>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </div><!-- /.fee-card-list -->
+        </div><!-- /.college-list-card -->
 
         <div class="empty-box" id="adminFeeFilterEmpty" style="display:none;margin-top:12px;">No fee records match your search/filter.</div>
     </div>
@@ -2767,6 +2801,7 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
         </div>
 
         <div class="college-list-card">
+            <div class="coord-table-wrap">
             <div class="college-list-wrap">
                 <table class="college-table" id="coordinatorTable">
                     <thead>
@@ -2842,7 +2877,47 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
                     </tbody>
                 </table>
             </div>
-        </div>
+            </div><!-- /.coord-table-wrap -->
+            <!-- Mobile card view -->
+            <div class="coord-card-list" id="coordCardList">
+                <?php if (empty($coordinators)): ?>
+                    <div style="padding:18px;text-align:center;color:var(--text-muted);">No coordinators added yet.</div>
+                <?php else: ?>
+                    <?php foreach ($coordinators as $coordinator): ?>
+                        <?php
+                            $cName = trim((string)$coordinator['first_name'] . ' ' . (string)$coordinator['second_name'] . ' ' . (string)$coordinator['last_name']);
+                            $cCollegesArr = array_filter(array_map('trim', explode(',', (string)($coordinator['assigned_colleges'] ?? ''))));
+                            $cCount = count($cCollegesArr);
+                        ?>
+                        <div class="coord-card">
+                            <div class="coord-card-name"><?php echo htmlspecialchars($cName, ENT_QUOTES, 'UTF-8'); ?></div>
+                            <div class="coord-card-email"><?php echo htmlspecialchars((string)$coordinator['email'], ENT_QUOTES, 'UTF-8'); ?></div>
+                            <div class="coord-card-meta">
+                                <div class="coord-card-meta-item"><strong>Mobile</strong><?php echo htmlspecialchars((string)$coordinator['mobile_no'], ENT_QUOTES, 'UTF-8'); ?></div>
+                                <div class="coord-card-meta-item"><strong>PIN</strong><?php echo htmlspecialchars((string)$coordinator['pin'], ENT_QUOTES, 'UTF-8'); ?></div>
+                                <div class="coord-card-meta-item"><strong>State</strong><?php echo htmlspecialchars((string)$coordinator['state'], ENT_QUOTES, 'UTF-8'); ?></div>
+                                <div class="coord-card-meta-item"><strong>District</strong><?php echo htmlspecialchars((string)$coordinator['district'], ENT_QUOTES, 'UTF-8'); ?></div>
+                                <div class="coord-card-meta-item" style="grid-column:1/-1;"><strong>Colleges</strong>
+                                    <?php if ($cCount > 0): ?>
+                                        <button type="button" class="colleges-badge" data-colleges="<?php echo htmlspecialchars(json_encode(array_values($cCollegesArr)), ENT_QUOTES, 'UTF-8'); ?>" style="font-size:0.75rem;padding:3px 8px;margin-top:3px;">
+                                            <i class="fa-solid fa-building-columns"></i> <?php echo $cCount; ?> <?php echo $cCount === 1 ? 'College' : 'Colleges'; ?> <i class="fa-solid fa-chevron-down" style="font-size:0.55rem;"></i>
+                                        </button>
+                                    <?php else: ?><span style="color:var(--text-muted);">None</span><?php endif; ?>
+                                </div>
+                            </div>
+                            <div class="coord-card-footer">
+                                <button type="button" class="action-btn edit-coord" data-coordinator='<?php echo htmlspecialchars(json_encode(["id"=>$coordinator["id"],"first_name"=>$coordinator["first_name"],"second_name"=>$coordinator["second_name"],"last_name"=>$coordinator["last_name"],"email"=>$coordinator["email"],"mobile_no"=>$coordinator["mobile_no"],"address_line1"=>$coordinator["address_line1"]??"","address_line2"=>$coordinator["address_line2"]??"","state"=>$coordinator["state"],"district"=>$coordinator["district"],"pin"=>$coordinator["pin"],"assigned_colleges"=>$coordinator["assigned_colleges"]??""]), ENT_QUOTES, "UTF-8"); ?>'>
+                                    <i class="fa-solid fa-pen"></i> Edit
+                                </button>
+                                <button type="button" class="action-btn delete" data-coordinator-id="<?php echo (int)$coordinator['id']; ?>" data-coordinator-name="<?php echo htmlspecialchars($cName, ENT_QUOTES, 'UTF-8'); ?>">
+                                    <i class="fa-solid fa-trash"></i> Delete
+                                </button>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </div><!-- /.coord-card-list -->
+        </div><!-- /.college-list-card -->
 
         <div class="form-card hidden" id="coordinatorFormWrap">
             <h3><i class="fa-solid fa-user-tie"></i> Coordinator Details</h3>
@@ -3239,7 +3314,7 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
     const alertsBadge = document.getElementById('alertsBadge');
     const isMobile       = () => window.innerWidth <= 700;
 
-    /* ── Sidebar toggle ── */
+    /* â”€â”€ Sidebar toggle â”€â”€ */
     document.getElementById('sidebarToggle').addEventListener('click', () => {
         if (isMobile()) {
             sidebar.classList.toggle('open');
@@ -3255,7 +3330,7 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
         sidebarOverlay.classList.remove('visible');
     });
 
-    /* ── Profile dropdown ── */
+    /* â”€â”€ Profile dropdown â”€â”€ */
     document.getElementById('profileBtn').addEventListener('click', (e) => {
         e.stopPropagation();
         profileWrap.classList.toggle('open');
@@ -3385,7 +3460,7 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
 
     function formatCurrency(value) {
         const amount = Number(value || 0);
-        return '₹' + amount.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        return 'â‚¹' + amount.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     }
 
     function renderStudentDetails(student) {
@@ -3870,7 +3945,7 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
     updateCollegeToggleLabel();
     updateCoordinatorToggleLabel();
 
-    /* ── Toast ── */
+    /* â”€â”€ Toast â”€â”€ */
     function showToast(msg, type) {
         let t = document.getElementById('globalToast');
         t.className = 'toast ' + type;
@@ -3881,7 +3956,7 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
         setTimeout(() => t.classList.remove('show'), 3500);
     }
 
-    /* ── Add College form ── */
+    /* â”€â”€ Add College form â”€â”€ */
     document.getElementById('clgForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         const btn = document.getElementById('clgSubmitBtn');
@@ -3895,7 +3970,7 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
         if (!valid) { showToast('Please fill all fields.', 'error'); return; }
 
         btn.disabled = true;
-        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving…';
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Savingâ€¦';
 
         const body = new FormData(this);
         try {
@@ -3926,7 +4001,7 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
         btn.innerHTML = '<i class="fa-solid fa-plus"></i> Add College';
     });
 
-    /* ── Add Coordinator form ── */
+    /* â”€â”€ Add Coordinator form â”€â”€ */
     document.getElementById('coordinatorForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         const btn = document.getElementById('coordinatorSubmitBtn');
@@ -3957,7 +4032,7 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
         }
 
         btn.disabled = true;
-        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Creating…';
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Creatingâ€¦';
 
         const body = new FormData(this);
         try {
@@ -3993,7 +4068,7 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
         btn.innerHTML = '<i class="fa-solid fa-plus"></i> Create Coordinator';
     });
 
-    /* ── Edit Student Logic ── */
+    /* â”€â”€ Edit Student Logic â”€â”€ */
     const studentFormWrap = document.getElementById('studentFormWrap');
     const cancelStudentEditBtn = document.getElementById('cancelStudentEditBtn');
     const studentEditForm = document.getElementById('studentEditForm');
@@ -4081,7 +4156,7 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
         });
     }
 
-    /* ── Section switching ── */
+    /* â”€â”€ Section switching â”€â”€ */
     const sections = document.querySelectorAll('[id^="section-"]');
     const navItems = document.querySelectorAll('.nav-item');
 
@@ -4109,7 +4184,7 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
         }
     }
 
-    // ── TICKET FILTERING ────────────────────────────
+    // â”€â”€ TICKET FILTERING â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const adminTicketSearchInput = document.getElementById('adminTicketSearchInput');
     const adminTicketStatusFilter = document.getElementById('adminTicketStatusFilter');
     const adminTicketVisibleCount = document.getElementById('adminTicketVisibleCount');
@@ -4189,7 +4264,7 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
     
     // Add reset filter logic if it exists (some other parts might use clear)
     
-    // ── FEES FILTERING ──────────────────────────────
+    // â”€â”€ FEES FILTERING â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const adminFeeSearchInput = document.getElementById('adminFeeSearchInput');
     const adminFeeStatusFilter = document.getElementById('adminFeeStatusFilter');
     const adminFeeVisibleCount = document.getElementById('adminFeeVisibleCount');
@@ -4285,7 +4360,7 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
         });
     }
 
-    // ── SETTINGS SAVE ───────────────────────────────
+    // â”€â”€ SETTINGS SAVE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const adminSettingsForm = document.getElementById('adminSettingsForm');
     const adminSettingsSubmitBtn = document.getElementById('adminSettingsSubmitBtn');
 
@@ -4541,14 +4616,135 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
             closePopover();
         }
     });
-
     // Close on backdrop tap (mobile)
     backdrop.addEventListener('click', closePopover);
     closeBtn.addEventListener('click', closePopover);
 
-    // Close on resize only (not scroll - scroll shouldn't close the popover)
+    /* Close on resize only (not scroll - scroll shouldn't close the popover) */
     window.addEventListener('resize', closePopover);
 })();
 </script>
+
+<style>
+    /* â”€â”€ COORDINATOR MOBILE CARDS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    .coord-card-list { display: none; flex-direction: column; gap: 12px; }
+    .coord-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 14px 14px 12px;
+    }
+    .coord-card-name {
+        font-weight: 700; font-size: 0.95rem;
+        margin-bottom: 4px; color: var(--text);
+    }
+    .coord-card-email {
+        font-size: 0.78rem; color: var(--text-muted);
+        margin-bottom: 10px; word-break: break-all;
+    }
+    .coord-card-meta {
+        display: grid; grid-template-columns: 1fr 1fr;
+        gap: 6px; margin-bottom: 10px;
+    }
+    .coord-card-meta-item {
+        background: var(--surface-2);
+        border-radius: 8px; padding: 6px 9px;
+        font-size: 0.75rem;
+    }
+    .coord-card-meta-item strong {
+        display: block; font-size: 0.66rem; color: var(--text-muted);
+        text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 2px;
+    }
+    .coord-card-footer {
+        display: flex; gap: 8px; align-items: center;
+        flex-wrap: wrap; padding-top: 10px;
+        border-top: 1px solid var(--border);
+    }
+
+    /* â”€â”€ FEES MOBILE CARDS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    .fee-card-list { display: none; flex-direction: column; gap: 12px; }
+    .fee-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 14px;
+    }
+    .fee-card-name { font-weight: 700; font-size: 0.92rem; margin-bottom: 2px; }
+    .fee-card-email { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 6px; word-break: break-all; }
+    .fee-card-sub { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 8px; }
+    .fee-card-amounts {
+        display: grid; grid-template-columns: repeat(3, 1fr);
+        gap: 6px; margin-bottom: 8px;
+    }
+    .fee-card-amount {
+        background: var(--surface-2);
+        border-radius: 8px; padding: 6px 8px;
+        font-size: 0.75rem; text-align: center;
+    }
+    .fee-card-amount strong { display: block; font-size: 0.66rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px; }
+    .fee-card-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; }
+
+    /* â”€â”€ COMPREHENSIVE RESPONSIVE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    @media (max-width: 900px) {
+        .coord-card-list { display: flex; }
+        .coord-table-wrap { display: none; }
+        .fee-card-list { display: flex; }
+        .fee-table-wrap { display: none; }
+    }
+
+    @media (max-width: 700px) {
+        :root { --sidebar-w: 240px; }
+        .sidebar { transform: translateX(calc(-1 * var(--sidebar-w))); }
+        .sidebar.open { transform: translateX(0); }
+        .main-content { margin-left: 0 !important; padding: 16px 12px 30px; }
+        .topbar { padding: 0 12px; }
+        .profile-name { display: none; }
+        .topbar-brand span { display: none; }
+        .notification-btn { width: 34px; height: 34px; border-radius: 10px; }
+        .notification-dropdown {
+            position: fixed; top: var(--topbar-h);
+            left: 8px; right: 8px; width: auto; max-width: none;
+        }
+        .page-heading { font-size: 1.18rem; }
+        .hero-actions { width: 100%; }
+        .hero-chip { flex: 1; justify-content: center; }
+        .stat-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .students-table-wrap { display: none; }
+        .student-cards { display: grid; }
+        .student-meta { grid-template-columns: 1fr; }
+        .student-filter-bar { grid-template-columns: 1fr; gap: 8px; }
+        .student-filter-count { justify-self: start; }
+        .row-actions { width: 100%; }
+        .action-btn { flex: 1; justify-content: center; }
+        .student-modal-overlay { padding: 0; align-items: flex-end; }
+        .student-modal {
+            width: 100%; max-height: 90vh;
+            border-radius: 16px 16px 0 0; border: none; padding: 16px;
+        }
+        .student-modal-head { align-items: flex-start; }
+        .student-modal-head-actions { width: 100%; justify-content: flex-end; }
+        .student-detail-grid { grid-template-columns: 1fr; }
+        .section-toolbar { flex-direction: column; gap: 10px; align-items: stretch; }
+        .section-toolbar > * { width: 100%; }
+        .btn-add-college { width: 100%; justify-content: center; }
+        .form-card { padding: 16px 14px; }
+    }
+
+    @media (max-width: 480px) {
+        .stat-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+        .stat-card { padding: 14px 12px; }
+        .stat-val { font-size: 1.6rem; }
+        .college-list-card { padding: 10px; }
+        .coord-card-meta { grid-template-columns: 1fr; }
+        .fee-card-amounts { grid-template-columns: repeat(3, 1fr); }
+        .fees-summary { grid-template-columns: 1fr 1fr; gap: 8px; }
+        .ticket-filter-bar { grid-template-columns: 1fr; gap: 8px; padding: 8px; }
+        .ticket-filter-count, .ticket-filter-reset { width: 100%; justify-self: stretch; justify-content: center; }
+        .fee-filter-bar { grid-template-columns: 1fr; gap: 8px; padding: 8px; }
+        .fee-filter-count { width: 100%; justify-self: stretch; justify-content: center; }
+        .report-grid { grid-template-columns: 1fr; }
+        .form-grid { grid-template-columns: 1fr; }
+    }
+</style>
 </body>
 </html>

@@ -147,7 +147,16 @@ $razorpayEnabled = RAZORPAY_KEY_ID !== '' && RAZORPAY_KEY_SECRET !== '';
             background: #67e8f920;
         }
         .loader-inline { font-size: .82rem; color: var(--text-muted); margin-top: 10px; display: none; }
-        @media (max-width: 640px) { .grid-2 { grid-template-columns: 1fr; } }
+        @media (max-width: 640px) {
+            .grid-2 { grid-template-columns: 1fr; }
+            .signup-shell { padding: 0 12px; padding-bottom: 80px; }
+            .signup-card { padding: 16px 14px; }
+        }
+        @media (max-width: 480px) {
+            .top-bar { padding: 10px 0; }
+            .signup-card h2 { font-size: 1rem; }
+            input, select, textarea { font-size: 16px; } /* prevent zoom on iOS */
+        }
     </style>
 </head>
 <body>

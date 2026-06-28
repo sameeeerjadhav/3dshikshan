@@ -1120,6 +1120,37 @@ function esc(string $value): string
             text-align: center;
             font-size: .86rem;
         }
+
+        /* ── RESPONSIVE ADDITIONS ── */
+        @media (max-width: 700px) {
+            .sidebar { transform: translateX(calc(-1 * var(--sidebar-w))); }
+            .sidebar.open { transform: translateX(0); }
+            .main-content { margin-left: 0; padding: 16px 12px 30px; }
+            .topbar { padding: 0 12px; }
+            .profile-name { display: none; }
+            .topbar-brand span { display: none; }
+            .notification-btn { width: 34px; height: 34px; border-radius: 10px; }
+            .notification-dropdown { position: fixed; top: var(--topbar-h); left: 8px; right: 8px; width: auto; max-width: none; }
+            .notification-wrap.open .notification-dropdown { transform: translateY(0); }
+            .cal-grid { gap: 4px; }
+            .cal-day { min-height: 36px; font-size: .78rem; }
+            .page-heading { font-size: 1.18rem; }
+        }
+        @media (max-width: 640px) {
+            .overview-stats { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+            .fees-table th, .fees-table td { padding: 8px 6px; font-size: .78rem; }
+            .ticket-card { padding: 12px; }
+            .ticket-list-item-meta { flex-wrap: wrap; }
+            .section-heading { font-size: 1rem; }
+        }
+        @media (max-width: 480px) {
+            .overview-stats { grid-template-columns: 1fr 1fr; gap: 6px; }
+            .stat-value { font-size: 1.5rem; }
+            .cal-card { padding: 14px 10px; }
+            .cal-day { min-height: 30px; font-size: .7rem; }
+            .page-heading { font-size: 1.05rem; }
+            .page-sub { font-size: .8rem; }
+        }
     </style>
 </head>
 <body>
