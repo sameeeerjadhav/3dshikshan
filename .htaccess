@@ -17,3 +17,18 @@ DirectoryIndex index.php index.html
     RewriteEngine On
     RewriteRule ^sql/ - [F,L]
 </IfModule>
+
+# Security Headers
+<IfModule mod_headers.c>
+    # Prevent clickjacking
+    Header always set X-Frame-Options "SAMEORIGIN"
+    # Prevent MIME type sniffing
+    Header always set X-Content-Type-Options "nosniff"
+    # Enable XSS protection in legacy browsers
+    Header always set X-XSS-Protection "1; mode=block"
+    # Enforce HTTPS (HSTS)
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    # Prevent information disclosure
+    Header unset X-Powered-By
+    Header always unset X-Powered-By
+</IfModule>

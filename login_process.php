@@ -30,6 +30,8 @@ if (
         'role' => 'admin',
     ];
 
+    session_regenerate_id(true);
+
     header('Location: admin/dashboard.php');
     exit;
 }
@@ -75,6 +77,9 @@ $_SESSION['user'] = [
     'login_id' => (string)$record['login_id'],
     'role' => $role,
 ];
+
+// Regenerate session ID to prevent Session Fixation attacks
+session_regenerate_id(true);
 
 header('Location: ' . ($role === 'admin' ? 'admin/dashboard.php' : 'dashboard.php'));
 exit;
