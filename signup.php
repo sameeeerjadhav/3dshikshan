@@ -153,6 +153,7 @@ $razorpayEnabled = RAZORPAY_KEY_ID !== '' && RAZORPAY_KEY_SECRET !== '';
 <body>
 <div class="signup-shell">
     <div class="top-bar">
+        <a href="index.html#login" style="color:var(--accent); text-decoration:none; display:flex; align-items:center; justify-content:center; width:34px; height:34px; border-radius:8px; background:var(--accent-light); margin-right:6px;"><i class="fa-solid fa-arrow-left"></i></a>
         <i class="fa-solid fa-user-plus top-icon"></i>
         <h2>Student Registration</h2>
     </div>
