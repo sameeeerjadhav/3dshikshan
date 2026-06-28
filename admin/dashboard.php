@@ -1134,22 +1134,221 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
         .student-card h4 {
             font-family: 'Space Grotesk', sans-serif;
             font-size: .9rem;
-            margin-bottom: 6px;
+            font-size: .82rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            white-space: nowrap;
+        }
+        .college-table th {
+            font-size: .72rem;
+            letter-spacing: .8px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            background: #f2f5fa;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+        .college-table tbody tr:nth-child(even) td {
+            background: #fbfcfe;
+        }
+        .college-table tbody tr:hover td {
+            background: #f4f8ff;
+        }
+        .college-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        .college-empty {
+            padding: 20px 16px;
+            color: var(--text-muted);
+            font-size: .84rem;
+        }
+
+        .role-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3px 9px;
+            border-radius: 999px;
+            font-size: .67rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .7px;
+            border: 1px solid transparent;
+        }
+        .role-badge.role-admin {
+            color: #7c2d12;
+            background: #ffedd5;
+            border-color: #fdba74;
+        }
+        .role-badge.role-coordinator {
+            color: #1d4ed8;
+            background: #dbeafe;
+            border-color: #93c5fd;
+        }
+        .role-badge.role-student {
+            color: #166534;
+            background: #dcfce7;
+            border-color: #86efac;
+        }
+        .subtle-cell {
+            color: var(--text-muted);
+            font-size: .78rem;
+        }
+
+        .fee-chip {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 14px;
+            font-size: .68rem;
+            font-weight: 700;
+            letter-spacing: .35px;
+            white-space: nowrap;
+        }
+        .fee-chip.total { background: #dbeafe; color: #1d4ed8; }
+        .fee-chip.paid { background: #dcfce7; color: #166534; }
+        .fee-chip.pending { background: #ffedd5; color: #9a3412; }
+
+        .row-actions {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .action-btn {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 7px 10px;
+            font-size: .74rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+            background: var(--surface-2);
+            color: var(--text);
+        }
+        .action-btn.view:hover {
+            border-color: #60a5fa;
+            color: #1d4ed8;
+            background: #eff6ff;
+        }
+        .action-btn.delete:hover {
+            border-color: #fda4af;
+            color: #be123c;
+            background: #fff1f2;
+        }
+
+        .student-filter-bar {
+            display: grid;
+            grid-template-columns: minmax(220px, 1.25fr) minmax(140px, .85fr) minmax(110px, .6fr) minmax(110px, .6fr) auto;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 12px;
+            background: linear-gradient(180deg, #ffffff 0%, #fbfcfe 100%);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 10px;
+            box-shadow: var(--shadow-soft);
+        }
+        .student-filter-field {
+            position: relative;
+            min-width: 0;
+        }
+        .student-filter-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: .8rem;
+            pointer-events: none;
+        }
+        .student-filter-input,
+        .student-filter-select {
+            width: 100%;
+            height: 40px;
+            border: 1px solid #d7dee9;
+            border-radius: 10px;
+            background: #fff;
+            color: var(--text);
+            font-size: .82rem;
+            font-family: 'DM Sans', sans-serif;
+            outline: none;
+            transition: border-color var(--transition), box-shadow var(--transition);
+        }
+        .student-filter-input {
+            padding: 0 12px 0 36px;
+        }
+        .student-filter-select {
+            padding: 0 32px 0 36px;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+        .student-filter-input:focus,
+        .student-filter-select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(11, 138, 94, .12);
+        }
+        .student-filter-caret {
+            position: absolute;
+            right: 11px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #64748b;
+            font-size: .68rem;
+            pointer-events: none;
+        }
+        .student-filter-count {
+            justify-self: end;
+            font-size: .76rem;
+            font-weight: 700;
+            color: #475569;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 999px;
+            padding: 7px 11px;
+            white-space: nowrap;
+        }
+
+        .student-cards,
+        .fee-card-list,
+        .coord-card-list {
+            display: none;
+            gap: 8px;
+        }
+        .student-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px;
+            box-shadow: var(--shadow-soft);
+        }
+        .student-card h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: .95rem;
+            font-weight: 700;
+            margin-bottom: 2px;
         }
         .student-meta {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 6px;
-            font-size: .74rem;
-            color: var(--text-muted);
+            gap: 8px;
+            font-size: .82rem;
+            color: var(--text);
+            margin-bottom: 12px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border);
         }
         .student-meta strong {
             display: block;
             font-size: .62rem;
             text-transform: uppercase;
             letter-spacing: .5px;
-            margin-bottom: 1px;
-            color: var(--text);
+            color: var(--text-muted);
+            margin-bottom: 2px;
         }
 
         .fee-card, .coord-card {
@@ -1404,7 +1603,7 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
             .student-cards,
             .fee-card-list,
             .coord-card-list { display: grid; }
-            .student-meta { grid-template-columns: 1fr; }
+            /* student-meta remains 1fr 1fr on mobile */
             .student-filter-bar {
                 grid-template-columns: 1fr 1fr;
                 gap: 8px;
