@@ -4184,9 +4184,11 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
             document.getElementById('clg_longitude').value = data.longitude || '';
             
             document.getElementById('clgSubmitBtn').innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Update College';
+            const listCard = document.querySelector('.college-list-card');
+            if (listCard) listCard.style.display = 'none';
             collegeFormWrap.classList.remove('hidden');
             updateCollegeToggleLabel();
-            collegeFormWrap.scrollIntoView({ behavior: 'smooth' });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
             return;
         }
 
@@ -4225,13 +4227,20 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
     });
 
     toggleCollegeFormBtn.addEventListener('click', () => {
+        const listCard = document.querySelector('.college-list-card');
         if (!collegeFormWrap.classList.contains('hidden')) {
             document.getElementById('clgForm').reset();
             document.getElementById('clg_id').value = '';
             document.getElementById('clgSubmitBtn').innerHTML = '<i class="fa-solid fa-plus"></i> Save College';
+            if (listCard) listCard.style.display = '';
+        } else {
+            if (listCard) listCard.style.display = 'none';
         }
         collegeFormWrap.classList.toggle('hidden');
         updateCollegeToggleLabel();
+        if (!collegeFormWrap.classList.contains('hidden')) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
     });
 
     toggleCoordinatorFormBtn.addEventListener('click', () => {
@@ -4302,6 +4311,8 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
                     this.reset();
                     document.getElementById('clg_id').value = '';
                     collegeFormWrap.classList.add('hidden');
+                    const listCard = document.querySelector('.college-list-card');
+                    if (listCard) listCard.style.display = '';
                     updateCollegeToggleLabel();
                 }
             } else {
