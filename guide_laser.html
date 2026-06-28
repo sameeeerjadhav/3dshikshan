@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -51,7 +51,7 @@
       padding-bottom: calc(60px + var(--safe-bottom));
     }
 
-    /* â”€â”€ PAGE VIEWS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* ── PAGE VIEWS ────────────────────────────────── */
     .page {
       display: none;
       min-height: calc(100vh - 60px);
@@ -88,7 +88,7 @@
     }
     .logo span { color: var(--text); }
 
-    /* â”€â”€ BOTTOM TAB BAR â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* ── BOTTOM TAB BAR ────────────────────────────── */
     .tab-bar {
       position: fixed; bottom: 0; left: 0; width: 100%; z-index: 9999;
       backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
@@ -121,7 +121,7 @@
     }
     .tab-btn:active { transform: scale(.92); }
 
-    /* â”€â”€ SHARED â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* ── SHARED ────────────────────────────────────── */
     .section-label {
       display: inline-block;
       font-size: .66rem; font-weight: 700;
@@ -135,7 +135,7 @@
       margin-bottom: 20px;
     }
 
-    /* â”€â”€ HERO â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* ── HERO ───────────────────────────────────────── */
     .hero {
       padding: 16px 0 22px; text-align: center;
     }
@@ -155,7 +155,7 @@
       max-width: 360px; margin: 0 auto;
     }
 
-    /* â”€â”€ HOME TOGGLE TABS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* ── HOME TOGGLE TABS ──────────────────────────── */
     .home-tabs {
       display: flex; gap: 0;
       background: var(--surface-2);
@@ -183,7 +183,7 @@
     .home-panel { display: none; animation: pageFadeIn .2s ease; }
     .home-panel.active { display: block; }
 
-    /* â”€â”€ SUB SECTIONS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* ── SUB SECTIONS ──────────────────────────────── */
     .sub-section { margin-bottom: 28px; }
     .sub-heading {
       display: flex; align-items: center; gap: 10px;
@@ -200,7 +200,7 @@
       font-size: 1.05rem; font-weight: 700;
     }
 
-    /* â”€â”€ CARDS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* ── CARDS ──────────────────────────────────────── */
     .card-grid { display: flex; flex-direction: column; gap: 10px; }
 
     .card {
@@ -236,7 +236,7 @@
       flex-shrink: 0;
     }
 
-    /* â”€â”€ GUIDE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* ── GUIDE ─────────────────────────────────────── */
     .guide-grid { display: flex; flex-direction: column; gap: 10px; }
     .guide-card {
       background: var(--surface);
@@ -284,7 +284,7 @@
     .step h5 { font-size: .86rem; margin-bottom: 2px; }
     .step p { color: var(--text-muted); font-size: .76rem; }
 
-    /* â”€â”€ MAP â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* ── MAP ────────────────────────────────────────── */
     #mapContainer {
       width: 100%; height: 50vh; min-height: 300px;
       border-radius: var(--radius);
@@ -350,7 +350,7 @@
     .btn-directions:active { background: #2563eb; }
     .btn-call:active { background: var(--surface-3); }
 
-    /* â”€â”€ LOGIN â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* ── LOGIN ──────────────────────────────────────── */
     .login-header {
       text-align: center; padding: 20px 0 24px;
     }
@@ -446,7 +446,7 @@
     }
     .signup-link a { color: var(--accent); text-decoration: none; font-weight: 600; }
 
-    /* â”€â”€ PAGE FOOTER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* ── PAGE FOOTER ───────────────────────────────── */
     .page-footer {
       text-align: center; padding: 24px 0 12px;
       color: var(--text-muted); font-size: .7rem;
@@ -454,7 +454,7 @@
       margin-top: 20px;
     }
 
-    /* â”€â”€ SCROLLBAR â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* ── SCROLLBAR ─────────────────────────────────── */
     ::-webkit-scrollbar { width: 3px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
@@ -463,7 +463,7 @@
 <body>
 <div class="page active" style="display: block; padding-bottom: 20px;">
   <div class="top-bar">
-    <button onclick="window.location.href=''index.html#guide''" style="background:none;border:none;font-size:1.2rem;margin-right:12px;cursor:pointer;color:var(--text);"><i class="fa-solid fa-arrow-left"></i></button>
+    <button onclick="window.location.href='index.html#guide'" style="background:none;border:none;font-size:1.2rem;margin-right:12px;cursor:pointer;color:var(--text);"><i class="fa-solid fa-arrow-left"></i></button>
     <h2>Laser Cutting 101</h2>
   </div>
   <div style="padding:16px; max-width: 600px; margin: 0 auto;">
