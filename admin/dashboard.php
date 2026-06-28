@@ -4089,6 +4089,8 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
         if (updateHash) {
             window.location.hash = name;
         }
+        // Persist to localStorage so refresh stays on same page
+        try { localStorage.setItem('admin_active_section', name); } catch(e) {}
         sections.forEach(s => s.style.display = 'none');
         const target = document.getElementById('section-' + name);
         if (target) target.style.display = 'block';
@@ -4456,9 +4458,17 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
     });
 
     document.addEventListener('DOMContentLoaded', () => {
+        // Restore section: prefer URL hash, fall back to localStorage
         const hash = window.location.hash.replace('#', '');
         if (hash && document.getElementById('section-' + hash)) {
             showSection(hash, false);
+        } else {
+            try {
+                const saved = localStorage.getItem('admin_active_section');
+                if (saved && document.getElementById('section-' + saved)) {
+                    showSection(saved, false);
+                }
+            } catch(e) {}
         }
     });
 </script>
@@ -4536,9 +4546,8 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
     backdrop.addEventListener('click', closePopover);
     closeBtn.addEventListener('click', closePopover);
 
-    // Reposition on scroll/resize
+    // Close on resize only (not scroll - scroll shouldn't close the popover)
     window.addEventListener('resize', closePopover);
-    window.addEventListener('scroll', closePopover, true);
 })();
 </script>
 </body>

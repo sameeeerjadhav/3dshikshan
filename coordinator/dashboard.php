@@ -1609,6 +1609,8 @@ function showSection(name, updateHash = true) {
     if (updateHash) {
         window.location.hash = name;
     }
+    // Persist to localStorage so refresh stays on same page
+    try { localStorage.setItem('coord_active_section', name); } catch(e) {}
     sections.forEach(section => section.style.display = 'none');
     const target = document.getElementById('section-' + name);
     if (target) target.style.display = 'block';
@@ -2333,9 +2335,17 @@ window.addEventListener('hashchange', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Restore section: prefer URL hash, fall back to localStorage
     const hash = window.location.hash.replace('#', '');
     if (hash && document.getElementById('section-' + hash)) {
         showSection(hash, false);
+    } else {
+        try {
+            const saved = localStorage.getItem('coord_active_section');
+            if (saved && document.getElementById('section-' + saved)) {
+                showSection(saved, false);
+            }
+        } catch(e) {}
     }
 });
 </script>
