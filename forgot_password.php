@@ -135,6 +135,12 @@ if (isset($_SESSION['user']['role'])) {
             color: var(--success);
             border: 1px solid #c8e6c9;
         }
+        @media (max-width: 500px) {
+            body { padding: 12px; }
+            .auth-card { padding: 24px 16px; border-radius: 16px; }
+            .auth-card h2 { font-size: 1.1rem; }
+            input { font-size: 16px; }
+        }
     </style>
 </head>
 <body>

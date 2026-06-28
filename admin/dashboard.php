@@ -2686,6 +2686,7 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
 
 
         <div class="college-list-card">
+            <div class="fee-table-wrap">
             <div class="college-list-wrap">
                 <table class="college-table" id="feesTable">
                     <thead>
@@ -2749,6 +2750,39 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
                     </tbody>
                 </table>
             </div>
+            </div><!-- /.fee-table-wrap -->
+            <!-- Mobile fee card list -->
+            <div class="fee-card-list" id="feeCardList">
+                <?php if (empty($students)): ?>
+                    <div style="padding:18px;text-align:center;color:var(--text-muted);">No student fee records found.</div>
+                <?php else: ?>
+                    <?php foreach ($students as $studentFee): ?>
+                        <?php
+                            $sfTotal = (float)($studentFee['total_fee'] ?? 0);
+                            $sfPaid = (float)($studentFee['paid_fee'] ?? 0);
+                            $sfPending = (float)($studentFee['remaining_fee'] ?? 0);
+                            if ($sfPending <= 0.009) { $sfClass = 'fully-paid'; $sfLabel = 'Fully Paid'; }
+                            elseif ($sfPaid > 0) { $sfClass = 'partial'; $sfLabel = 'Partial'; }
+                            else { $sfClass = 'unpaid'; $sfLabel = 'Unpaid'; }
+                            $sfBlob = strtolower(trim((string)($studentFee['full_name']??'').' '.(string)($studentFee['email']??'').' '.(string)($studentFee['college_name']??'').' '.(string)($studentFee['course_name']??'').' '.(string)($studentFee['login_id']??'')));
+                        ?>
+                        <div class="fee-card" data-fee-item="1" data-status="<?php echo htmlspecialchars($sfClass,ENT_QUOTES,'UTF-8'); ?>" data-search="<?php echo htmlspecialchars($sfBlob,ENT_QUOTES,'UTF-8'); ?>" data-total="<?php echo $sfTotal; ?>" data-paid="<?php echo $sfPaid; ?>" data-pending="<?php echo $sfPending; ?>">
+                            <div class="fee-card-name"><?php echo htmlspecialchars((string)($studentFee['full_name']??''),ENT_QUOTES,'UTF-8'); ?></div>
+                            <div class="fee-card-email"><?php echo htmlspecialchars((string)($studentFee['email']??''),ENT_QUOTES,'UTF-8'); ?></div>
+                            <div class="fee-card-sub"><?php echo htmlspecialchars((string)($studentFee['college_name']??''),ENT_QUOTES,'UTF-8'); ?> &middot; <?php echo htmlspecialchars((string)($studentFee['course_name']??''),ENT_QUOTES,'UTF-8'); ?></div>
+                            <div class="fee-card-amounts">
+                                <div class="fee-card-amount"><strong>Total</strong>&#8377;<?php echo number_format($sfTotal,2); ?></div>
+                                <div class="fee-card-amount"><strong>Paid</strong>&#8377;<?php echo number_format($sfPaid,2); ?></div>
+                                <div class="fee-card-amount"><strong>Due</strong>&#8377;<?php echo number_format($sfPending,2); ?></div>
+                            </div>
+                            <div class="fee-card-footer">
+                                <span class="fee-status <?php echo htmlspecialchars($sfClass,ENT_QUOTES,'UTF-8'); ?>"><?php echo htmlspecialchars($sfLabel,ENT_QUOTES,'UTF-8'); ?></span>
+                                <span style="font-size:0.72rem;color:var(--text-muted);"><?php echo htmlspecialchars((string)($studentFee['created_at']??''),ENT_QUOTES,'UTF-8'); ?></span>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </div>
         </div>
 
         <div class="empty-box" id="adminFeeFilterEmpty" style="display:none;margin-top:12px;">No fee records match your search/filter.</div>
@@ -2767,6 +2801,7 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
         </div>
 
         <div class="college-list-card">
+            <div class="coord-table-wrap">
             <div class="college-list-wrap">
                 <table class="college-table" id="coordinatorTable">
                     <thead>
@@ -2841,6 +2876,47 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
                         <?php endif; ?>
                     </tbody>
                 </table>
+            </div>
+            </div><!-- /.coord-table-wrap -->
+            <!-- Mobile card view for coordinators -->
+            <div class="coord-card-list" id="coordCardList">
+                <?php if (empty()): ?>
+                    <div style="padding:18px;text-align:center;color:var(--text-muted);">No coordinators added yet.</div>
+                <?php else: ?>
+                    <?php foreach ( as ): ?>
+                        <?php
+                            $cName = trim((string)$coordinator['first_name'] . ' ' . (string)$coordinator['second_name'] . ' ' . (string)$coordinator['last_name']);
+                            $cCollegesArr = array_filter(array_map('trim', explode(',', (string)($coordinator['assigned_colleges'] ?? ''))));
+                            $cCount = count($cCollegesArr);
+                        ?>
+                        <div class="coord-card">
+                            <div class="coord-card-name"><?php echo htmlspecialchars($cName, ENT_QUOTES, 'UTF-8'); ?></div>
+                            <div class="coord-card-email"><?php echo htmlspecialchars((string)$coordinator['email'], ENT_QUOTES, 'UTF-8'); ?></div>
+                            <div class="coord-card-meta">
+                                <div class="coord-card-meta-item"><strong>Mobile</strong><?php echo htmlspecialchars((string)$coordinator['mobile_no'], ENT_QUOTES, 'UTF-8'); ?></div>
+                                <div class="coord-card-meta-item"><strong>PIN</strong><?php echo htmlspecialchars((string)$coordinator['pin'], ENT_QUOTES, 'UTF-8'); ?></div>
+                                <div class="coord-card-meta-item"><strong>State</strong><?php echo htmlspecialchars((string)$coordinator['state'], ENT_QUOTES, 'UTF-8'); ?></div>
+                                <div class="coord-card-meta-item"><strong>District</strong><?php echo htmlspecialchars((string)$coordinator['district'], ENT_QUOTES, 'UTF-8'); ?></div>
+                                <div class="coord-card-meta-item" style="grid-column:1/-1;">
+                                    <strong>Colleges</strong>
+                                    <?php if ($cCount > 0): ?>
+                                        <button type="button" class="colleges-badge" data-colleges="<?php echo htmlspecialchars(json_encode(array_values($cCollegesArr)), ENT_QUOTES, 'UTF-8'); ?>" style="font-size:0.75rem;padding:3px 8px;margin-top:3px;">
+                                            <i class="fa-solid fa-building-columns"></i> <?php echo $cCount; ?> <?php echo $cCount === 1 ? 'College' : 'Colleges'; ?> <i class="fa-solid fa-chevron-down" style="font-size:0.55rem;"></i>
+                                        </button>
+                                    <?php else: ?><span style="color:var(--text-muted);">None</span><?php endif; ?>
+                                </div>
+                            </div>
+                            <div class="coord-card-footer">
+                                <button type="button" class="action-btn edit-coord" data-coordinator='<?php echo htmlspecialchars(json_encode(["id"=>$coordinator["id"],"first_name"=>$coordinator["first_name"],"second_name"=>$coordinator["second_name"],"last_name"=>$coordinator["last_name"],"email"=>$coordinator["email"],"mobile_no"=>$coordinator["mobile_no"],"address_line1"=>$coordinator["address_line1"]??"","address_line2"=>$coordinator["address_line2"]??"","state"=>$coordinator["state"],"district"=>$coordinator["district"],"pin"=>$coordinator["pin"],"assigned_colleges"=>$coordinator["assigned_colleges"]??""]), ENT_QUOTES, "UTF-8"); ?>'>
+                                    <i class="fa-solid fa-pen"></i> Edit
+                                </button>
+                                <button type="button" class="action-btn delete" data-coordinator-id="<?php echo (int)$coordinator['id']; ?>" data-coordinator-name="<?php echo htmlspecialchars($cName, ENT_QUOTES, 'UTF-8'); ?>">
+                                    <i class="fa-solid fa-trash"></i> Delete
+                                </button>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </div>
         </div>
 
