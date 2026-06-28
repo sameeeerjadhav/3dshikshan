@@ -1152,6 +1152,76 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
             color: var(--text);
         }
 
+        .fee-card, .coord-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px;
+            box-shadow: var(--shadow-soft);
+        }
+        .fee-card-name, .coord-card-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: .95rem;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+        .fee-card-email, .coord-card-email {
+            font-size: .78rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+        .fee-card-sub {
+            font-size: .72rem;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+        .fee-card-amounts {
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 12px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border);
+        }
+        .coord-card-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 12px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border);
+        }
+        .fee-card-amount, .coord-card-meta-item {
+            font-size: .82rem;
+            color: var(--text);
+        }
+        .fee-card-amount strong, .coord-card-meta-item strong {
+            display: block;
+            font-size: .62rem;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+        .fee-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 10px;
+            border-top: 1px dashed var(--border);
+        }
+        .coord-card-footer {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding-top: 10px;
+            border-top: 1px dashed var(--border);
+        }
+        .coord-card-footer .action-btn {
+            flex: 1;
+            justify-content: center;
+        }
+
         .student-modal-overlay {
             display: none;
             position: fixed;
