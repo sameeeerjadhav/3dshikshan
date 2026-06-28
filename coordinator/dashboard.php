@@ -555,6 +555,28 @@ function esc(string $value): string
         .ticket-search:focus,.ticket-status-filter:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(11,138,94,.12)}
         .ticket-select-caret{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:.68rem;color:#64748b;pointer-events:none}
         .ticket-filter-count{justify-self:end;font-size:.76rem;font-weight:700;color:#475569;background:#f8fafc;border:1px solid #e2e8f0;padding:7px 11px;border-radius:999px;white-space:nowrap}
+        .ticket-filter-reset {
+            height: 40px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            background: #ffffff;
+            color: #334155;
+            font-size: .78rem;
+            font-weight: 700;
+            padding: 0 12px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+        .ticket-filter-reset:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: #f0fdf4;
+        }
         .ticket-row{padding:8px 10px;border-bottom:1px solid var(--border)}
         .ticket-row.is-unread{background:#f9fffb}
         .ticket-row:last-child{border-bottom:none}
@@ -602,6 +624,11 @@ function esc(string $value): string
         .sidebar-overlay.visible{display:block}
         @media (max-width:700px){.sidebar{transform:translateX(calc(-1 * var(--sidebar-w)))}.sidebar.open{transform:translateX(0)}.main-content{margin-left:0}.profile-name{display:none}.topbar-brand span{display:none}.notification-btn{width:34px;height:34px;border-radius:10px}.notification-dropdown{left:8px;right:8px;width:auto;max-width:none}}
         @media (max-width:920px){.student-table-wrap{display:none}.student-cards{display:grid}.student-meta{grid-template-columns:1fr}.student-filter-bar{grid-template-columns:1fr 1fr}}
+        @media(max-width:768px){
+            .ticket-filter-bar{grid-template-columns:1fr}
+            .ticket-filter-count, .ticket-filter-reset{justify-self:start; width:100%; justify-content:center;}
+            .ticket-row-top{flex-direction:column;align-items:flex-start}
+        }
         @media (max-width:640px){.college-summary{padding:16px;flex-direction:column;align-items:flex-start}.college-summary-count{width:100%;justify-content:center}.college-grid{grid-template-columns:1fr}.college-card{padding:12px}.college-view-btn{height:36px;padding:0 10px}.student-detail-grid{grid-template-columns:1fr}.student-filter-panel{padding:12px}.student-filter-top{flex-wrap:wrap;white-space:normal}.student-filter-bar{grid-template-columns:1fr;gap:8px;padding:7px}.student-filter-input,.student-filter-select{height:38px;font-size:.78rem}.student-filter-input{padding:0 10px 0 32px}.student-filter-select{padding:0 26px 0 32px}.student-input-icon,.student-select-icon{left:10px;font-size:.74rem}.student-select-caret{right:10px;font-size:.66rem}.student-filter-actions{justify-content:stretch}.student-filter-clear{width:100%;height:36px}.ticket-filter-bar{grid-template-columns:1fr}.ticket-filter-count{justify-self:start}.ticket-row{padding:8px 9px}.ticket-row-top{flex-direction:column;gap:5px;margin-bottom:5px}.ticket-status{align-self:flex-start}.schedule-form{grid-template-columns:1fr}.att-setup-card{grid-template-columns:1fr}}
     </style>
 </head>
@@ -1132,6 +1159,7 @@ function esc(string $value): string
                 <i class="fa-solid fa-chevron-down ticket-select-caret"></i>
             </div>
             <div class="ticket-filter-count" id="ticketVisibleCount">Showing <?php echo count($coordinatorTickets); ?> tickets</div>
+            <button type="button" class="ticket-filter-reset" id="ticketResetBtn"><i class="fa-solid fa-rotate-left"></i> Reset</button>
         </div>
 
         <?php if (!empty($coordinatorTickets)): ?>
@@ -1670,6 +1698,15 @@ if (ticketSearchInput) {
 
 if (ticketStatusFilter) {
     ticketStatusFilter.addEventListener('change', applyTicketFilters);
+}
+
+const ticketResetBtn = document.getElementById('ticketResetBtn');
+if (ticketResetBtn) {
+    ticketResetBtn.addEventListener('click', () => {
+        if (ticketSearchInput) ticketSearchInput.value = '';
+        if (ticketStatusFilter) ticketStatusFilter.value = '';
+        applyTicketFilters();
+    });
 }
 
 applyTicketFilters();
