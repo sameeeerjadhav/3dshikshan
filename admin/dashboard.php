@@ -1627,6 +1627,12 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
             .student-modal-head { align-items: flex-start; }
             .student-modal-head-actions { width: 100%; justify-content: flex-end; }
             .student-detail-grid { grid-template-columns: 1fr; }
+            .stat-grid, .fees-summary-grid, .report-kpi-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+            .report-table-wrap { display: none; }
+            .report-mobile-cards { display: grid; }
         }
 
         /* ── TICKETS ────────────────────────────────── */
@@ -2049,6 +2055,23 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
         .report-table tbody tr:last-child td {
             border-bottom: none;
         }
+        .report-mobile-cards { display: none; gap: 10px; padding: 12px 12px 14px; }
+        .report-mobile-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 12px;
+        }
+        .report-mobile-card-title {
+            font-size: .82rem; font-weight: 700; margin-bottom: 8px;
+            color: var(--text); border-bottom: 1px dashed #cbd5e1; padding-bottom: 6px;
+        }
+        .report-mobile-card-row {
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: .76rem; margin-bottom: 6px; color: var(--text-muted);
+        }
+        .report-mobile-card-row span:last-child { font-weight: 600; color: var(--text); text-align: right; }
+        .report-mobile-card-row:last-child { margin-bottom: 0; }
         .report-pill {
             display: inline-flex;
             align-items: center;
@@ -3435,6 +3458,23 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
                         </tbody>
                     </table>
                 </div>
+                <div class="report-mobile-cards">
+                    <?php if (empty($collegePerformance)): ?>
+                        <div class="empty-box">No college fee data available.</div>
+                    <?php else: ?>
+                        <?php foreach ($collegePerformance as $collegeRow): ?>
+                            <?php $isHealthy = (float)$collegeRow['collection_percent'] >= 70; ?>
+                            <div class="report-mobile-card">
+                                <div class="report-mobile-card-title"><?php echo htmlspecialchars((string)$collegeRow['college'], ENT_QUOTES, 'UTF-8'); ?></div>
+                                <div class="report-mobile-card-row"><span>Students</span><span><?php echo (int)$collegeRow['students']; ?></span></div>
+                                <div class="report-mobile-card-row"><span>Assigned</span><span>INR <?php echo number_format((float)$collegeRow['assigned'], 2); ?></span></div>
+                                <div class="report-mobile-card-row"><span>Collected</span><span>INR <?php echo number_format((float)$collegeRow['collected'], 2); ?></span></div>
+                                <div class="report-mobile-card-row"><span>Pending</span><span>INR <?php echo number_format((float)$collegeRow['pending'], 2); ?></span></div>
+                                <div class="report-mobile-card-row"><span>Rate</span><span><span class="report-pill <?php echo $isHealthy ? 'good' : 'warn'; ?>"><?php echo number_format((float)$collegeRow['collection_percent'], 1); ?>%</span></span></div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
             </div>
 
             <div class="report-card">
@@ -3470,6 +3510,21 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
                         </tbody>
                     </table>
                 </div>
+                <div class="report-mobile-cards">
+                    <?php if (empty($coordinatorTicketLoad)): ?>
+                        <div class="empty-box">No ticket data available.</div>
+                    <?php else: ?>
+                        <?php foreach ($coordinatorTicketLoad as $coordLoad): ?>
+                            <div class="report-mobile-card">
+                                <div class="report-mobile-card-title"><?php echo htmlspecialchars((string)$coordLoad['name'], ENT_QUOTES, 'UTF-8'); ?></div>
+                                <div class="report-mobile-card-row"><span>Total</span><span><?php echo (int)$coordLoad['total']; ?></span></div>
+                                <div class="report-mobile-card-row"><span>Open</span><span><?php echo (int)$coordLoad['open']; ?></span></div>
+                                <div class="report-mobile-card-row"><span>In Progress</span><span><?php echo (int)$coordLoad['in_progress']; ?></span></div>
+                                <div class="report-mobile-card-row"><span>Resolved</span><span><span class="report-pill info"><?php echo (int)$coordLoad['resolved']; ?></span></span></div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
             </div>
 
             <div class="report-card">
@@ -3503,6 +3558,20 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
                         </tbody>
                     </table>
                 </div>
+                <div class="report-mobile-cards">
+                    <?php if (empty($monthlyAdmissions)): ?>
+                        <div class="empty-box">No monthly trend data available.</div>
+                    <?php else: ?>
+                        <?php foreach ($monthlyAdmissions as $monthRow): ?>
+                            <div class="report-mobile-card">
+                                <div class="report-mobile-card-title"><?php echo htmlspecialchars((string)$monthRow['month'], ENT_QUOTES, 'UTF-8'); ?></div>
+                                <div class="report-mobile-card-row"><span>Students</span><span><?php echo (int)$monthRow['students']; ?></span></div>
+                                <div class="report-mobile-card-row"><span>Assigned</span><span>INR <?php echo number_format((float)$monthRow['assigned'], 2); ?></span></div>
+                                <div class="report-mobile-card-row"><span>Collected</span><span>INR <?php echo number_format((float)$monthRow['collected'], 2); ?></span></div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
             </div>
 
             <div class="report-card">
@@ -3530,6 +3599,16 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
                             <?php endforeach; ?>
                         </tbody>
                     </table>
+                </div>
+                <div class="report-mobile-cards">
+                    <?php foreach ($roleCounts as $roleName => $roleCount): ?>
+                        <?php $share = $totalUsers > 0 ? round(((int)$roleCount / $totalUsers) * 100, 1) : 0.0; ?>
+                        <div class="report-mobile-card">
+                            <div class="report-mobile-card-title"><?php echo htmlspecialchars(ucfirst((string)$roleName), ENT_QUOTES, 'UTF-8'); ?></div>
+                            <div class="report-mobile-card-row"><span>Count</span><span><?php echo (int)$roleCount; ?></span></div>
+                            <div class="report-mobile-card-row"><span>Share</span><span><span class="report-pill <?php echo $share >= 50 ? 'info' : 'good'; ?>"><?php echo number_format($share, 1); ?>%</span></span></div>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div>
