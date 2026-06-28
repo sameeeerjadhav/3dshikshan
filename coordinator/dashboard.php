@@ -248,6 +248,8 @@ if ($conn !== null) {
                 sp.middle_name,
                 sp.last_name,
                 sp.email,
+                sp.academic_year,
+                sp.semester,
                 c.name AS college_name
             FROM coordinator_tickets ct
             INNER JOIN student_profiles sp ON sp.id = ct.student_profile_id
@@ -546,15 +548,16 @@ function esc(string $value): string
         .student-filter-empty.show{display:block}
         .tickets-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
         .tickets-head{padding:9px 12px;border-bottom:1px solid var(--border);font-size:.76rem;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--text-muted)}
-        .ticket-filter-bar{display:grid;grid-template-columns:minmax(260px,1.2fr) minmax(170px,.6fr) auto;gap:10px;align-items:center;margin-bottom:12px;background:linear-gradient(180deg,#fff 0%,#fbfcfd 100%);border:1px solid #d8dde6;border-radius:14px;padding:10px}
-        .ticket-field{position:relative;min-width:0}
+        .ticket-filter-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px;background:linear-gradient(180deg,#fff 0%,#fbfcfd 100%);border:1px solid #d8dde6;border-radius:14px;padding:10px}
+        .ticket-field{position:relative;min-width:0;flex:1;min-width:140px}
+        .ticket-field.search-field{flex:2;min-width:250px}
         .ticket-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:.8rem;pointer-events:none}
         .ticket-search,.ticket-status-filter{width:100%;height:40px;border:1px solid #dbe2ea;border-radius:10px;background:#fff;outline:none;font-size:.82rem;color:var(--text);font-family:'DM Sans',sans-serif;transition:border-color var(--transition),box-shadow var(--transition)}
         .ticket-search{padding:0 12px 0 36px}
         .ticket-status-filter{padding:0 34px 0 36px;appearance:none;-webkit-appearance:none;-moz-appearance:none}
         .ticket-search:focus,.ticket-status-filter:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(11,138,94,.12)}
         .ticket-select-caret{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:.68rem;color:#64748b;pointer-events:none}
-        .ticket-filter-count{justify-self:end;font-size:.76rem;font-weight:700;color:#475569;background:#f8fafc;border:1px solid #e2e8f0;padding:7px 11px;border-radius:999px;white-space:nowrap}
+        .ticket-filter-count{margin-left:auto;font-size:.76rem;font-weight:700;color:#475569;background:#f8fafc;border:1px solid #e2e8f0;padding:7px 11px;border-radius:999px;white-space:nowrap}
         .ticket-filter-reset {
             height: 40px;
             border: 1px solid #cbd5e1;
@@ -625,11 +628,11 @@ function esc(string $value): string
         @media (max-width:700px){.sidebar{transform:translateX(calc(-1 * var(--sidebar-w)))}.sidebar.open{transform:translateX(0)}.main-content{margin-left:0}.profile-name{display:none}.topbar-brand span{display:none}.notification-btn{width:34px;height:34px;border-radius:10px}.notification-dropdown{left:8px;right:8px;width:auto;max-width:none}}
         @media (max-width:920px){.student-table-wrap{display:none}.student-cards{display:grid}.student-meta{grid-template-columns:1fr}.student-filter-bar{grid-template-columns:1fr 1fr}}
         @media(max-width:768px){
-            .ticket-filter-bar{grid-template-columns:1fr}
-            .ticket-filter-count, .ticket-filter-reset{justify-self:start; width:100%; justify-content:center;}
+            .ticket-filter-bar{flex-direction:column;align-items:stretch}
+            .ticket-filter-count, .ticket-filter-reset{margin-left:0; width:100%; justify-content:center;}
             .ticket-row-top{flex-direction:column;align-items:flex-start}
         }
-        @media (max-width:640px){.college-summary{padding:16px;flex-direction:column;align-items:flex-start}.college-summary-count{width:100%;justify-content:center}.college-grid{grid-template-columns:1fr}.college-card{padding:12px}.college-view-btn{height:36px;padding:0 10px}.student-detail-grid{grid-template-columns:1fr}.student-filter-panel{padding:12px}.student-filter-top{flex-wrap:wrap;white-space:normal}.student-filter-bar{grid-template-columns:1fr;gap:8px;padding:7px}.student-filter-input,.student-filter-select{height:38px;font-size:.78rem}.student-filter-input{padding:0 10px 0 32px}.student-filter-select{padding:0 26px 0 32px}.student-input-icon,.student-select-icon{left:10px;font-size:.74rem}.student-select-caret{right:10px;font-size:.66rem}.student-filter-actions{justify-content:stretch}.student-filter-clear{width:100%;height:36px}.ticket-filter-bar{grid-template-columns:1fr}.ticket-filter-count{justify-self:start}.ticket-row{padding:8px 9px}.ticket-row-top{flex-direction:column;gap:5px;margin-bottom:5px}.ticket-status{align-self:flex-start}.schedule-form{grid-template-columns:1fr}.att-setup-card{grid-template-columns:1fr}}
+        @media (max-width:640px){.college-summary{padding:16px;flex-direction:column;align-items:flex-start}.college-summary-count{width:100%;justify-content:center}.college-grid{grid-template-columns:1fr}.college-card{padding:12px}.college-view-btn{height:36px;padding:0 10px}.student-detail-grid{grid-template-columns:1fr}.student-filter-panel{padding:12px}.student-filter-top{flex-wrap:wrap;white-space:normal}.student-filter-bar{grid-template-columns:1fr;gap:8px;padding:7px}.student-filter-input,.student-filter-select{height:38px;font-size:.78rem}.student-filter-input{padding:0 10px 0 32px}.student-filter-select{padding:0 26px 0 32px}.student-input-icon,.student-select-icon{left:10px;font-size:.74rem}.student-select-caret{right:10px;font-size:.66rem}.student-filter-actions{justify-content:stretch}.student-filter-clear{width:100%;height:36px}.ticket-filter-bar{flex-direction:column;align-items:stretch}.ticket-filter-count{margin-left:0}.ticket-row{padding:8px 9px}.ticket-row-top{flex-direction:column;gap:5px;margin-bottom:5px}.ticket-status{align-self:flex-start}.schedule-form{grid-template-columns:1fr}.att-setup-card{grid-template-columns:1fr}}
     </style>
 </head>
 <body>
@@ -1144,7 +1147,7 @@ function esc(string $value): string
         <p class="page-sub">Student issues raised for your assigned colleges.</p>
 
         <div class="ticket-filter-bar">
-            <div class="ticket-field">
+            <div class="ticket-field search-field">
                 <i class="fa-solid fa-magnifying-glass ticket-icon"></i>
                 <input type="search" id="ticketSearchInput" class="ticket-search" placeholder="Search by subject, student, college, email">
             </div>
@@ -1158,8 +1161,29 @@ function esc(string $value): string
                 </select>
                 <i class="fa-solid fa-chevron-down ticket-select-caret"></i>
             </div>
+            <div class="ticket-field">
+                <i class="fa-solid fa-calendar-alt ticket-icon"></i>
+                <select id="ticketYearFilter" class="ticket-status-filter">
+                    <option value="">All Years</option>
+                    <option value="2025">2025</option>
+                    <option value="2026">2026</option>
+                    <option value="2027">2027</option>
+                </select>
+                <i class="fa-solid fa-chevron-down ticket-select-caret"></i>
+            </div>
+            <div class="ticket-field">
+                <i class="fa-solid fa-book ticket-icon"></i>
+                <select id="ticketSemesterFilter" class="ticket-status-filter">
+                    <option value="">All Semesters</option>
+                    <option value="Odd">Odd</option>
+                    <option value="Even">Even</option>
+                </select>
+                <i class="fa-solid fa-chevron-down ticket-select-caret"></i>
+            </div>
             <div class="ticket-filter-count" id="ticketVisibleCount">Showing <?php echo count($coordinatorTickets); ?> tickets</div>
-            <button type="button" class="ticket-filter-reset" id="ticketResetBtn"><i class="fa-solid fa-rotate-left"></i> Reset</button>
+            <button type="button" class="ticket-filter-reset" id="ticketResetBtn">
+                <i class="fa-solid fa-rotate-left"></i> Reset
+            </button>
         </div>
 
         <?php if (!empty($coordinatorTickets)): ?>
@@ -1183,8 +1207,10 @@ function esc(string $value): string
                             (string)($ticket['college_name'] ?? '')
                         ));
                         $isUnreadTicket = (int)($ticket['is_seen_by_coordinator'] ?? 0) === 0;
+                        $ticketYear = (string)($ticket['academic_year'] ?? 'Unknown');
+                        $ticketSemester = (string)($ticket['semester'] ?? 'Unknown');
                     ?>
-                    <div class="ticket-row <?php echo $isUnreadTicket ? 'is-unread' : ''; ?>" data-ticket-item="1" data-ticket-id="<?php echo (int)($ticket['id'] ?? 0); ?>" data-status="<?php echo esc($ticketStatus); ?>" data-search="<?php echo esc($ticketSearchBlob); ?>">
+                    <div class="ticket-row <?php echo $isUnreadTicket ? 'is-unread' : ''; ?>" data-ticket-item="1" data-ticket-id="<?php echo (int)($ticket['id'] ?? 0); ?>" data-status="<?php echo esc($ticketStatus); ?>" data-search="<?php echo esc($ticketSearchBlob); ?>" data-year="<?php echo esc(strtolower($ticketYear)); ?>" data-semester="<?php echo esc(strtolower($ticketSemester)); ?>">
                         <div class="ticket-row-top">
                             <div class="ticket-subject"><?php echo esc((string)$ticket['subject']); ?></div>
                             <span class="ticket-status <?php echo esc($ticketStatusClass); ?>"><?php echo esc($ticketStatusLabel); ?></span>
@@ -1322,6 +1348,8 @@ const noScheduledSessionsBox = document.getElementById('noScheduledSessionsBox')
 const scheduledSessionsTableWrap = document.getElementById('scheduledSessionsTableWrap');
 const ticketSearchInput = document.getElementById('ticketSearchInput');
 const ticketStatusFilter = document.getElementById('ticketStatusFilter');
+const ticketYearFilter = document.getElementById('ticketYearFilter');
+const ticketSemesterFilter = document.getElementById('ticketSemesterFilter');
 const ticketVisibleCount = document.getElementById('ticketVisibleCount');
 const ticketFilterEmpty = document.getElementById('ticketFilterEmpty');
 const ticketRows = document.querySelectorAll('[data-ticket-item="1"]');
@@ -1491,14 +1519,21 @@ function applyTicketFilters() {
 
     const query = (ticketSearchInput && ticketSearchInput.value ? ticketSearchInput.value : '').trim().toLowerCase();
     const selectedStatus = (ticketStatusFilter && ticketStatusFilter.value ? ticketStatusFilter.value : '').trim().toLowerCase();
+    const selectedYear = (ticketYearFilter && ticketYearFilter.value ? ticketYearFilter.value : '').trim().toLowerCase();
+    const selectedSemester = (ticketSemesterFilter && ticketSemesterFilter.value ? ticketSemesterFilter.value : '').trim().toLowerCase();
 
     let visibleCount = 0;
     ticketRows.forEach((row) => {
         const rowStatus = String(row.getAttribute('data-status') || '').toLowerCase();
         const rowSearch = String(row.getAttribute('data-search') || '').toLowerCase();
+        const rowYear = String(row.getAttribute('data-year') || '').toLowerCase();
+        const rowSemester = String(row.getAttribute('data-semester') || '').toLowerCase();
+        
         const matchesStatus = selectedStatus === '' || rowStatus === selectedStatus;
+        const matchesYear = selectedYear === '' || rowYear === selectedYear;
+        const matchesSemester = selectedSemester === '' || rowSemester === selectedSemester;
         const matchesQuery = query === '' || rowSearch.includes(query);
-        const visible = matchesStatus && matchesQuery;
+        const visible = matchesStatus && matchesYear && matchesSemester && matchesQuery;
         row.style.display = visible ? '' : 'none';
         if (visible) {
             visibleCount += 1;
@@ -1699,12 +1734,20 @@ if (ticketSearchInput) {
 if (ticketStatusFilter) {
     ticketStatusFilter.addEventListener('change', applyTicketFilters);
 }
+if (ticketYearFilter) {
+    ticketYearFilter.addEventListener('change', applyTicketFilters);
+}
+if (ticketSemesterFilter) {
+    ticketSemesterFilter.addEventListener('change', applyTicketFilters);
+}
 
 const ticketResetBtn = document.getElementById('ticketResetBtn');
 if (ticketResetBtn) {
     ticketResetBtn.addEventListener('click', () => {
         if (ticketSearchInput) ticketSearchInput.value = '';
         if (ticketStatusFilter) ticketStatusFilter.value = '';
+        if (ticketYearFilter) ticketYearFilter.value = '';
+        if (ticketSemesterFilter) ticketSemesterFilter.value = '';
         applyTicketFilters();
     });
 }
