@@ -943,18 +943,19 @@ function esc(string $value): string
         <div class="page-heading">Assigned Colleges Students</div>
         <p class="page-sub">View student list and open full profile with fees details.</p>
 
-        <?php if (!empty($assignedStudents)): ?>
-            <?php
-                $collegeFilterOptions = [];
+        <?php
+            $collegeFilterOptions = [];
+            if (!empty($assignedStudents)) {
                 foreach ($assignedStudents as $studentOption) {
                     $collegeName = trim((string)($studentOption['college_name'] ?? ''));
                     if ($collegeName !== '') {
                         $collegeFilterOptions[$collegeName] = true;
                     }
                 }
-                $collegeFilterNames = array_keys($collegeFilterOptions);
-                sort($collegeFilterNames, SORT_NATURAL | SORT_FLAG_CASE);
-            ?>
+            }
+            $collegeFilterNames = array_keys($collegeFilterOptions);
+            sort($collegeFilterNames, SORT_NATURAL | SORT_FLAG_CASE);
+        ?>
 
             <div class="student-filter-panel">
                 <div class="student-filter-top">
@@ -1026,6 +1027,8 @@ function esc(string $value): string
                     </button>
                 </div>
             </div>
+
+            <?php if (!empty($assignedStudents)): ?>
 
             <div class="table-card student-table-wrap">
                 <div class="table-wrap">
