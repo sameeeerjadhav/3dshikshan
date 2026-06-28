@@ -1,5 +1,5 @@
-const CACHE_NAME = '3d-shikshan-v1';
-const PRECACHE = ['./index.php?login=1', './assets/css/style.css', './assets/icons/app-icon.svg'];
+const CACHE_NAME = '3d-shikshan-v1.1';
+const PRECACHE = ['./assets/css/style.css', './assets/icons/app-icon.svg'];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -14,6 +14,12 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') {
+    return;
+  }
+
+  // Do not intercept PHP pages to prevent redirect ERR_FAILED bugs
+  const url = new URL(event.request.url);
+  if (url.pathname.endsWith('.php')) {
     return;
   }
 
