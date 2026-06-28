@@ -1631,8 +1631,6 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
                 grid-template-columns: 1fr 1fr;
                 gap: 12px;
             }
-            .report-table-wrap { display: none; }
-            .report-mobile-cards { display: grid; }
         }
 
         /* ── TICKETS ────────────────────────────────── */
@@ -2121,6 +2119,8 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
             }
         }
         @media (max-width: 700px) {
+            .report-table-wrap { display: none; }
+            .report-mobile-cards { display: grid; }
             .ticket-filter-bar {
                 grid-template-columns: 1fr;
                 gap: 8px;
