@@ -1,4 +1,4 @@
-const CACHE_NAME = '3d-shikshan-v1.1';
+const CACHE_NAME = '3d-shikshan-v1.2';
 const PRECACHE = ['./assets/css/style.css', './assets/icons/app-icon.svg'];
 
 self.addEventListener('install', (event) => {
@@ -9,7 +9,17 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('activate', (event) => {
-  event.waitUntil(self.clients.claim());
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cacheName) => {
+          if (cacheName !== CACHE_NAME) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    }).then(() => self.clients.claim())
+  );
 });
 
 self.addEventListener('fetch', (event) => {
