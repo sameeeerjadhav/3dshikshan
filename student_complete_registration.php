@@ -113,8 +113,10 @@ if ($paymentStatus !== 'captured') {
 
     $paidRupees = round($paymentAmountPaise / 100, 2);
 } else {
-    // If test bypass, assume paid ₹1000 or whatever was sent in payload (but we don't have it here, so default to 1000)
+    // If test bypass, simulate successful payment data
     $paidRupees = isset($data['amount_to_pay']) ? (float)$data['amount_to_pay'] : 1000.0;
+    $paymentStatus = 'captured';
+    $paymentCurrency = RAZORPAY_CURRENCY;
 }
 
 $conn = getDbConnection();
