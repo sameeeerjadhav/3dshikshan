@@ -5,58 +5,39 @@ legal_render_head("Guide & Inventory");
 ?>
 <h2>1. FDM (Fused Deposition Modeling)</h2>
 <h2>🚀 Meet the Most Popular 3D Printing Technology</h2>
-<p>Imagine you have a tube of toothpaste. When you squeeze it, toothpaste comes out from the nozzle and creates a line.</p>
-<p>Now imagine replacing toothpaste with melted plastic. That's exactly how an FDM printer works!</p>
-<h2>FDM stands for: Fused Deposition Modeling</h2>
-<p>It is the most widely used 3D printing technology in: Schools, Colleges, Industries, Research Labs, Homes</p>
+<p>Imagine you have a tube of toothpaste. When you squeeze it, toothpaste comes out from the nozzle and creates a line. Now imagine replacing toothpaste with melted plastic. That's exactly how an FDM printer works! FDM stands for: Fused Deposition Modeling It is the most widely used 3D printing technology in: Schools, Colleges, Industries, Research Labs, Homes</p>
 <h2>🤔 Have You Seen a Cake Being Decorated?</h2>
-<p>A baker uses a piping bag. Cream comes out from the nozzle. Layer by layer decorations are created. An FDM printer</p>
-<p>works in a very similar way. Instead of cream, it uses plastic filament. Instead of a piping bag, it uses an</p>
-<p>extruder and nozzle. Instead of a cake, it creates a 3D object.</p>
+<p>A baker uses a piping bag. Cream comes out from the nozzle. Layer by layer decorations are created. An FDM printer works in a very similar way. Instead of cream, it uses plastic filament. Instead of a piping bag, it uses an extruder and nozzle. Instead of a cake, it creates a 3D object.</p>
 <h2>🎬 What Happens When You Click Print?</h2>
 <p>Let's follow the journey of a filament.</p>
-<ul>
-<li><strong>Step 1: Meet Mr. Filament 🧵</strong></li>
-</ul>
-<p>Everything starts with a filament spool. Think of filament as the raw material of FDM printing. Common materials</p>
-<p>include PLA, PETG, ABS, and TPU. The filament waits patiently on the spool.</p>
+<h2>Step 1: Meet Mr. Filament 🧵</h2>
+<p>Everything starts with a filament spool. Think of filament as the raw material of FDM printing. Common materials include PLA, PETG, ABS, and TPU. The filament waits patiently on the spool.</p>
 <h2>Fun Fact</h2>
 <p>A standard filament spool contains around 330 meters of filament. That's longer than 3 football fields!</p>
-<ul>
-<li><strong>Step 2: The Extruder Pulls the Filament</strong></li>
-</ul>
-<h2>Think of the extruder as:</h2>
+<h2>Step 2: The Extruder Pulls the Filament</h2>
+<p>Think of the extruder as:</p>
 <h2>The Printer's Feeding System</h2>
-<p>Its job is simple: "Pull filament from the spool and send it to the hotend." Without the extruder, there is no</p>
-<p>filament, no print, and no fun.</p>
+<p>Its job is simple: "Pull filament from the spool and send it to the hotend." Without the extruder, there is no filament, no print, and no fun.</p>
 <h2>Interactive Question</h2>
-<h2>❓ What happens if the extruder stops feeding filament?</h2>
 <ul>
+<li>What happens if the extruder stops feeding filament?</li>
 <li>Printing stops immediately.</li>
-<li><strong>Step 3: Welcome to the Hotend 🔥</strong></li>
 </ul>
-<p>Now the filament reaches the hottest place in the printer. The hotend is like a Tiny Plastic Melting Factory. Inside</p>
-<p>the hotend, Solid Plastic becomes Soft Plastic and then Molten Plastic.</p>
+<h2>Step 3: Welcome to the Hotend 🔥</h2>
+<p>Now the filament reaches the hottest place in the printer. The hotend is like a Tiny Plastic Melting Factory. Inside the hotend, Solid Plastic becomes Soft Plastic and then Molten Plastic.</p>
 <h2>Typical Temperatures</h2>
 <h2>PLA → 200°C</h2>
 <h2>PETG → 240°C</h2>
 <h2>ABS → 250°C</h2>
-<h2>That's hotter than boiling water!</h2>
+<p>That's hotter than boiling water!</p>
 <h2>Did You Know?</h2>
 <p>The nozzle can become hot enough to cause burns within seconds. Never touch it during printing.</p>
-<ul>
-<li><strong>Step 4: The Nozzle Starts Drawing</strong></li>
-</ul>
-<p>The nozzle acts like a pen, but instead of ink, it deposits molten plastic. The nozzle follows instructions from the</p>
-<p>printer and starts drawing the first layer.</p>
+<h2>Step 4: The Nozzle Starts Drawing</h2>
+<p>The nozzle acts like a pen, but instead of ink, it deposits molten plastic. The nozzle follows instructions from the printer and starts drawing the first layer.</p>
 <h2>Imagine This</h2>
-<p>Drawing a square, then another square on top, then another, and then another, hundreds of times. Eventually, a 3D</p>
-<p>object appears.</p>
-<ul>
-<li><strong>Step 5: The Build Plate Becomes a Construction Site</strong></li>
-</ul>
-<p>The build plate is where the magic begins. Think of it as the Foundation of a Building. Every object starts from the</p>
-<p>first layer. If the first layer fails, the entire print fails.</p>
+<p>Drawing a square, then another square on top, then another, and then another, hundreds of times. Eventually, a 3D object appears.</p>
+<h2>Step 5: The Build Plate Becomes a Construction Site</h2>
+<p>The build plate is where the magic begins. Think of it as the Foundation of a Building. Every object starts from the first layer. If the first layer fails, the entire print fails.</p>
 <h2>Real-Life Example</h2>
 <p>If the foundation of a house is weak, the house may collapse. The same thing happens in 3D printing.</p>
 <h2>🏗️ How Does the Printer Move?</h2>
@@ -74,19 +55,14 @@ legal_render_head("Guide & Inventory");
 <h2>⬆️ Up</h2>
 <h2>⬇️ Down</h2>
 <h2>Easy Memory Trick</h2>
-<h2>X = Left ↔ Right</h2>
-<h2>Y = Front ↔ Back</h2>
-<h2>Z = Up ↕ Down</h2>
+<p>X = Left ↔ Right Y = Front ↔ Back Z = Up ↕ Down</p>
 <h2>Quiz Time</h2>
-<h2>❓ Which axis moves upward after every layer?</h2>
 <ul>
+<li>Which axis moves upward after every layer?</li>
 <li>Z-Axis</li>
 </ul>
 <h2>🤖 Meet the Brain of the Printer</h2>
-<p>Every printer has a brain. This brain is called the Controller Board. It receives instructions from the computer and</p>
-<p>then tells the motors where to move, the hotend how much to heat, and the extruder how much filament to push.</p>
-<h2>Think of It Like This</h2>
-<h2>Human Brain → Muscles → Movement</h2>
+<p>Every printer has a brain. This brain is called the Controller Board. It receives instructions from the computer and then tells the motors where to move, the hotend how much to heat, and the extruder how much filament to push. Think of It Like This Human Brain → Muscles → Movement</p>
 <h2>Similarly,</h2>
 <p>Controller Board → Motors → Printing.</p>
 <h2>🎯 Meet the Team Behind Every Print</h2>
@@ -109,8 +85,7 @@ legal_render_head("Guide & Inventory");
 <h2>😨 What Can Go Wrong?</h2>
 <p>Even printers have bad days. Let's see the most common problems.</p>
 <h2>Problem 1: Nozzle Clog</h2>
-<p>Imagine Drinking Juice Through a Straw. Now imagine the straw is blocked. Nothing comes out. The same thing happens</p>
-<p>in a nozzle clog.</p>
+<p>Imagine Drinking Juice Through a Straw. Now imagine the straw is blocked. Nothing comes out. The same thing happens in a nozzle clog.</p>
 <h2>Symptoms</h2>
 <ul>
 <li>No filament coming out</li>
@@ -124,8 +99,7 @@ legal_render_head("Guide & Inventory");
 <li>Replace nozzle if necessary</li>
 </ul>
 <h2>Problem 2: Layer Shifting</h2>
-<p>Imagine building a tower. Suddenly someone pushes one layer sideways. The tower becomes misaligned. This is layer</p>
-<p>shifting.</p>
+<p>Imagine building a tower. Suddenly someone pushes one layer sideways. The tower becomes misaligned. This is layer shifting.</p>
 <h2>Causes</h2>
 <h2>Loose belts</h2>
 <h2>Loose pulleys</h2>
@@ -181,7 +155,7 @@ legal_render_head("Guide & Inventory");
 <li>Keep workspace clean</li>
 </ul>
 <h2>🎓 Quick Challenge</h2>
-<h2>You press "Print". Can you arrange the journey correctly?</h2>
+<p>You press "Print". Can you arrange the journey correctly?</p>
 <h2>A. Nozzle</h2>
 <h2>B. Filament</h2>
 <h2>C. Extruder</h2>
@@ -190,10 +164,7 @@ legal_render_head("Guide & Inventory");
 <p>Filament → Extruder → Hotend → Nozzle → Build Plate → Finished Part.</p>
 <h2>2. SLA (Stereolithography)</h2>
 <h2>🚀 Meet the Technology That Prints with Liquid</h2>
-<p>Imagine you have a bucket filled with liquid. Now imagine a magical flashlight that can instantly turn that liquid</p>
-<p>into solid plastic wherever the light touches. Sounds like science fiction? That's exactly how SLA 3D Printing</p>
-<p>works. Unlike FDM printers that melt filament, SLA printers use Liquid Photopolymer Resin and UV Light to create</p>
-<p>objects layer by layer.</p>
+<p>Imagine you have a bucket filled with liquid. Now imagine a magical flashlight that can instantly turn that liquid into solid plastic wherever the light touches. Sounds like science fiction? That's exactly how SLA 3D Printing works. Unlike FDM printers that melt filament, SLA printers use Liquid Photopolymer Resin and UV Light to create objects layer by layer.</p>
 <h2>🤔 What Makes SLA Special?</h2>
 <p>Have you ever looked at a dental model or a jewelry prototype and wondered how it has such smooth surfaces and tiny</p>
 <h2>details?</h2>
@@ -207,20 +178,12 @@ legal_render_head("Guide & Inventory");
 </ul>
 <h2>🎬 What Happens When You Click Print?</h2>
 <p>Let's follow a drop of resin through its journey.</p>
-<ul>
-<li><strong>Step 1: Meet Mr. Resin 💧</strong></li>
-</ul>
-<p>Everything starts with a liquid called Photopolymer Resin. This special liquid reacts when exposed to UV light. When</p>
-<p>UV light touches the resin, Liquid becomes Solid.</p>
-<p>Magic? No. Science? Yes.</p>
+<h2>Step 1: Meet Mr. Resin 💧</h2>
+<p>Everything starts with a liquid called Photopolymer Resin. This special liquid reacts when exposed to UV light. When UV light touches the resin, Liquid becomes Solid. Magic? No. Science? Yes.</p>
 <h2>Fun Fact</h2>
-<p>A bottle of resin may look like ordinary liquid, but under UV light, it transforms into solid plastic within</p>
-<p>seconds.</p>
-<ul>
-<li><strong>Step 2: The Resin Tank Holds the Material</strong></li>
-</ul>
-<p>The resin is stored inside a container called the Resin Vat. Think of it as a swimming pool filled with resin. The</p>
-<p>printer continuously uses resin from this tank during printing.</p>
+<p>A bottle of resin may look like ordinary liquid, but under UV light, it transforms into solid plastic within seconds.</p>
+<h2>Step 2: The Resin Tank Holds the Material</h2>
+<p>The resin is stored inside a container called the Resin Vat. Think of it as a swimming pool filled with resin. The printer continuously uses resin from this tank during printing.</p>
 <h2>Responsibilities</h2>
 <ul>
 <li>Stores resin</li>
@@ -228,13 +191,9 @@ legal_render_head("Guide & Inventory");
 <li>Maintains resin level</li>
 </ul>
 <h2>Real-Life Analogy</h2>
-<h2>FDM Printer → Uses Filament Spool</h2>
-<p>SLA Printer → Uses Resin Tank.</p>
-<ul>
-<li><strong>Step 3: The Magic Window (FEP Film)</strong></li>
-</ul>
-<p>At the bottom of the resin tank is a transparent sheet called the FEP Film. Think of it as a glass window. The UV</p>
-<p>light must pass through this film before reaching the resin.</p>
+<p>FDM Printer → Uses Filament Spool SLA Printer → Uses Resin Tank.</p>
+<h2>Step 3: The Magic Window (FEP Film)</h2>
+<p>At the bottom of the resin tank is a transparent sheet called the FEP Film. Think of it as a glass window. The UV light must pass through this film before reaching the resin.</p>
 <h2>Why is FEP Important?</h2>
 <h2>Without the FEP film:</h2>
 <ul>
@@ -243,32 +202,26 @@ legal_render_head("Guide & Inventory");
 <li>Prints fail</li>
 </ul>
 <h2>Easy Memory Trick</h2>
-<h2>FEP Film = Printer's Window</h2>
-<ul>
-<li><strong>Step 4: The UV Light Engine Wakes Up 🔵</strong></li>
-</ul>
-<p>Now the real magic begins. The printer shines UV light through the FEP film. Wherever the light touches, Liquid</p>
-<p>Resin becomes a Solid Layer.</p>
+<p>FEP Film = Printer's Window</p>
+<h2>Step 4: The UV Light Engine Wakes Up 🔵</h2>
+<p>Now the real magic begins. The printer shines UV light through the FEP film. Wherever the light touches, Liquid Resin becomes a Solid Layer.</p>
 <h2>Think About It</h2>
 <p>Imagine drawing shapes on water. Every time the UV light shines, a solid layer appears.</p>
 <h2>Interactive Question</h2>
-<h2>❓ What happens if UV light does not reach the resin?</h2>
 <ul>
+<li>What happens if UV light does not reach the resin?</li>
 <li>The resin remains liquid.</li>
-<li><strong>Step 5: The Build Platform Pulls the Print Up</strong></li>
 </ul>
-<p>This is the coolest part. Unlike FDM printing where the object grows upward from the bed, in SLA printing, the</p>
-<p>object hangs upside down.</p>
+<h2>Step 5: The Build Platform Pulls the Print Up</h2>
+<p>This is the coolest part. Unlike FDM printing where the object grows upward from the bed, in SLA printing, the object hangs upside down.</p>
 <h2>What Happens?</h2>
-<p>A layer cures → Build platform moves upward → Fresh resin flows underneath → Next layer cures → Process repeats.</p>
-<p>Eventually hundreds or thousands of layers combine to form the complete model.</p>
+<p>A layer cures → Build platform moves upward → Fresh resin flows underneath → Next layer cures → Process repeats. Eventually hundreds or thousands of layers combine to form the complete model.</p>
 <h2>🏗️ How an SLA Printer Builds Objects</h2>
 <p>Resin Tank → UV Light Source → FEP Film → Build Platform → Printed Part.</p>
 <h2>🧩 Meet the SLA Printing Team</h2>
 <p>Every SLA printer has a team of components working together.</p>
 <h2>💧 Resin Vat</h2>
-<h2>What is a Resin Vat?</h2>
-<p>The resin vat stores the liquid resin. Think of it as: Fuel Tank of the Printer. Without resin: No print.</p>
+<p>What is a Resin Vat? The resin vat stores the liquid resin. Think of it as: Fuel Tank of the Printer. Without resin: No print.</p>
 <h2>Responsibilities</h2>
 <ul>
 <li>Holds liquid resin</li>
@@ -297,8 +250,7 @@ legal_render_head("Guide & Inventory");
 </ul>
 <p>Think of It As, A projector drawing every layer using light.</p>
 <h2>🟫 Build Platform</h2>
-<h2>What is a Build Platform?</h2>
-<p>The platform where the object grows.</p>
+<p>What is a Build Platform? The platform where the object grows.</p>
 <h2>Responsibilities</h2>
 <ul>
 <li>Supports printed part</li>
@@ -317,8 +269,8 @@ legal_render_head("Guide & Inventory");
 <li>Smooth movement</li>
 </ul>
 <h2>Quiz Time</h2>
-<h2>❓ Which axis moves in SLA printing after every layer?</h2>
 <ul>
+<li>Which axis moves in SLA printing after every layer?</li>
 <li>Z-Axis</li>
 </ul>
 <h2>🌬️ Air Filtration System</h2>
@@ -335,22 +287,14 @@ legal_render_head("Guide & Inventory");
 <h2>🧹 Taking Care of Your SLA Printer</h2>
 <p>Just like a car requires servicing, SLA printers require maintenance.</p>
 <h2>Daily Maintenance</h2>
-<p>Filter Resin → Removes cured particles and debris.</p>
-<p>Clean Build Platform → Improves print adhesion.</p>
-<p>Inspect Resin Tank → Check for contamination.</p>
-<p>Clean Exterior Surfaces → Maintain visibility and cleanliness.</p>
+<p>Filter Resin → Removes cured particles and debris. Clean Build Platform → Improves print adhesion. Inspect Resin Tank → Check for contamination. Clean Exterior Surfaces → Maintain visibility and cleanliness.</p>
 <h2>Weekly Maintenance</h2>
-<p>Inspect FEP Film → Check for scratches, cloudiness, damage.</p>
-<p>Clean UV Screen → Remove dust and resin residues.</p>
-<p>Verify Build Plate Tightness → Prevent movement during printing. .</p>
+<p>Inspect FEP Film → Check for scratches, cloudiness, damage. Clean UV Screen → Remove dust and resin residues. Verify Build Plate Tightness → Prevent movement during printing. .</p>
 <h2>Monthly Maintenance</h2>
-<p>Check UV Screen Health → Ensure proper curing performance.</p>
-<p>Inspect Z-Axis → Verify smooth movement.</p>
-<p>Check Electrical Connections → Ensure safe operation.</p>
+<p>Check UV Screen Health → Ensure proper curing performance. Inspect Z-Axis → Verify smooth movement. Check Electrical Connections → Ensure safe operation.</p>
 <h2>😨 Common Problems and Solutions</h2>
 <h2>Problem 1: Layer Separation</h2>
-<h2>What Does It Look Like?</h2>
-<p>Layers appear separated or broken. Print may crack during printing.</p>
+<p>What Does It Look Like? Layers appear separated or broken. Print may crack during printing.</p>
 <h2>Causes</h2>
 <h2>Damaged FEP Film</h2>
 <h2>Incorrect Exposure Time</h2>
@@ -391,8 +335,7 @@ legal_render_head("Guide & Inventory");
 </ul>
 <h2>Problem 4: Cloudy FEP Film</h2>
 <h2>Symptoms</h2>
-<p>Reduced print quality.</p>
-<p>Poor curing.</p>
+<p>Reduced print quality. Poor curing.</p>
 <h2>Causes</h2>
 <h2>Aging</h2>
 <h2>Scratches</h2>
@@ -402,29 +345,20 @@ legal_render_head("Guide & Inventory");
 <li>Replace FEP Film</li>
 </ul>
 <h2>🦺 Safety Rules for SLA Printing</h2>
-<p>Unlike FDM printing, SLA printing involves chemicals. Safety is extremely important.</p>
-<p>Wear Gloves 🧤 → Always wear nitrile gloves when handling resin. Why? Uncured resin may irritate skin.</p>
-<p>Avoid Direct Skin Contact → Never touch liquid resin directly.</p>
-<p>Wear Safety Glasses 🥽 → Protect your eyes during resin handling.</p>
-<p>Protect Resin from Sunlight ☀️ → UV light can cure resin unexpectedly. Store resin bottles away from sunlight.</p>
-<p>Ensure Proper Ventilation 🌬️ → Always operate SLA printers in a well-ventilated room.</p>
-<p>Wash Hands After Handling Resin → Even when gloves are used.</p>
+<p>Unlike FDM printing, SLA printing involves chemicals. Safety is extremely important. Wear Gloves 🧤 → Always wear nitrile gloves when handling resin. Why? Uncured resin may irritate skin. Avoid Direct Skin Contact → Never touch liquid resin directly. Wear Safety Glasses 🥽 → Protect your eyes during resin handling. Protect Resin from Sunlight ☀️ → UV light can cure resin unexpectedly. Store resin bottles away from sunlight. Ensure Proper Ventilation 🌬️ → Always operate SLA printers in a well-ventilated room. Wash Hands After Handling Resin → Even when gloves are used.</p>
 <h2>🎓 Quick Challenge</h2>
-<h2>Can you arrange the SLA printing process correctly?</h2>
+<p>Can you arrange the SLA printing process correctly?</p>
 <h2>A. Build Platform</h2>
 <h2>B. Resin Vat</h2>
 <h2>C. UV Light</h2>
 <h2>D. Printed Part</h2>
 <h2>Correct Answer</h2>
-<p>💧 Resin Vat → 🔵 UV Light → 🟫 Build Platform → 🧩 Printed Part</p>
+<h2>💧 Resin Vat → 🔵 UV Light → 🟫 Build Platform → 🧩 Printed Part</h2>
 <h2>3. SLS (Selective Laser Sintering)</h2>
 <h2>🚀 Imagine Printing Without Filament or Resin</h2>
-<p>By now, you've seen: 🧵 FDM uses Filament. 💧 SLA uses Liquid Resin. But what if we could print using powder? That's</p>
-<p>exactly what SLS does. SLS stands for: Selective Laser Sintering. Instead of melting filament or curing resin, SLS</p>
-<p>uses a powerful laser to fuse tiny powder particles together layer by layer.</p>
+<p>By now, you've seen: 🧵 FDM uses Filament. 💧 SLA uses Liquid Resin. But what if we could print using powder? That's exactly what SLS does. SLS stands for: Selective Laser Sintering. Instead of melting filament or curing resin, SLS uses a powerful laser to fuse tiny powder particles together layer by layer.</p>
 <h2>🤔 What Makes SLS Special?</h2>
-<p>Imagine building a sandcastle. Normally, you need support structures to hold things together. In SLS: the</p>
-<p>surrounding powder automatically supports the printed part.</p>
+<p>Imagine building a sandcastle. Normally, you need support structures to hold things together. In SLS: the surrounding powder automatically supports the printed part.</p>
 <h2>This means:</h2>
 <ul>
 <li>No Support Structures</li>
@@ -433,22 +367,17 @@ legal_render_head("Guide & Inventory");
 <li>Industrial Applications</li>
 </ul>
 <h2>Fun Fact</h2>
-<p>An SLS printer can print dozens of different parts in a single job because all parts are supported by the</p>
-<p>surrounding powder.</p>
+<p>An SLS printer can print dozens of different parts in a single job because all parts are supported by the surrounding powder.</p>
 <h2>🎬 What Happens When You Click Print?</h2>
 <p>Let's follow a tiny powder particle through its journey.</p>
-<ul>
-<li><strong>Step 1: Meet Mr. Powder ⚪</strong></li>
-</ul>
+<h2>Step 1: Meet Mr. Powder ⚪</h2>
 <p>Everything begins with a fine powder. Common materials include:</p>
 <h2>Nylon (PA12)</h2>
 <h2>PA11</h2>
 <h2>Glass Filled Nylon</h2>
 <h2>Engineering Polymers</h2>
 <p>The powder feels similar to Fine flour or talcum powder.</p>
-<ul>
-<li><strong>Step 2: The Powder Feed Chamber Supplies Material</strong></li>
-</ul>
+<h2>Step 2: The Powder Feed Chamber Supplies Material</h2>
 <p>Think of the powder feed chamber as: The Printer's Storage Tank. Its job is to continuously provide fresh powder.</p>
 <h2>Responsibilities</h2>
 <ul>
@@ -457,44 +386,29 @@ legal_render_head("Guide & Inventory");
 <li>Maintains powder levels</li>
 </ul>
 <h2>Real-Life Analogy</h2>
-<h2>FDM Printer → Filament Spool</h2>
-<h2>SLS Printer → Powder Feed Chamber</h2>
-<ul>
-<li><strong>Step 3: The Recoater Spreads a Powder Layer</strong></li>
-</ul>
-<p>Now a component called the: Recoater Blade moves across the build area. Its job: Spread an extremely thin layer of</p>
-<p>powder.</p>
-<p>Think of It Like This. Imagine using a ruler to spread sand evenly across a surface. That's exactly what the</p>
-<p>recoater does.</p>
-<p>Typical Layer Thickness: 50–150 Microns. That's thinner than a human hair.</p>
-<ul>
-<li><strong>Step 4: The Laser Starts Drawing 🔥</strong></li>
-</ul>
-<p>Now the exciting part begins. A high-power laser scans the powder bed.</p>
-<p>Wherever the laser touches: Powder Particles → Fuse Together → Solid Layer Forms.</p>
+<p>FDM Printer → Filament Spool SLS Printer → Powder Feed Chamber</p>
+<h2>Step 3: The Recoater Spreads a Powder Layer</h2>
+<p>Now a component called the: Recoater Blade moves across the build area. Its job: Spread an extremely thin layer of powder. Think of It Like This. Imagine using a ruler to spread sand evenly across a surface. That's exactly what the recoater does. Typical Layer Thickness: 50–150 Microns. That's thinner than a human hair.</p>
+<h2>Step 4: The Laser Starts Drawing 🔥</h2>
+<p>Now the exciting part begins. A high-power laser scans the powder bed. Wherever the laser touches: Powder Particles → Fuse Together → Solid Layer Forms.</p>
 <h2>Important Note</h2>
-<p>The laser does NOT melt the entire bed. It only fuses the areas that belong to the part. Everything else remains</p>
-<p>powder.</p>
+<p>The laser does NOT melt the entire bed. It only fuses the areas that belong to the part. Everything else remains powder.</p>
 <h2>Interactive Question</h2>
-<h2>❓ What happens to the powder that is not touched by the laser?</h2>
 <ul>
+<li>What happens to the powder that is not touched by the laser?</li>
 <li>It remains loose and acts as natural support material.</li>
-<li><strong>Step 5: Build Platform Moves Down</strong></li>
 </ul>
-<p>After one layer is completed: Build Platform moves down. A new layer of powder is spread. The laser scans again.</p>
-<p>Another layer forms.</p>
+<h2>Step 5: Build Platform Moves Down</h2>
+<p>After one layer is completed: Build Platform moves down. A new layer of powder is spread. The laser scans again. Another layer forms.</p>
 <h2>This Process Repeats</h2>
 <p>Spread Powder → Laser Scan → Platform Moves → Repeat → Until the complete object is built.</p>
 <h2>🎯 The Amazing Part</h2>
-<p>At the end of printing: The entire build chamber looks like a box filled with powder. Inside that powder: Hidden</p>
-<p>parts are waiting. Students often describe this as: "Archaeology for Engineers" because you dig the parts out of the</p>
-<p>powder.</p>
+<p>At the end of printing: The entire build chamber looks like a box filled with powder. Inside that powder: Hidden parts are waiting. Students often describe this as: "Archaeology for Engineers" because you dig the parts out of the powder.</p>
 <h2>🏗️ SLS Construction Flow</h2>
 <p>Powder Feed Chamber → Recoater Blade → Powder Bed → Laser System → Finished Part</p>
 <h2>🧩 Meet the SLS Printing Team</h2>
 <h2>🔥 Laser System</h2>
-<h2>What is the Laser System?</h2>
-<p>The laser is the heart of the SLS printer. Without the laser: No powder fusion. No part. No printing.</p>
+<p>What is the Laser System? The laser is the heart of the SLS printer. Without the laser: No powder fusion. No part. No printing.</p>
 <h2>Responsibilities</h2>
 <ul>
 <li>Fuses powder particles</li>
@@ -527,7 +441,7 @@ legal_render_head("Guide & Inventory");
 <h2>What Does It Do?</h2>
 <p>Spreads powder evenly across the build area.</p>
 <h2>Why Is It Important?</h2>
-<h2>Uneven powder layers lead to:</h2>
+<p>Uneven powder layers lead to:</p>
 <ul>
 <li>Poor surface quality</li>
 <li>Dimensional errors</li>
@@ -536,8 +450,7 @@ legal_render_head("Guide & Inventory");
 <h2>Think of It As</h2>
 <p>A road roller making a smooth road.</p>
 <h2>🏗️ Build Chamber</h2>
-<h2>What is the Build Chamber?</h2>
-<p>The area where printing takes place.</p>
+<p>What is the Build Chamber? The area where printing takes place.</p>
 <h2>Responsibilities</h2>
 <ul>
 <li>Holds powder</li>
@@ -579,23 +492,15 @@ legal_render_head("Guide & Inventory");
 <h2>🧹 Taking Care of an SLS Printer</h2>
 <p>Industrial machines require regular maintenance.</p>
 <h2>Daily Maintenance</h2>
-<p>Clean Powder Areas → Remove loose powder.</p>
-<p>Check Powder Quality → Inspect for contamination.</p>
-<p>Empty Waste Collection Areas → Prevent powder buildup.</p>
+<p>Clean Powder Areas → Remove loose powder. Check Powder Quality → Inspect for contamination. Empty Waste Collection Areas → Prevent powder buildup.</p>
 <h2>Weekly Maintenance</h2>
-<p>Inspect Recoater Blade → Look for wear and damage.</p>
-<p>Check Powder Feed Mechanism → Ensure smooth operation.</p>
-<p>Clean Machine Interior → Remove accumulated powder.</p>
+<p>Inspect Recoater Blade → Look for wear and damage. Check Powder Feed Mechanism → Ensure smooth operation. Clean Machine Interior → Remove accumulated powder.</p>
 <h2>Monthly Maintenance</h2>
-<p>Inspect Laser Optics → Ensure proper laser transmission.</p>
-<p>Verify Calibration → Maintain dimensional accuracy.</p>
-<p>Replace Filters → Maintain airflow quality.</p>
+<p>Inspect Laser Optics → Ensure proper laser transmission. Verify Calibration → Maintain dimensional accuracy. Replace Filters → Maintain airflow quality.</p>
 <h2>😨 Common Problems and Solutions</h2>
 <h2>Problem 1: Powder Contamination</h2>
 <h2>Symptoms</h2>
-<p>Poor surface finish.</p>
-<p>Weak parts.</p>
-<p>Inconsistent quality.</p>
+<p>Poor surface finish. Weak parts. Inconsistent quality.</p>
 <h2>Causes</h2>
 <h2>Dust</h2>
 <h2>Moisture</h2>
@@ -608,12 +513,9 @@ legal_render_head("Guide & Inventory");
 </ul>
 <h2>Problem 2: Uneven Powder Spreading</h2>
 <h2>Symptoms</h2>
-<p>Visible layer defects.</p>
-<p>Incomplete sintering.</p>
+<p>Visible layer defects. Incomplete sintering.</p>
 <h2>Causes</h2>
-<p>Damaged recoater.</p>
-<p>Powder clumping.</p>
-<p>Improper settings.</p>
+<p>Damaged recoater. Powder clumping. Improper settings.</p>
 <h2>Solutions</h2>
 <ul>
 <li>Inspect recoater blade</li>
@@ -622,11 +524,9 @@ legal_render_head("Guide & Inventory");
 </ul>
 <h2>Problem 3: Warping</h2>
 <h2>Symptoms</h2>
-<p>Part deformation.</p>
-<p>Dimensional inaccuracies.</p>
+<p>Part deformation. Dimensional inaccuracies.</p>
 <h2>Causes</h2>
-<p>Uneven cooling.</p>
-<p>Improper chamber temperature.</p>
+<p>Uneven cooling. Improper chamber temperature.</p>
 <h2>Solutions</h2>
 <ul>
 <li>Maintain proper chamber temperature</li>
@@ -634,11 +534,9 @@ legal_render_head("Guide & Inventory");
 </ul>
 <h2>Problem 4: Laser Calibration Issues</h2>
 <h2>Symptoms</h2>
-<p>Inaccurate dimensions.</p>
-<p>Poor detail quality.</p>
+<p>Inaccurate dimensions. Poor detail quality.</p>
 <h2>Causes</h2>
-<p>Misaligned optics.</p>
-<p>Incorrect calibration.</p>
+<p>Misaligned optics. Incorrect calibration.</p>
 <h2>Solutions</h2>
 <ul>
 <li>Laser recalibration</li>
@@ -649,14 +547,9 @@ legal_render_head("Guide & Inventory");
 <h2>Fine powder</h2>
 <h2>High temperatures</h2>
 <h2>Laser systems</h2>
-<p>Safety is extremely important.</p>
-<p>Wear Respiratory Protection 😷 → Fine powder should not be inhaled.</p>
-<p>Avoid Powder Contact → Use gloves when handling materials.</p>
-<p>Prevent Dust Accumulation → Keep work area clean.</p>
-<p>Follow Laser Safety Rules → Never attempt to access the laser system during operation.</p>
-<p>Ensure Proper Ventilation → Industrial powder systems require proper airflow.</p>
+<p>Safety is extremely important. Wear Respiratory Protection 😷 → Fine powder should not be inhaled. Avoid Powder Contact → Use gloves when handling materials. Prevent Dust Accumulation → Keep work area clean. Follow Laser Safety Rules → Never attempt to access the laser system during operation. Ensure Proper Ventilation → Industrial powder systems require proper airflow.</p>
 <h2>🎓 Quick Challenge</h2>
-<h2>Arrange the SLS printing process:</h2>
+<p>Arrange the SLS printing process:</p>
 <h2>A. Powder Bed</h2>
 <h2>B. Laser</h2>
 <h2>C. Powder Feed Chamber</h2>
@@ -665,16 +558,10 @@ legal_render_head("Guide & Inventory");
 <h2>Correct Answer</h2>
 <p>⚪ Powder Feed Chamber → 📏 Recoater Blade → ⚪ Powder Bed → 🔥 Laser System → 🧩 Finished Part.</p>
 <h2>4. DED (Directed Energy Deposition)</h2>
-<p>🚀 Imagine Repairing a Broken Metal Part Instead of Replacing It. Suppose an aircraft engine blade is damaged.</p>
-<p>Traditional options: 1. Replace the entire component. 2. Expensive repair process. 3. Long downtime. Now imagine a</p>
-<p>machine that can: Add metal exactly where required, Repair worn surfaces, Build large metal parts, Add features to</p>
-<p>existing components. This is exactly what DED technology does.</p>
+<h2>🚀 Imagine Repairing a Broken Metal Part Instead of Replacing It. Suppose an aircraft engine blade is damaged.</h2>
+<p>Traditional options: 1. Replace the entire component. 2. Expensive repair process. 3. Long downtime. Now imagine a machine that can: Add metal exactly where required, Repair worn surfaces, Build large metal parts, Add features to existing components. This is exactly what DED technology does.</p>
 <h2>🤔 What is DED?</h2>
-<p>DED stands for: Directed Energy Deposition. It is a metal additive manufacturing process where: Metal Material +</p>
-<p>High Energy Source combine to create metal parts layer by layer. Unlike powder bed technologies such as SLS or DMLS,</p>
-<p>DED deposits material directly where it is needed.</p>
-<p>Think About It Like Welding. If welding joins two metal parts together, DED is like: Extremely Precise Automated</p>
-<p>Welding Controlled by a Computer. The machine continuously feeds metal while simultaneously melting it.</p>
+<p>DED stands for: Directed Energy Deposition. It is a metal additive manufacturing process where: Metal Material + High Energy Source combine to create metal parts layer by layer. Unlike powder bed technologies such as SLS or DMLS, DED deposits material directly where it is needed. Think About It Like Welding. If welding joins two metal parts together, DED is like: Extremely Precise Automated Welding Controlled by a Computer. The machine continuously feeds metal while simultaneously melting it.</p>
 <h2>Why is DED Special?</h2>
 <p>Most 3D printing technologies start with an empty build plate.</p>
 <h2>DED can:</h2>
@@ -685,59 +572,39 @@ legal_render_head("Guide & Inventory");
 <li>Manufacture Large Metal Structures</li>
 </ul>
 <h2>Real-World Example</h2>
-<p>An aerospace company repairs a damaged turbine blade. Instead of replacing the entire blade: DED adds metal only to</p>
-<p>the damaged area.</p>
+<p>An aerospace company repairs a damaged turbine blade. Instead of replacing the entire blade: DED adds metal only to the damaged area.</p>
 <h2>This saves:</h2>
 <h2>💰 Cost</h2>
 <h2>⏳ Time</h2>
 <h2>🔩 Material</h2>
 <h2>🎬 What Happens When You Click Print?</h2>
 <p>Let's follow a metal particle through its journey.</p>
-<ul>
-<li><strong>Step 1: Meet Mr. Metal 🔩</strong></li>
-</ul>
-<p>DED uses metal as raw material. This can be: Metal Wire or Metal Powder.</p>
-<p>Common Materials: 🔩 Stainless Steel, ✈️ Titanium, 🚗 Aluminum, 🔥 Inconel, 🛡️ Cobalt Chrome.</p>
-<p>Fun Fact: Some DED machines use the same titanium alloys used in aircraft and spacecraft.</p>
-<ul>
-<li><strong>Step 2: Material Feeds Through the Nozzle</strong></li>
-</ul>
-<p>The material feed system continuously delivers metal toward the deposition zone. Think of it like: Feeding Wire into</p>
-<p>a Welding Torch.</p>
+<h2>Step 1: Meet Mr. Metal 🔩</h2>
+<p>DED uses metal as raw material. This can be: Metal Wire or Metal Powder. Common Materials: 🔩 Stainless Steel, ✈️ Titanium, 🚗 Aluminum, 🔥 Inconel, 🛡️ Cobalt Chrome. Fun Fact: Some DED machines use the same titanium alloys used in aircraft and spacecraft.</p>
+<h2>Step 2: Material Feeds Through the Nozzle</h2>
+<p>The material feed system continuously delivers metal toward the deposition zone. Think of it like: Feeding Wire into a Welding Torch.</p>
 <h2>Responsibilities</h2>
 <ul>
 <li>Supplies material</li>
 <li>Maintains flow rate</li>
 <li>Ensures consistency</li>
-<li><strong>Step 3: The Energy Source Wakes Up ⚡</strong></li>
 </ul>
-<p>Now the machine activates a powerful energy source. Possible energy sources include: Laser, Plasma Arc, Electron</p>
-<p>Beam.</p>
-<p>What Does It Do? The energy source generates enough heat to melt metal instantly.</p>
-<p>Think of It Like: A concentrated energy beam acting as a metal melting tool.</p>
-<ul>
-<li><strong>Step 4: The Melt Pool Forms 🔥</strong></li>
-</ul>
-<p>When metal and energy meet: Metal → Melts → Creates Molten Metal Pool → Solidifies → Forms a Layer.</p>
-<p>This small molten region is called: Melt Pool. The melt pool is where the actual manufacturing happens.</p>
-<ul>
-<li><strong>Step 5: The Part Begins to Grow</strong></li>
-</ul>
-<p>The machine moves according to the CAD design. Material is continuously deposited. Layer after layer. Bead after</p>
-<p>bead. Until the final metal component is completed.</p>
+<h2>Step 3: The Energy Source Wakes Up ⚡</h2>
+<p>Now the machine activates a powerful energy source. Possible energy sources include: Laser, Plasma Arc, Electron Beam. What Does It Do? The energy source generates enough heat to melt metal instantly. Think of It Like: A concentrated energy beam acting as a metal melting tool.</p>
+<h2>Step 4: The Melt Pool Forms 🔥</h2>
+<p>When metal and energy meet: Metal → Melts → Creates Molten Metal Pool → Solidifies → Forms a Layer. This small molten region is called: Melt Pool. The melt pool is where the actual manufacturing happens.</p>
+<h2>Step 5: The Part Begins to Grow</h2>
+<p>The machine moves according to the CAD design. Material is continuously deposited. Layer after layer. Bead after bead. Until the final metal component is completed.</p>
 <h2>🏗️ DED Construction Flow</h2>
 <p>Metal Wire / Powder → Deposition Head → Laser / Plasma / Electron Beam → Melt Pool → Part Formation.</p>
 <h2>🧩 Meet the DED Printing Team</h2>
 <h2>⚡ Energy Source</h2>
-<h2>What is the Energy Source?</h2>
-<p>The heart of the DED system. It generates the heat required to melt metal.</p>
+<p>What is the Energy Source? The heart of the DED system. It generates the heat required to melt metal.</p>
 <h2>Types</h2>
 <h2>Laser-Based DED</h2>
-<p>Most common.</p>
-<p>High precision.</p>
+<p>Most common. High precision.</p>
 <h2>Plasma-Based DED</h2>
-<p>Higher deposition rates.</p>
-<p>Industrial applications.</p>
+<p>Higher deposition rates. Industrial applications.</p>
 <h2>Electron Beam DED</h2>
 <p>Used for advanced aerospace manufacturing.</p>
 <h2>Responsibilities</h2>
@@ -748,8 +615,7 @@ legal_render_head("Guide & Inventory");
 </ul>
 <p>Think of It As The printer's furnace.</p>
 <h2>🎯 Deposition Nozzle</h2>
-<h2>What is a Deposition Nozzle?</h2>
-<p>The component that delivers metal to the melt pool.</p>
+<p>What is a Deposition Nozzle? The component that delivers metal to the melt pool.</p>
 <h2>Responsibilities</h2>
 <ul>
 <li>Material Delivery</li>
@@ -778,7 +644,7 @@ legal_render_head("Guide & Inventory");
 <h2>X-Axis</h2>
 <h2>Y-Axis</h2>
 <h2>Z-Axis</h2>
-<h2>Robotic Arm (in many systems)</h2>
+<p>Robotic Arm (in many systems)</p>
 <h2>Responsibilities</h2>
 <ul>
 <li>Part Geometry</li>
@@ -788,8 +654,7 @@ legal_render_head("Guide & Inventory");
 <h2>Fun Fact</h2>
 <p>Many industrial DED systems use robotic arms with 6 degrees of freedom.</p>
 <h2>🌬️ Shielding Gas System</h2>
-<h2>Why Is Shielding Gas Needed?</h2>
-<p>Molten metal reacts easily with oxygen.</p>
+<p>Why Is Shielding Gas Needed? Molten metal reacts easily with oxygen.</p>
 <h2>This can cause:</h2>
 <ul>
 <li>Oxidation</li>
@@ -821,23 +686,17 @@ legal_render_head("Guide & Inventory");
 <h2>🌍 Where is DED Used?</h2>
 <p>Unlike FDM or SLA, DED is primarily used in heavy industries.</p>
 <h2>✈️ Aerospace</h2>
-<p>Repairing turbine blades.</p>
-<p>Manufacturing structural components.</p>
+<p>Repairing turbine blades. Manufacturing structural components.</p>
 <h2>🚗 Automotive</h2>
-<p>Tool repair.</p>
-<p>Metal component manufacturing.</p>
+<p>Tool repair. Metal component manufacturing.</p>
 <h2>🛡 Defense</h2>
-<p>Military equipment repair.</p>
-<p>Large metal structures.</p>
+<p>Military equipment repair. Large metal structures.</p>
 <h2>⚡ Energy Sector</h2>
 <p>Repairing power generation components.</p>
 <h2>🚢 Marine Industry</h2>
 <p>Repairing ship components.</p>
 <h2>🎯 Why Industries Love DED</h2>
-<p>Repair Instead of Replace → Massive cost savings.</p>
-<p>Large Components → Can manufacture very large parts.</p>
-<p>Multi-Material Manufacturing → Different materials can be added during printing.</p>
-<p>High Deposition Rate → Faster than many metal powder bed systems.</p>
+<p>Repair Instead of Replace → Massive cost savings. Large Components → Can manufacture very large parts. Multi-Material Manufacturing → Different materials can be added during printing. High Deposition Rate → Faster than many metal powder bed systems.</p>
 <h2>🧹 Taking Care of a DED Machine</h2>
 <p>Industrial metal printers require routine maintenance.</p>
 <h2>Daily Maintenance</h2>
@@ -861,8 +720,7 @@ legal_render_head("Guide & Inventory");
 <h2>😨 Common Problems and Solutions</h2>
 <h2>Problem 1: Poor Bead Quality</h2>
 <h2>Symptoms</h2>
-<p>Irregular deposition.</p>
-<p>Uneven layers.</p>
+<p>Irregular deposition. Uneven layers.</p>
 <h2>Causes</h2>
 <h2>Incorrect Beam Settings</h2>
 <h2>Poor Material Feed</h2>
@@ -887,8 +745,7 @@ legal_render_head("Guide & Inventory");
 </ul>
 <h2>Problem 3: Porosity</h2>
 <h2>Symptoms</h2>
-<p>Small holes inside part.</p>
-<p>Reduced strength.</p>
+<p>Small holes inside part. Reduced strength.</p>
 <h2>Causes</h2>
 <h2>Insufficient Shielding Gas</h2>
 <h2>Contamination</h2>
@@ -901,8 +758,7 @@ legal_render_head("Guide & Inventory");
 </ul>
 <h2>Problem 4: Inconsistent Deposition</h2>
 <h2>Symptoms</h2>
-<p>Uneven layer thickness.</p>
-<p>Poor dimensional accuracy.</p>
+<p>Uneven layer thickness. Poor dimensional accuracy.</p>
 <h2>Causes</h2>
 <h2>Motion Errors</h2>
 <h2>Variable Material Feed</h2>
@@ -923,11 +779,11 @@ legal_render_head("Guide & Inventory");
 <li>Protect eyes from laser exposure</li>
 <li>Protect eyes from bright process light</li>
 </ul>
-<h2>Follow Beam Safety Procedures ⚡</h2>
+<p>Follow Beam Safety Procedures ⚡</p>
 <ul>
 <li>Never access beam area during operation</li>
 </ul>
-<h2>Monitor Shielding Gas Supply 🌬️</h2>
+<p>Monitor Shielding Gas Supply 🌬️</p>
 <ul>
 <li>Ensure proper gas flow at all times</li>
 </ul>
@@ -943,16 +799,10 @@ legal_render_head("Guide & Inventory");
 <li>Protective Clothing</li>
 </ul>
 <h2>5. Material Jetting</h2>
-<p>🚀 Imagine a 3D Printer That Works Like an Inkjet Printer</p>
-<p>Have you ever seen an inkjet printer printing on paper? It sprays thousands of tiny droplets of ink to create an</p>
-<p>image. Now imagine replacing: 🖋️ Ink with 💧 Liquid Photopolymer Material and printing layer upon layer until a 3D</p>
-<p>object is created. That's exactly how Material Jetting works.</p>
+<h2>🚀 Imagine a 3D Printer That Works Like an Inkjet Printer</h2>
+<p>Have you ever seen an inkjet printer printing on paper? It sprays thousands of tiny droplets of ink to create an image. Now imagine replacing: 🖋️ Ink with 💧 Liquid Photopolymer Material and printing layer upon layer until a 3D object is created. That's exactly how Material Jetting works.</p>
 <h2>🤔 What is Material Jetting?</h2>
-<p>Material Jetting is a 3D printing technology that creates objects by depositing tiny droplets of liquid photopolymer</p>
-<p>material and instantly curing them using UV light. Think of it as: "3D Printing with Tiny Drops of Liquid Plastic"</p>
-<p>The printer deposits microscopic droplets exactly where needed and then solidifies them using UV light.</p>
-<h2>Why is Material Jetting Special?</h2>
-<h2>Most 3D printing technologies focus on:</h2>
+<p>Material Jetting is a 3D printing technology that creates objects by depositing tiny droplets of liquid photopolymer material and instantly curing them using UV light. Think of it as: "3D Printing with Tiny Drops of Liquid Plastic" The printer deposits microscopic droplets exactly where needed and then solidifies them using UV light. Why is Material Jetting Special? Most 3D printing technologies focus on:</p>
 <h2>Strength</h2>
 <h2>Speed</h2>
 <h2>Cost</h2>
@@ -962,7 +812,7 @@ legal_render_head("Guide & Inventory");
 <h2>✨ Color Accuracy</h2>
 <h2>✨ Multi-Material Printing</h2>
 <h2>Fun Fact</h2>
-<h2>Material Jetting printers can print:</h2>
+<p>Material Jetting printers can print:</p>
 <h2>Multiple colors</h2>
 <h2>Multiple materials</h2>
 <h2>Transparent sections</h2>
@@ -970,59 +820,45 @@ legal_render_head("Guide & Inventory");
 <p>all in the same print.</p>
 <h2>🎬 What Happens When You Click Print?</h2>
 <p>Let's follow a tiny droplet through its journey.</p>
-<ul>
-<li><strong>Step 1: Meet Mr. Material Drop 💧</strong></li>
-</ul>
-<p>Everything begins inside a material reservoir. This reservoir stores liquid photopolymer materials. Think of it as:</p>
-<p>An Ink Cartridge for a 3D Printer.</p>
+<h2>Step 1: Meet Mr. Material Drop 💧</h2>
+<p>Everything begins inside a material reservoir. This reservoir stores liquid photopolymer materials. Think of it as: An Ink Cartridge for a 3D Printer.</p>
 <h2>Common Materials</h2>
 <h2>🔵 Rigid Photopolymer</h2>
 <h2>🟢 Transparent Material</h2>
 <h2>🟠 Flexible Material</h2>
 <h2>🟣 Multi-Color Materials</h2>
-<ul>
-<li><strong>Step 2: The Print Head Starts Working</strong></li>
-</ul>
-<h2>Now the printer activates the:</h2>
+<h2>Step 2: The Print Head Starts Working</h2>
+<p>Now the printer activates the:</p>
 <h2>Print Head</h2>
 <p>This component is similar to the print head of an inkjet printer. Its job is to spray thousands of tiny droplets.</p>
 <h2>Think About It</h2>
-<p>A single droplet is often smaller than the width of a human hair. Thousands of droplets combine to create each</p>
-<p>layer.</p>
+<p>A single droplet is often smaller than the width of a human hair. Thousands of droplets combine to create each layer.</p>
 <h2>Responsibilities</h2>
 <ul>
 <li>Material Deposition</li>
 <li>Layer Formation</li>
 <li>Precision Placement</li>
-<li><strong>Step 3: Droplet Deposition Begins</strong></li>
 </ul>
-<p>The print head moves across the build area. Tiny droplets are deposited exactly where required. Imagine This:</p>
-<p>Drawing a picture using thousands of microscopic water droplets. That's how each layer is created.</p>
+<h2>Step 3: Droplet Deposition Begins</h2>
+<p>The print head moves across the build area. Tiny droplets are deposited exactly where required. Imagine This: Drawing a picture using thousands of microscopic water droplets. That's how each layer is created.</p>
 <h2>What Makes It Unique?</h2>
-<p>Unlike FDM: No filament is melted.</p>
-<p>Unlike SLA: No resin tank is required.</p>
-<p>The material is deposited directly where needed.</p>
-<ul>
-<li><strong>Step 4: UV Light Instantly Cures the Material 🔵</strong></li>
-</ul>
+<p>Unlike FDM: No filament is melted. Unlike SLA: No resin tank is required. The material is deposited directly where needed.</p>
+<h2>Step 4: UV Light Instantly Cures the Material 🔵</h2>
 <p>Immediately after deposition: UV lamps shine on the droplets.</p>
 <h2>What Happens?</h2>
-<p>Liquid Droplet → UV Light → Solid Material.</p>
-<p>The material hardens almost instantly.</p>
+<p>Liquid Droplet → UV Light → Solid Material. The material hardens almost instantly.</p>
 <h2>Interactive Question</h2>
-<h2>❓ What happens if UV light is not applied?</h2>
 <ul>
+<li>What happens if UV light is not applied?</li>
 <li>The droplets remain liquid and the print fails.</li>
-<li><strong>Step 5: Layer by Layer Growth</strong></li>
 </ul>
-<p>After one layer is cured: The build platform moves. Another layer is deposited. Another layer is cured. The process</p>
-<p>repeats until the complete model is formed.</p>
+<h2>Step 5: Layer by Layer Growth</h2>
+<p>After one layer is cured: The build platform moves. Another layer is deposited. Another layer is cured. The process repeats until the complete model is formed.</p>
 <h2>🏗️ Material Jetting Construction Flow</h2>
 <p>Material Reservoir → Print Head → Droplet Deposition → UV Curing → Part Formation.</p>
 <h2>🧩 Meet the Material Jetting Team</h2>
 <h2>💧 Material Reservoir</h2>
-<h2>What is a Material Reservoir?</h2>
-<p>The reservoir stores liquid printing materials. Think of it as: The Printer's Fuel Tank.</p>
+<p>What is a Material Reservoir? The reservoir stores liquid printing materials. Think of it as: The Printer's Fuel Tank.</p>
 <h2>Responsibilities</h2>
 <ul>
 <li>Material Storage</li>
@@ -1032,8 +868,7 @@ legal_render_head("Guide & Inventory");
 <h2>Real-Life Analogy</h2>
 <p>Like an ink cartridge in a paper printer.</p>
 <h2>🖨️ Print Heads</h2>
-<h2>What is a Print Head?</h2>
-<p>The print head deposits tiny droplets of material. It is one of the most critical components in the system.</p>
+<p>What is a Print Head? The print head deposits tiny droplets of material. It is one of the most critical components in the system.</p>
 <h2>Responsibilities</h2>
 <ul>
 <li>Precise Material Placement</li>
@@ -1043,8 +878,7 @@ legal_render_head("Guide & Inventory");
 <h2>Interesting Fact</h2>
 <p>Modern print heads can deposit millions of droplets every minute.</p>
 <h2>🔵 UV Lamps</h2>
-<h2>Why Are UV Lamps Needed?</h2>
-<p>The material is initially liquid. UV lamps convert it into solid material.</p>
+<p>Why Are UV Lamps Needed? The material is initially liquid. UV lamps convert it into solid material.</p>
 <h2>Responsibilities</h2>
 <ul>
 <li>Instant Curing</li>
@@ -1069,8 +903,7 @@ legal_render_head("Guide & Inventory");
 <h2>Motors</h2>
 <h2>Linear Guides</h2>
 <h2>🟫 Build Platform</h2>
-<h2>What is a Build Platform?</h2>
-<p>The surface where the object is constructed.</p>
+<p>What is a Build Platform? The surface where the object is constructed.</p>
 <h2>Responsibilities</h2>
 <ul>
 <li>Supports Print</li>
@@ -1082,8 +915,7 @@ legal_render_head("Guide & Inventory");
 <h2>🚗 Automotive Industry</h2>
 <p>Concept models. Showroom prototypes.</p>
 <h2>🏥 Healthcare</h2>
-<p>Medical models.</p>
-<p>Surgical planning models.</p>
+<p>Medical models. Surgical planning models.</p>
 <h2>🦷 Dentistry</h2>
 <p>Dental models. Treatment planning.</p>
 <h2>🏛 Product Design</h2>
@@ -1132,9 +964,7 @@ legal_render_head("Guide & Inventory");
 <h2>😨 Common Problems and Solutions</h2>
 <h2>Problem 1: Nozzle Blockage</h2>
 <h2>Symptoms</h2>
-<p>Missing areas.</p>
-<p>Incomplete layers.</p>
-<p>Poor surface quality.</p>
+<p>Missing areas. Incomplete layers. Poor surface quality.</p>
 <h2>Causes</h2>
 <h2>Material Drying</h2>
 <h2>Contamination</h2>
@@ -1147,8 +977,7 @@ legal_render_head("Guide & Inventory");
 </ul>
 <h2>Problem 2: Droplet Misalignment</h2>
 <h2>Symptoms</h2>
-<p>Distorted geometry.</p>
-<p>Dimensional inaccuracies.</p>
+<p>Distorted geometry. Dimensional inaccuracies.</p>
 <h2>Causes</h2>
 <h2>Calibration Issues</h2>
 <h2>Motion System Errors</h2>
@@ -1159,9 +988,7 @@ legal_render_head("Guide & Inventory");
 </ul>
 <h2>Problem 3: UV Curing Failure</h2>
 <h2>Symptoms</h2>
-<p>Sticky surfaces.</p>
-<p>Soft parts.</p>
-<p>Incomplete curing.</p>
+<p>Sticky surfaces. Soft parts. Incomplete curing.</p>
 <h2>Causes</h2>
 <h2>UV Lamp Failure</h2>
 <h2>Low UV Intensity</h2>
@@ -1197,23 +1024,19 @@ legal_render_head("Guide & Inventory");
 <li>Dust and contamination can affect print quality</li>
 </ul>
 <h2>🎓 Quick Challenge</h2>
-<h2>Arrange the Material Jetting process:</h2>
+<p>Arrange the Material Jetting process:</p>
 <h2>A. UV Curing</h2>
 <h2>B. Print Head</h2>
 <h2>C. Material Reservoir</h2>
 <h2>D. Part Formation</h2>
 <h2>E. Droplet Deposition</h2>
 <h2>Correct Answer</h2>
-<p>💧 Material Reservoir → 🖨️ Print Head → 💦 Droplet Deposition → 🔵 UV Curing → 🧩 Part Formation.</p>
+<h2>💧 Material Reservoir → 🖨️ Print Head → 💦 Droplet Deposition → 🔵 UV Curing → 🧩 Part Formation.</h2>
 <h2>6. PolyJet Technology</h2>
-<p>🚀 Imagine a Color Printer That Can Print Real Objects. Have you ever used a color inkjet printer? It sprays tiny</p>
-<p>droplets of ink onto paper to create images. Now imagine a machine that sprays microscopic droplets of liquid</p>
-<p>plastic instead of ink and instantly hardens them using UV light. The result? A Real 3D Object with Amazing Detail</p>
-<p>and Surface Finish. This technology is called: 🌈 PolyJet Technology. PolyJet is one of the most advanced and</p>
-<p>realistic 3D printing technologies available today. It is widely used when appearance, detail, color accuracy, and</p>
-<p>realism are extremely important.</p>
+<h2>🚀 Imagine a Color Printer That Can Print Real Objects. Have you ever used a color inkjet printer? It sprays tiny</h2>
+<p>droplets of ink onto paper to create images. Now imagine a machine that sprays microscopic droplets of liquid plastic instead of ink and instantly hardens them using UV light. The result? A Real 3D Object with Amazing Detail and Surface Finish. This technology is called: 🌈 PolyJet Technology. PolyJet is one of the most advanced and realistic 3D printing technologies available today. It is widely used when appearance, detail, color accuracy, and realism are extremely important.</p>
 <h2>🤔 What Makes PolyJet Special?</h2>
-<h2>Most 3D printers can print:</h2>
+<p>Most 3D printers can print:</p>
 <h2>One material</h2>
 <h2>One color</h2>
 <h2>Basic surface finish</h2>
@@ -1228,55 +1051,40 @@ legal_render_head("Guide & Inventory");
 </ul>
 <p>All in a single print.</p>
 <h2>Fun Fact</h2>
-<h2>Some PolyJet printers can simulate:</h2>
+<p>Some PolyJet printers can simulate:</p>
 <h2>Soft rubber</h2>
 <h2>Hard plastic</h2>
 <h2>Transparent glass-like materials</h2>
 <p>in the same model. This makes prototypes look almost identical to final products.</p>
 <h2>🎬 What Happens When You Click Print?</h2>
 <p>Let's follow a tiny droplet through its journey.</p>
-<ul>
-<li><strong>Step 1: Meet Mr. Photopolymer 💧</strong></li>
-</ul>
-<p>Everything begins inside a material cartridge. The cartridge stores: Liquid Photopolymer Material. Think of it as: A</p>
-<p>giant ink cartridge filled with liquid plastic.</p>
+<h2>Step 1: Meet Mr. Photopolymer 💧</h2>
+<p>Everything begins inside a material cartridge. The cartridge stores: Liquid Photopolymer Material. Think of it as: A giant ink cartridge filled with liquid plastic.</p>
 <h2>Types of Materials</h2>
 <h2>🔵 Rigid Materials</h2>
 <h2>🟢 Flexible Materials</h2>
 <h2>🟡 Transparent Materials</h2>
 <h2>🔴 Colored Materials</h2>
 <h2>Interactive Question</h2>
-<h2>❓ What is a photopolymer?</h2>
 <ul>
+<li>What is a photopolymer?</li>
 <li>A liquid material that becomes solid when exposed to UV light.</li>
-<li><strong>Step 2: The Jetting Head Starts Spraying</strong></li>
 </ul>
-<p>The printer activates the: Jetting Head. This is one of the most important components in a PolyJet printer. Its job</p>
-<p>is to deposit thousands of microscopic droplets.</p>
-<p>Think About It. Imagine spraying millions of tiny water droplets exactly where needed. That is how each layer is</p>
-<p>created.</p>
+<h2>Step 2: The Jetting Head Starts Spraying</h2>
+<p>The printer activates the: Jetting Head. This is one of the most important components in a PolyJet printer. Its job is to deposit thousands of microscopic droplets. Think About It. Imagine spraying millions of tiny water droplets exactly where needed. That is how each layer is created.</p>
 <h2>Responsibilities</h2>
 <ul>
 <li>Material Deposition</li>
 <li>Layer Creation</li>
 <li>Multi-Material Printing</li>
-<li><strong>Step 3: UV Light Instantly Hardens the Material 🔵</strong></li>
 </ul>
+<h2>Step 3: UV Light Instantly Hardens the Material 🔵</h2>
 <p>Immediately after the droplets are deposited: UV lamps shine on them.</p>
 <h2>What Happens?</h2>
-<p>Liquid Material → UV Light → Solid Layer.</p>
-<p>This process happens within seconds.</p>
-<p>Real-Life Analogy: Imagine sunlight instantly turning water into solid plastic. That's essentially what happens</p>
-<p>inside the printer.</p>
-<ul>
-<li><strong>Step 4: Layer Formation Begins</strong></li>
-</ul>
-<p>The printer deposits: Droplets → Cures Them → Deposits More Droplets → Cures Again.</p>
-<p>This process repeats hundreds or thousands of times.</p>
-<p>Eventually: A complete 3D object is formed.</p>
-<ul>
-<li><strong>Step 5: Finished Part Appears</strong></li>
-</ul>
+<p>Liquid Material → UV Light → Solid Layer. This process happens within seconds. Real-Life Analogy: Imagine sunlight instantly turning water into solid plastic. That's essentially what happens inside the printer.</p>
+<h2>Step 4: Layer Formation Begins</h2>
+<p>The printer deposits: Droplets → Cures Them → Deposits More Droplets → Cures Again. This process repeats hundreds or thousands of times. Eventually: A complete 3D object is formed.</p>
+<h2>Step 5: Finished Part Appears</h2>
 <p>The result is often so realistic that people mistake it for a final manufactured product.</p>
 <h2>🏗️ PolyJet Construction Flow</h2>
 <p>Photopolymer Cartridge → Jetting Head → UV Lamp → Layer Formation → Finished Part.</p>
@@ -1292,8 +1100,7 @@ legal_render_head("Guide & Inventory");
 <h2>Fun Fact</h2>
 <p>Some industrial PolyJet printers can use several material cartridges simultaneously.</p>
 <h2>🖨️ Jetting Head</h2>
-<h2>What is a Jetting Head?</h2>
-<p>The jetting head sprays microscopic droplets onto the build area.</p>
+<p>What is a Jetting Head? The jetting head sprays microscopic droplets onto the build area.</p>
 <h2>Responsibilities</h2>
 <ul>
 <li>Material Deposition</li>
@@ -1308,8 +1115,7 @@ legal_render_head("Guide & Inventory");
 <h2>Think of It As</h2>
 <p>The printer's paintbrush.</p>
 <h2>🔵 UV Curing Unit</h2>
-<h2>What is a UV Curing Unit?</h2>
-<p>The UV curing system instantly solidifies deposited material.</p>
+<p>What is a UV Curing Unit? The UV curing system instantly solidifies deposited material.</p>
 <h2>Responsibilities</h2>
 <ul>
 <li>Material Hardening</li>
@@ -1319,8 +1125,7 @@ legal_render_head("Guide & Inventory");
 <h2>Real-Life Analogy</h2>
 <p>Like sunlight drying wet paint instantly.</p>
 <h2>🟫 Build Tray</h2>
-<h2>What is a Build Tray?</h2>
-<p>The platform where the object is created.</p>
+<p>What is a Build Tray? The platform where the object is created.</p>
 <h2>Responsibilities</h2>
 <ul>
 <li>Supports Part During Printing</li>
@@ -1436,8 +1241,7 @@ legal_render_head("Guide & Inventory");
 </ul>
 <h2>Problem 2: Surface Defects</h2>
 <h2>Symptoms</h2>
-<p>Rough areas.</p>
-<p>Visible imperfections.</p>
+<p>Rough areas. Visible imperfections.</p>
 <h2>Causes</h2>
 <h2>Poor Material Deposition</h2>
 <h2>Jetting Errors</h2>
@@ -1450,9 +1254,7 @@ legal_render_head("Guide & Inventory");
 </ul>
 <h2>Problem 3: Material Contamination</h2>
 <h2>Symptoms</h2>
-<p>Color variation.</p>
-<p>Poor curing.</p>
-<p>Weak sections.</p>
+<p>Color variation. Poor curing. Weak sections.</p>
 <h2>Causes</h2>
 <h2>Dust</h2>
 <h2>Mixed Materials</h2>
@@ -1464,8 +1266,7 @@ legal_render_head("Guide & Inventory");
 <li>Replace Contaminated Material</li>
 </ul>
 <h2>🦺 Safety First</h2>
-<p>PolyJet printers use photopolymers and UV light.</p>
-<p>Proper safety procedures must always be followed.</p>
+<p>PolyJet printers use photopolymers and UV light. Proper safety procedures must always be followed.</p>
 <h2>Wear PPE 🥽🧤</h2>
 <ul>
 <li>Use Gloves</li>
@@ -1489,14 +1290,14 @@ legal_render_head("Guide & Inventory");
 <li>Support materials and waste photopolymers must be disposed according to safety guidelines.</li>
 </ul>
 <h2>🎓 Quick Challenge</h2>
-<h2>Arrange the PolyJet process correctly:</h2>
+<p>Arrange the PolyJet process correctly:</p>
 <h2>A. UV Lamp</h2>
 <h2>B. Photopolymer Cartridge</h2>
 <h2>C. Layer Formation</h2>
 <h2>D. Jetting Head</h2>
 <h2>E. Finished Part</h2>
 <h2>Correct Answer</h2>
-<p>💧 Photopolymer Cartridge → 🖨️ Jetting Head → 🔵 UV Lamp → 📚 Layer Formation → 🧩 Finished Part.</p>
+<h2>💧 Photopolymer Cartridge → 🖨️ Jetting Head → 🔵 UV Lamp → 📚 Layer Formation → 🧩 Finished Part.</h2>
 <?php
 legal_render_foot();
 ?>
