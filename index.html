@@ -431,15 +431,15 @@
       content: ''; flex: 1; height: 1px; background: var(--border);
     }
     .social-btns { display: flex; gap: 10px; }
-    .social-btns button {
+    .social-btns a {
       flex: 1; padding: 10px;
       background: var(--bg); border: 1px solid var(--border);
       border-radius: 10px; color: var(--text);
       font-size: 1.05rem; cursor: pointer;
-      transition: var(--transition);
+      transition: var(--transition); text-align: center;
       -webkit-tap-highlight-color: transparent;
     }
-    .social-btns button:active { background: var(--surface-2); }
+    .social-btns a:active { background: var(--surface-2); }
     .signup-link {
       text-align: center; margin-top: 18px;
       font-size: .82rem; color: var(--text-muted);
@@ -802,9 +802,9 @@
     </form>
     <div class="divider">or continue with</div>
     <div class="social-btns">
-      <button title="Google"><i class="fa-brands fa-google"></i></button>
-      <button title="GitHub"><i class="fa-brands fa-github"></i></button>
-      <button title="Apple"><i class="fa-brands fa-apple"></i></button>
+      <a href="oauth_login.php?provider=google" title="Google"><i class="fa-brands fa-google"></i></a>
+      <a href="oauth_login.php?provider=github" title="GitHub"><i class="fa-brands fa-github"></i></a>
+      <a href="oauth_login.php?provider=apple" title="Apple"><i class="fa-brands fa-apple"></i></a>
     </div>
     <p class="signup-link">Don't have an account? <a href="signup.php">Sign up</a></p>
   </div>
@@ -1057,7 +1057,14 @@
         'db': 'Unable to connect to database right now.',
         'unavailable': 'Login is temporarily unavailable.',
         'invalid': 'Invalid credentials.',
-        'unauthorized': 'Unauthorized role for this portal.'
+        'unauthorized': 'Unauthorized role for this portal.',
+        'invalid_provider': 'Invalid OAuth provider.',
+        'oauth_not_configured': 'This login method is not fully configured yet.',
+        'oauth_declined': 'Authentication was declined.',
+        'oauth_invalid': 'Invalid authorization response from provider.',
+        'oauth_state_mismatch': 'Security state mismatch, please try again.',
+        'oauth_no_email': 'Could not retrieve email from provider.',
+        'oauth_not_found': 'Account not found. Please register first.'
       };
       if (errMap[errCode] && banner && errText) {
         errText.textContent = errMap[errCode];

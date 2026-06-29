@@ -113,3 +113,12 @@ if (!defined('SMTP_FROM_NAME')) define('SMTP_FROM_NAME', env_value('SMTP_FROM_NA
 // Security settings
 if (!defined('MAX_LOGIN_ATTEMPTS')) define('MAX_LOGIN_ATTEMPTS', 5);
 
+// OAuth Settings
+if (!defined('OAUTH_GOOGLE_CLIENT_ID')) define('OAUTH_GOOGLE_CLIENT_ID', env_value('OAUTH_GOOGLE_CLIENT_ID', ''));
+if (!defined('OAUTH_GOOGLE_CLIENT_SECRET')) define('OAUTH_GOOGLE_CLIENT_SECRET', env_value('OAUTH_GOOGLE_CLIENT_SECRET', ''));
+if (!defined('OAUTH_GITHUB_CLIENT_ID')) define('OAUTH_GITHUB_CLIENT_ID', env_value('OAUTH_GITHUB_CLIENT_ID', ''));
+if (!defined('OAUTH_GITHUB_CLIENT_SECRET')) define('OAUTH_GITHUB_CLIENT_SECRET', env_value('OAUTH_GITHUB_CLIENT_SECRET', ''));
+if (!defined('OAUTH_APPLE_CLIENT_ID')) define('OAUTH_APPLE_CLIENT_ID', env_value('OAUTH_APPLE_CLIENT_ID', ''));
+if (!defined('OAUTH_APPLE_TEAM_ID')) define('OAUTH_APPLE_TEAM_ID', env_value('OAUTH_APPLE_TEAM_ID', ''));
+if (!defined('OAUTH_APPLE_KEY_ID')) define('OAUTH_APPLE_KEY_ID', env_value('OAUTH_APPLE_KEY_ID', ''));
+if (!defined('OAUTH_APPLE_PRIVATE_KEY_PATH')) define('OAUTH_APPLE_PRIVATE_KEY_PATH', env_value('OAUTH_APPLE_PRIVATE_KEY_PATH', ''));
