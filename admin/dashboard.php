@@ -357,6 +357,7 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Admin Dashboard — 3D Shikshan</title>
     <link rel="icon" type="image/png" href="../assets/logo.png" />
+    <link rel="manifest" href="../manifest.webmanifest" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -2419,22 +2420,22 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
         </div>
 
         <div class="stat-grid">
-            <div class="stat-card">
+            <div class="stat-card" onclick="showSection('users')" style="cursor: pointer;">
                 <div class="stat-icon si-green"><i class="fa-solid fa-users"></i></div>
                 <div class="stat-val" id="statTotalUsers"><?php echo $totalUsers; ?></div>
                 <div class="stat-lbl">Total Users</div>
             </div>
-            <div class="stat-card">
+            <div class="stat-card" style="cursor: pointer;">
                 <div class="stat-icon si-blue"><i class="fa-solid fa-cube"></i></div>
                 <div class="stat-val" id="statCourses"><?php echo $totalCourses; ?></div>
                 <div class="stat-lbl">Courses</div>
             </div>
-            <div class="stat-card">
+            <div class="stat-card" onclick="showSection('users')" style="cursor: pointer;">
                 <div class="stat-icon si-yellow"><i class="fa-solid fa-graduation-cap"></i></div>
                 <div class="stat-val" id="statStudents"><?php echo $totalStudents; ?></div>
                 <div class="stat-lbl">Students</div>
             </div>
-            <div class="stat-card">
+            <div class="stat-card" onclick="showSection('tickets')" style="cursor: pointer;">
                 <div class="stat-icon si-red"><i class="fa-solid fa-triangle-exclamation"></i></div>
                 <div class="stat-val" id="statAlerts"><?php echo $unreadAlerts; ?></div>
                 <div class="stat-lbl">Alerts</div>
@@ -5029,5 +5030,14 @@ $initials     = strtoupper(substr((string)$user['name'], 0, 1));
     window.addEventListener('resize', closePopover);
 })();
 </script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('../sw.js').then(reg => {
+                    console.log('SW registered!', reg);
+                }).catch(err => console.log('SW registration failed', err));
+            });
+        }
+    </script>
 </body>
 </html>

@@ -363,8 +363,9 @@ function esc(string $value): string
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <title>Coordinator Dashboard - 3D Shikshan</title>
+    <title>Coordinator Dashboard — 3D Shikshan</title>
     <link rel="icon" type="image/png" href="../assets/logo.png" />
+    <link rel="manifest" href="../manifest.webmanifest" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -727,19 +728,19 @@ function esc(string $value): string
         <p class="page-sub">Welcome back, <?php echo $displayName; ?>.</p>
 
         <div class="overview-stats">
-            <div class="overview-stat">
+            <div class="overview-stat" onclick="showSection('colleges')" style="cursor: pointer;">
                 <div class="k">Assigned Colleges</div>
                 <div class="v"><?php echo count($assignedColleges); ?></div>
             </div>
-            <div class="overview-stat">
+            <div class="overview-stat" onclick="showSection('students')" style="cursor: pointer;">
                 <div class="k">Assigned Students</div>
                 <div class="v"><?php echo count($assignedStudents); ?></div>
             </div>
-            <div class="overview-stat">
+            <div class="overview-stat" onclick="showSection('schedule')" style="cursor: pointer;">
                 <div class="k">Scheduled Sessions</div>
                 <div class="v"><?php echo count($scheduledSessions); ?></div>
             </div>
-            <div class="overview-stat">
+            <div class="overview-stat" onclick="showSection('tickets')" style="cursor: pointer;">
                 <div class="k">Open Tickets</div>
                 <div class="v"><?php echo (int)$ticketOpenCount; ?></div>
             </div>
@@ -2358,5 +2359,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 </script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('../sw.js').then(reg => {
+                    console.log('SW registered!', reg);
+                }).catch(err => console.log('SW registration failed', err));
+            });
+        }
+    </script>
 </body>
 </html>

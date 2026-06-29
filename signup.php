@@ -189,19 +189,19 @@ $razorpayEnabled = RAZORPAY_KEY_ID !== '' && RAZORPAY_KEY_SECRET !== '';
             <div class="grid-2">
                 <div class="form-group">
                     <label for="first_name">First Name</label>
-                    <input type="text" id="first_name" name="first_name" required>
+                    <input type="text" id="first_name" name="first_name" pattern="[A-Za-z\s]+" title="Only letters and spaces allowed" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '');" required>
                 </div>
                 <div class="form-group">
                     <label for="middle_name">Middle Name</label>
-                    <input type="text" id="middle_name" name="middle_name">
+                    <input type="text" id="middle_name" name="middle_name" pattern="[A-Za-z\s]*" title="Only letters and spaces allowed" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '');">
                 </div>
                 <div class="form-group">
                     <label for="last_name">Last Name</label>
-                    <input type="text" id="last_name" name="last_name" required>
+                    <input type="text" id="last_name" name="last_name" pattern="[A-Za-z\s]+" title="Only letters and spaces allowed" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '');" required>
                 </div>
                 <div class="form-group">
                     <label for="mobile_no">Mobile No</label>
-                    <input type="text" id="mobile_no" name="mobile_no" maxlength="15" required>
+                    <input type="tel" id="mobile_no" name="mobile_no" pattern="\d{10}" maxlength="10" title="Must be exactly 10 digits" oninput="this.value = this.value.replace(/\D/g, '').slice(0, 10);" required>
                 </div>
                 <div class="form-group full">
                     <label for="email">Email</label>
@@ -266,6 +266,9 @@ $razorpayEnabled = RAZORPAY_KEY_ID !== '' && RAZORPAY_KEY_SECRET !== '';
 
             <div class="signup-actions">
                 <button type="submit" class="btn-login" id="payRegisterBtn" <?php echo $razorpayEnabled ? '' : 'disabled'; ?>>Pay & Sign Up</button>
+                <?php if ($razorpayEnabled && strpos(RAZORPAY_KEY_ID, 'rzp_test_') === 0): ?>
+                    <button type="button" class="btn-outline" id="bypassPaymentBtn" style="border-color: #0b8a5e; color: #0b8a5e;">Test: Bypass Payment</button>
+                <?php endif; ?>
                 <a href="index.php?login=1" class="btn-outline">Back to Login</a>
             </div>
             <?php if (!$razorpayEnabled): ?>
@@ -412,9 +415,9 @@ function validateForm() {
     }
 
     const mobile = document.getElementById('mobile_no').value.trim();
-    if (!/^\d{10,15}$/.test(mobile)) {
+    if (!/^\d{10}$/.test(mobile)) {
         document.getElementById('mobile_no').focus();
-        return 'Enter valid mobile number (10-15 digits).';
+        return 'Enter valid mobile number (exactly 10 digits).';
     }
 
     const selectedCourse = courses.length > 0 ? courses[0] : null;
@@ -549,6 +552,58 @@ formEl.addEventListener('submit', async function (event) {
         showPopup(error.message || 'Could not initiate payment.');
     }
 });
+
+const bypassBtn = document.getElementById('bypassPaymentBtn');
+if (bypassBtn) {
+    bypassBtn.addEventListener('click', async function() {
+        const validationError = validateForm();
+        if (validationError) {
+            showPopup(validationError);
+            return;
+        }
+
+        if (paymentTermsEl && !paymentTermsEl.checked) {
+            showPopup('Please accept the Terms & Conditions, Privacy Policy, Refund Policy, and Razorpay terms to continue.');
+            return;
+        }
+
+        bypassBtn.disabled = true;
+        loaderEl.style.display = 'block';
+        loaderEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Bypassing payment for testing...';
+
+        const formData = new FormData(formEl);
+        const payload = Object.fromEntries(formData.entries());
+
+        try {
+            const completeRes = await fetch('student_complete_registration.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    ...payload,
+                    razorpay_order_id: 'order_test_bypass',
+                    razorpay_payment_id: 'pay_test_bypass',
+                    razorpay_signature: 'test_bypass_signature'
+                })
+            });
+
+            const completeData = await completeRes.json();
+            if (!completeData.ok) {
+                throw new Error(completeData.error || 'Registration failed after payment bypass.');
+            }
+
+            successEl.style.display = 'block';
+            successEl.innerHTML = `Registration successful (Test Bypass).<br>Email/Login ID: <strong>${completeData.login_id}</strong><br>Auto-generated Password: <strong>${completeData.generated_password}</strong><br>Please save this password and login.`;
+            formEl.reset();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } catch (error) {
+            showPopup(error.message || 'Registration failed.');
+        } finally {
+            loaderEl.style.display = 'none';
+            bypassBtn.disabled = false;
+        }
+    });
+}
+
 </script>
 <div class="tab-bar">
   <div class="tab-bar-inner">

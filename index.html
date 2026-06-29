@@ -786,7 +786,7 @@
     <form action="login_process.php" method="post" autocomplete="off" novalidate>
       <div class="form-group">
         <label for="login_id">Email or Username</label>
-        <input type="text" id="login_id" name="login_id" placeholder="Enter email or username" required autocomplete="username" />
+        <input type="text" id="login_id" name="login_id" placeholder="Enter email or username" required autocomplete="username" onblur="this.value = this.value.trim();" />
       </div>
       <div class="form-group">
         <label for="password">Password</label>
@@ -1075,6 +1075,16 @@
     }
   });
 
+</script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js')
+        .then(reg => console.log('Service worker registered.', reg))
+        .catch(err => console.error('Service worker registration failed.', err));
+    });
+  }
 </script>
 
 </body>

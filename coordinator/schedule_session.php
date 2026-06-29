@@ -176,17 +176,20 @@ if ($collegeName === '') {
 $conn->begin_transaction();
 
 try {
+    @$conn->query("ALTER TABLE coordinator_sessions ADD COLUMN session_type VARCHAR(50) NOT NULL DEFAULT 'Class', ADD COLUMN notes VARCHAR(2000) NOT NULL DEFAULT ''");
+
     $insertSessionStmt = $conn->prepare(
         'INSERT INTO coordinator_sessions (coordinator_id, college_id, session_date, session_details, session_type, notes) VALUES (?, ?, ?, ?, ?, ?)'
     );
     if ($insertSessionStmt === false) {
-        throw new RuntimeException('Unable to save scheduled session.');
+        throw new RuntimeException('Unable to save scheduled session. DB Error: ' . $conn->error);
     }
 
     $insertSessionStmt->bind_param('iissss', $coordinatorId, $collegeId, $sessionDate, $sessionDetails, $sessionType, $notes);
     if (!$insertSessionStmt->execute()) {
+        $errorMsg = $insertSessionStmt->error;
         $insertSessionStmt->close();
-        throw new RuntimeException('Unable to save scheduled session.');
+        throw new RuntimeException('Unable to save scheduled session. Execute Error: ' . $errorMsg);
     }
 
     $sessionId = (int)$conn->insert_id;
@@ -204,13 +207,14 @@ try {
     );
 
     if ($notifyStmt === false) {
-        throw new RuntimeException('Unable to create student notifications.');
+        throw new RuntimeException('Unable to create student notifications. DB Error: ' . $conn->error);
     }
 
     $notifyStmt->bind_param('issi', $sessionId, $notificationTitle, $notificationMessage, $collegeId);
     if (!$notifyStmt->execute()) {
+        $errorMsg = $notifyStmt->error;
         $notifyStmt->close();
-        throw new RuntimeException('Unable to create student notifications.');
+        throw new RuntimeException('Unable to create student notifications. Execute Error: ' . $errorMsg);
     }
 
     $notifiedCount = (int)$notifyStmt->affected_rows;

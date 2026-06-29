@@ -302,6 +302,7 @@ function esc(string $value): string
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Student Dashboard - 3D Shikshan</title>
     <link rel="icon" type="image/png" href="assets/logo.png" />
+    <link rel="manifest" href="manifest.webmanifest" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -1279,7 +1280,7 @@ function esc(string $value): string
             <p class="page-sub">Welcome back, <?php echo $displayName; ?>. Track your attendance and learning progress.</p>
 
             <?php if ($studentProfile): ?>
-                <div class="attendance-card">
+                <div class="attendance-card" onclick="showSection('attendance')" style="cursor: pointer;">
                     <div class="attendance-head">
                         <h3>Attendance Progress</h3>
                         <span class="attendance-percent"><?php echo (int)$attendancePercent; ?>%</span>
@@ -1295,15 +1296,15 @@ function esc(string $value): string
                 </div>
 
                 <div class="quick-grid">
-                    <div class="quick-card">
+                    <div class="quick-card" onclick="showSection('schedule')" style="cursor: pointer;">
                         <div class="lbl">Scheduled Sessions</div>
                         <div class="val"><?php echo (int)count($scheduleSessions); ?></div>
                     </div>
-                    <div class="quick-card">
+                    <div class="quick-card" onclick="showSection('schedule')" style="cursor: pointer;">
                         <div class="lbl">Next Session Date</div>
                         <div class="val"><?php echo $nextScheduledSessionDate !== '' ? esc($nextScheduledSessionDate) : 'Not scheduled'; ?></div>
                     </div>
-                    <div class="quick-card">
+                    <div class="quick-card" onclick="showSection('fees')" style="cursor: pointer;">
                         <div class="lbl">Pending Fees</div>
                         <div class="val">₹<?php echo esc(number_format($pendingFees, 2)); ?></div>
                     </div>
@@ -2016,6 +2017,15 @@ function esc(string $value): string
                 } finally {
                     ticketSubmitBtn.disabled = false;
                 }
+            });
+        }
+    </script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').then(reg => {
+                    console.log('SW registered!', reg);
+                }).catch(err => console.log('SW registration failed', err));
             });
         }
     </script>
