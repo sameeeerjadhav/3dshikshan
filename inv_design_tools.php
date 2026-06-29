@@ -5,193 +5,143 @@ legal_render_head("Guide & Inventory");
 ?>
 <h2>Design Support Tools & Digital Inventory</h2>
 <h2>1. CAD Design Software</h2>
-<h2>TinkerCAD</h2>
-<h2>https://www.tinkercad.com</h2>
-<h2>SelfCAD</h2>
-<h2>https://www.selfcad.com</h2>
-<h2>SketchUp Free</h2>
-<h2>https://app.sketchup.com</h2>
-<h2>BlocksCAD</h2>
-<h2>https://www.blockscad3d.com</h2>
-<h2>Fusion 360</h2>
-<h2>https://www.autodesk.com/products/fusion-360</h2>
-<h2>Onshape</h2>
-<h2>https://www.onshape.com</h2>
-<h2>FreeCAD</h2>
-<h2>https://www.freecad.org</h2>
-<h2>SolveSpace</h2>
-<h2>https://solvespace.com</h2>
-<h2>SolidWorks</h2>
-<h2>https://www.solidworks.com</h2>
-<h2>CATIA</h2>
-<h2>https://www.3ds.com/products/catia</h2>
-<h2>Creo</h2>
-<h2>https://www.ptc.com/en/products/creo</h2>
-<h2>Siemens NX</h2>
-<h2>https://plm.sw.siemens.com/en-US/nx</h2>
+<ul>
+<li><a href="https://www.tinkercad.com" target="_blank">TinkerCAD</a></li>
+<li><a href="https://www.selfcad.com" target="_blank">SelfCAD</a></li>
+<li><a href="https://app.sketchup.com" target="_blank">SketchUp Free</a></li>
+<li><a href="https://www.blockscad3d.com" target="_blank">BlocksCAD</a></li>
+<li><a href="https://www.autodesk.com/products/fusion-360" target="_blank">Fusion 360</a></li>
+<li><a href="https://www.onshape.com" target="_blank">Onshape</a></li>
+<li><a href="https://www.freecad.org" target="_blank">FreeCAD</a></li>
+<li><a href="https://solvespace.com" target="_blank">SolveSpace</a></li>
+<li><a href="https://www.solidworks.com" target="_blank">SolidWorks</a></li>
+<li><a href="https://www.3ds.com/products/catia" target="_blank">CATIA</a></li>
+<li><a href="https://www.ptc.com/en/products/creo" target="_blank">Creo</a></li>
+<li><a href="https://plm.sw.siemens.com/en-US/nx" target="_blank">Siemens NX</a></li>
+</ul>
 <h2>2. AI Powered 3D Design Tools</h2>
 <h2>Text to 3D</h2>
-<h2>Meshy AI</h2>
-<h2>https://www.meshy.ai</h2>
-<h2>Tripo AI</h2>
-<h2>https://www.tripo3d.ai</h2>
-<h2>Sloyd AI</h2>
-<h2>https://www.sloyd.ai</h2>
-<h2>Masterpiece X</h2>
-<h2>https://masterpiecex.com</h2>
+<ul>
+<li><a href="https://www.meshy.ai" target="_blank">Meshy AI</a></li>
+<li><a href="https://www.tripo3d.ai" target="_blank">Tripo AI</a></li>
+<li><a href="https://www.sloyd.ai" target="_blank">Sloyd AI</a></li>
+<li><a href="https://masterpiecex.com" target="_blank">Masterpiece X</a></li>
+</ul>
 <h2>Image to 3D</h2>
-<h2>Meshy AI</h2>
-<h2>https://www.meshy.ai</h2>
-<h2>Tripo AI</h2>
-<h2>https://www.tripo3d.ai</h2>
-<h2>Kaedim</h2>
-<h2>https://www.kaedim3d.com</h2>
-<h2>Luma AI</h2>
-<h2>https://lumalabs.ai</h2>
-<h2>CSM AI</h2>
-<h2>https://www.csm.ai</h2>
+<ul>
+<li><a href="https://www.meshy.ai" target="_blank">Meshy AI</a></li>
+<li><a href="https://www.tripo3d.ai" target="_blank">Tripo AI</a></li>
+<li><a href="https://www.kaedim3d.com" target="_blank">Kaedim</a></li>
+<li><a href="https://lumalabs.ai" target="_blank">Luma AI</a></li>
+<li><a href="https://www.csm.ai" target="_blank">CSM AI</a></li>
+</ul>
 <h2>3. Image to STL Conversion Tools</h2>
-<h2>ImageToSTL</h2>
-<h2>https://imagetostl.com</h2>
-<h2>Selva3D</h2>
-<h2>https://www.selva3d.com</h2>
-<h2>3DP Rocks Lithophane Maker</h2>
-<h2>https://3dp.rocks/lithophane</h2>
-<h2>ItsLitho</h2>
-<h2>https://itslitho.com</h2>
-<h2>Convertio</h2>
-<h2>https://convertio.co</h2>
+<ul>
+<li><a href="https://imagetostl.com" target="_blank">ImageToSTL</a></li>
+<li><a href="https://www.selva3d.com" target="_blank">Selva3D</a></li>
+<li><a href="https://3dp.rocks/lithophane" target="_blank">3DP Rocks Lithophane Maker</a></li>
+<li><a href="https://itslitho.com" target="_blank">ItsLitho</a></li>
+<li><a href="https://convertio.co" target="_blank">Convertio</a></li>
+</ul>
 <h2>4. SVG, DXF & Logo to STL Tools</h2>
-<h2>SVG to STL Converter</h2>
-<h2>https://imagetostl.com/convert/file/svg/to/stl</h2>
-<h2>SVG2STL</h2>
-<h2>https://svg2stl.com</h2>
-<h2>TinkerCAD SVG Import</h2>
-<h2>https://www.tinkercad.com</h2>
-<h2>Inkscape</h2>
-<h2>https://inkscape.org</h2>
-<h2>Adobe Illustrator</h2>
-<h2>https://www.adobe.com/products/illustrator.html</h2>
+<ul>
+<li><a href="https://imagetostl.com/convert/file/svg/to/stl" target="_blank">SVG to STL Converter</a></li>
+<li><a href="https://svg2stl.com" target="_blank">SVG2STL</a></li>
+<li><a href="https://www.tinkercad.com" target="_blank">TinkerCAD SVG Import</a></li>
+<li><a href="https://inkscape.org" target="_blank">Inkscape</a></li>
+<li><a href="https://www.adobe.com/products/illustrator.html" target="_blank">Adobe Illustrator</a></li>
+</ul>
 <h2>5. CAD File Conversion Tools</h2>
-<h2>Aspose 3D Converter</h2>
-<h2>https://products.aspose.app/3d/conversion</h2>
-<h2>CAD Exchanger</h2>
-<h2>https://cadexchanger.com</h2>
-<h2>AnyConv</h2>
-<h2>https://anyconv.com</h2>
-<h2>3DConvert Cloud</h2>
-<h2>https://3dconvert.com</h2>
+<ul>
+<li><a href="https://products.aspose.app/3d/conversion" target="_blank">Aspose 3D Converter</a></li>
+<li><a href="https://cadexchanger.com" target="_blank">CAD Exchanger</a></li>
+<li><a href="https://anyconv.com" target="_blank">AnyConv</a></li>
+<li><a href="https://3dconvert.com" target="_blank">3DConvert Cloud</a></li>
+</ul>
 <h2>6. STL Repair Tools</h2>
-<h2>Meshmixer</h2>
-<h2>https://meshmixer.org</h2>
-<h2>Autodesk Netfabb</h2>
-<h2>https://www.autodesk.com/products/netfabb</h2>
-<h2>Microsoft 3D Builder</h2>
-<h2>https://apps.microsoft.com/detail/9wzdncrfj3t6</h2>
-<h2>Formware Online STL Repair</h2>
-<h2>https://www.formware.co/onlinestlrepair</h2>
-<h2>Materialise Magics</h2>
-<h2>https://www.materialise.com/en/software/magics</h2>
+<ul>
+<li><a href="https://meshmixer.org" target="_blank">Meshmixer</a></li>
+<li><a href="https://www.autodesk.com/products/netfabb" target="_blank">Autodesk Netfabb</a></li>
+<li><a href="https://apps.microsoft.com/detail/9wzdncrfj3t6" target="_blank">Microsoft 3D Builder</a></li>
+<li><a href="https://www.formware.co/onlinestlrepair" target="_blank">Formware Online STL Repair</a></li>
+<li><a href="https://www.materialise.com/en/software/magics" target="_blank">Materialise Magics</a></li>
+</ul>
 <h2>7. STL Viewers</h2>
-<h2>ViewSTL</h2>
-<h2>https://www.viewstl.com</h2>
-<h2>Autodesk Viewer</h2>
-<h2>https://viewer.autodesk.com</h2>
-<h2>3D Viewer Online</h2>
-<h2>https://3dviewer.net</h2>
-<h2>Glovius Viewer</h2>
-<h2>https://www.glovius.com</h2>
+<ul>
+<li><a href="https://www.viewstl.com" target="_blank">ViewSTL</a></li>
+<li><a href="https://viewer.autodesk.com" target="_blank">Autodesk Viewer</a></li>
+<li><a href="https://3dviewer.net" target="_blank">3D Viewer Online</a></li>
+<li><a href="https://www.glovius.com" target="_blank">Glovius Viewer</a></li>
+</ul>
 <h2>8. 3D Scanning & Reverse Engineering</h2>
 <h2>Mobile Based</h2>
-<h2>Polycam</h2>
-<h2>https://poly.cam</h2>
-<h2>Kiri Engine</h2>
-<h2>https://www.kiriengine.app</h2>
-<h2>Luma AI</h2>
-<h2>https://lumalabs.ai</h2>
-<h2>Qlone</h2>
-<h2>https://www.qlone.pro</h2>
+<ul>
+<li><a href="https://poly.cam" target="_blank">Polycam</a></li>
+<li><a href="https://www.kiriengine.app" target="_blank">Kiri Engine</a></li>
+<li><a href="https://lumalabs.ai" target="_blank">Luma AI</a></li>
+<li><a href="https://www.qlone.pro" target="_blank">Qlone</a></li>
+</ul>
 <h2>Professional</h2>
-<h2>Artec Studio</h2>
-<h2>https://www.artec3d.com/software/artec-studio</h2>
-<h2>Geomagic Design X</h2>
-<h2>https://www.3dsystems.com/software/geomagic-design-x</h2>
-<h2>MeshLab</h2>
-<h2>https://www.meshlab.net</h2>
+<ul>
+<li><a href="https://www.artec3d.com/software/artec-studio" target="_blank">Artec Studio</a></li>
+<li><a href="https://www.3dsystems.com/software/geomagic-design-x" target="_blank">Geomagic Design X</a></li>
+<li><a href="https://www.meshlab.net" target="_blank">MeshLab</a></li>
+</ul>
 <h2>9. Sculpting Software</h2>
-<h2>Blender</h2>
-<h2>https://www.blender.org</h2>
-<h2>ZBrush</h2>
-<h2>https://www.maxon.net/en/zbrush</h2>
-<h2>Nomad Sculpt</h2>
-<h2>https://nomadsculpt.com</h2>
-<h2>Autodesk Mudbox</h2>
-<h2>https://www.autodesk.com/products/mudbox</h2>
+<ul>
+<li><a href="https://www.blender.org" target="_blank">Blender</a></li>
+<li><a href="https://www.maxon.net/en/zbrush" target="_blank">ZBrush</a></li>
+<li><a href="https://nomadsculpt.com" target="_blank">Nomad Sculpt</a></li>
+<li><a href="https://www.autodesk.com/products/mudbox" target="_blank">Autodesk Mudbox</a></li>
+</ul>
 <h2>10. STL Libraries</h2>
 <h2>Free Libraries</h2>
-<h2>Thingiverse</h2>
-<h2>https://www.thingiverse.com</h2>
-<h2>Printables</h2>
-<h2>https://www.printables.com</h2>
-<h2>MakerWorld</h2>
-<h2>https://makerworld.com</h2>
-<h2>Thangs</h2>
-<h2>https://thangs.com</h2>
-<h2>GrabCAD Library</h2>
-<h2>https://grabcad.com/library</h2>
-<h2>NIH 3D Print Exchange</h2>
-<h2>https://3dprint.nih.gov</h2>
+<ul>
+<li><a href="https://www.thingiverse.com" target="_blank">Thingiverse</a></li>
+<li><a href="https://www.printables.com" target="_blank">Printables</a></li>
+<li><a href="https://makerworld.com" target="_blank">MakerWorld</a></li>
+<li><a href="https://thangs.com" target="_blank">Thangs</a></li>
+<li><a href="https://grabcad.com/library" target="_blank">GrabCAD Library</a></li>
+<li><a href="https://3dprint.nih.gov" target="_blank">NIH 3D Print Exchange</a></li>
+</ul>
 <h2>Premium Libraries</h2>
-<h2>MyMiniFactory</h2>
-<h2>https://www.myminifactory.com</h2>
-<h2>CGTrader</h2>
-<h2>https://www.cgtrader.com</h2>
-<h2>TurboSquid</h2>
-<h2>https://www.turbosquid.com</h2>
-<h2>Cults3D</h2>
-<h2>https://cults3d.com</h2>
+<ul>
+<li><a href="https://www.myminifactory.com" target="_blank">MyMiniFactory</a></li>
+<li><a href="https://www.cgtrader.com" target="_blank">CGTrader</a></li>
+<li><a href="https://www.turbosquid.com" target="_blank">TurboSquid</a></li>
+<li><a href="https://cults3d.com" target="_blank">Cults3D</a></li>
+</ul>
 <h2>11. Generative Design & Topology Optimization</h2>
-<h2>Autodesk Generative Design</h2>
-<h2>https://www.autodesk.com/solutions/generative-design</h2>
-<h2>nTop</h2>
-<h2>https://www.ntop.com</h2>
-<h2>Altair Inspire</h2>
-<h2>https://altair.com/inspire</h2>
-<h2>Fusion 360 Generative Design</h2>
-<h2>https://www.autodesk.com/products/fusion-360</h2>
+<ul>
+<li><a href="https://www.autodesk.com/solutions/generative-design" target="_blank">Autodesk Generative Design</a></li>
+<li><a href="https://www.ntop.com" target="_blank">nTop</a></li>
+<li><a href="https://altair.com/inspire" target="_blank">Altair Inspire</a></li>
+<li><a href="https://www.autodesk.com/products/fusion-360" target="_blank">Fusion 360 Generative Design</a></li>
+</ul>
 <h2>12. Medical & DICOM to STL Tools</h2>
-<h2>3D Slicer</h2>
-<h2>https://www.slicer.org</h2>
-<h2>InVesalius</h2>
-<h2>https://invesalius.github.io</h2>
-<h2>Materialise Mimics</h2>
-<h2>https://www.materialise.com/en/healthcare/mimics-innovation-suite</h2>
-<h2>RadiAnt DICOM Viewer</h2>
-<h2>https://www.radiantviewer.com</h2>
+<ul>
+<li><a href="https://www.slicer.org" target="_blank">3D Slicer</a></li>
+<li><a href="https://invesalius.github.io" target="_blank">InVesalius</a></li>
+<li><a href="https://www.materialise.com/en/healthcare/mimics-innovation-suite" target="_blank">Materialise Mimics</a></li>
+<li><a href="https://www.radiantviewer.com" target="_blank">RadiAnt DICOM Viewer</a></li>
+</ul>
 <h2>13. AI Assisted CAD & Engineering Tools</h2>
-<h2>Zoo Text-to-CAD</h2>
-<h2>https://zoo.dev</h2>
-<h2>LEAP 71</h2>
-<h2>https://leap71.com</h2>
-<h2>Vizcom</h2>
-<h2>https://www.vizcom.ai</h2>
-<h2>Shapr3D</h2>
-<h2>https://www.shapr3d.com</h2>
+<ul>
+<li><a href="https://zoo.dev" target="_blank">Zoo Text-to-CAD</a></li>
+<li><a href="https://leap71.com" target="_blank">LEAP 71</a></li>
+<li><a href="https://www.vizcom.ai" target="_blank">Vizcom</a></li>
+<li><a href="https://www.shapr3d.com" target="_blank">Shapr3D</a></li>
+</ul>
 <h2>14. Slicer Software</h2>
-<h2>Ultimaker Cura</h2>
-<h2>https://ultimaker.com/software/ultimaker-cura</h2>
-<h2>Orca Slicer</h2>
-<h2>https://orcaslicer.net</h2>
-<h2>PrusaSlicer</h2>
-<h2>https://www.prusa3d.com/page/prusaslicer_424</h2>
-<h2>Bambu Studio</h2>
-<h2>https://bambulab.com/en/download/studio</h2>
-<h2>Chitubox</h2>
-<h2>https://www.chitubox.com</h2>
-<h2>Lychee Slicer</h2>
-<h2>https://lychee.mango3d.io</h2>
-<h2>Photon Workshop</h2>
-<h2>https://www.anycubic.com/pages/anycubic-photon-workshop</h2>
+<ul>
+<li><a href="https://ultimaker.com/software/ultimaker-cura" target="_blank">Ultimaker Cura</a></li>
+<li><a href="https://orcaslicer.net" target="_blank">Orca Slicer</a></li>
+<li><a href="https://www.prusa3d.com/page/prusaslicer_424" target="_blank">PrusaSlicer</a></li>
+<li><a href="https://bambulab.com/en/download/studio" target="_blank">Bambu Studio</a></li>
+<li><a href="https://www.chitubox.com" target="_blank">Chitubox</a></li>
+<li><a href="https://lychee.mango3d.io" target="_blank">Lychee Slicer</a></li>
+<li><a href="https://www.anycubic.com/pages/anycubic-photon-workshop" target="_blank">Photon Workshop</a></li>
+</ul>
 <?php
 legal_render_foot();
 ?>
